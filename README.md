@@ -1,20 +1,10 @@
-# coingolive
-Site
+## Installation Using docker-compose
 
+```bash
+$ cd coingolive/
+$ docker-compose up
+```
 
-cd coingolive/
-docker-compose up
+you can visit http://localhost to see the site running and complete setup.
 
-
-
-setup manual
-
-Rename files config
-define.local to define.php
-
-criar estruturas de tabelas
-cd DIRETORIO_PROJETO
-php console/execute.php setup
-
-crons
-php console/execute.php c
+![alt text](https://raw.githubusercontent.com/CoinGoLive/coingolive/master/screenshot.png)
