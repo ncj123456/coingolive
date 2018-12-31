@@ -1,0 +1,285 @@
+<html>
+    <head>
+        <title id="title_page">Calculadora</title>
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <script src="jquery-3.2.1.slim.min.js"></script>
+        <script src="popper.min.js"></script>
+        <script src="bootstrap.min.js" ></script>
+    </head>
+    <body style="background-color:black">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-body bg-dark text-light">
+                    <select id="exchange" class="form-control">
+                        <option value=""></option>
+                        <option value="bitcoin_trade">Bitcoin Trade</option>
+                        <option value="binance">Binance</option>
+                    </select>
+                    <input type='text' id="saldo" placeholder="Saldo" value="3800"  class="calcular form-control" /><br/>
+                    <input type='text' id="compra" placeholder="Compra"  class="calcular form-control" /><br/>
+                    <input type='text' id="venda" placeholder="Venda" class="calcular form-control" /><br/>
+                </div>
+
+                <!--        <div id="chart_price" style="height:200px;width:400px"></div>
+                        <div id="chart_volume" style="height:200px;width:400px"></div>-->
+            </div> 
+            <div class="col-md-3">
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%" id="porc_progress"></div>
+                </div>
+                <div class="card card-body bg-dark text-white">
+                    <div id="div_show"></div>
+                </div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div  class="col-md-3">
+                <div class="card card-body bg-dark text-white">
+                    <h1 id="price_now">----</h1>
+                    <div id="price_compra">----</div>
+                    <div id="price_venda">----</div>
+                </div>
+
+                <div class="card card-body bg-dark text-white">
+                    <div id="div_now"></div>
+                </div>
+            </div>
+        </div>
+        <script src="jquery-2.2.4.min.js"></script>
+        <!--<script src="echarts-en.min.js"></script>-->
+        <script>
+
+            var exchanges = {
+                'bitcoin_trade': {
+                    'taxa': 0.5 / 100
+                },
+                'binance': {
+                    'taxa': 0.075 / 100
+                }
+            };
+            var taxa = false;
+
+            $("#exchange").on('change', function () {
+                var ex = $(this).val();
+                taxa = exchanges[ex].taxa;
+
+                $(".calcular").trigger('keyup');
+            });
+
+            $(".calcular").on('keyup', function () {
+
+                $("#div_show").html('');
+                var saldo = parseFloat($("#saldo").val());
+                var compra = parseFloat($("#compra").val());
+                var taxa_compra = saldo * taxa;
+                var btc = (saldo - taxa_compra) / compra;
+
+                var venda = parseFloat($("#venda").val());
+                var taxa_venda = btc * venda * taxa;
+                var novo_saldo = (btc * venda) - taxa_venda;
+
+                var lucro = novo_saldo - saldo;
+                var diff_porc = (lucro) * 100 / saldo;
+
+                var diff_btc = (venda - compra) * 100 / compra;
+                var total_taxa = taxa_venda + taxa_compra
+
+
+                divShow(btc, 8, ' BTC');
+                //        divShow(taxa_compra, 2, ' taxa compra');
+                //        divShow(taxa_venda, 2, ' taxa venda');
+                divShow(novo_saldo, 2, ' novo saldo', 'b');
+                divShow(lucro, 2, ' lucro', 'b');
+                divShow(total_taxa, 2, ' total taxa');
+                divShow(diff_porc, 2, ' porc lucro');
+                divShow(diff_btc, 2, ' change');
+            });
+
+            function divShow(val, casas, text, tag) {
+                val = val.toFixed(casas);
+                if (tag) {
+                    val = '<' + tag + '>' + val + '</' + tag + '>';
+                }
+                $("#div_show").append(val + ' ' + text + "<br /><hr/>");
+            }
+
+            function divShow2(val, casas, text, tag) {
+                val = val.toFixed(casas);
+                if (tag) {
+                    val = '<' + tag + '>' + val + '</' + tag + '>';
+                }
+                $("#div_now").append(val + ' ' + text + "<br /><hr/>");
+            }
+
+
+            //    var data = [];
+            //    var now = +new Date(1997, 9, 3);
+            //
+            //    option = {
+            //        title: {
+            //            text: 'aaa'
+            //        },
+            //        tooltip: {
+            //            trigger: 'axis',
+            //            formatter: function (params) {
+            //                console.log(params);
+            //                params = params[0];
+            //                var date = params.value[0];
+            //                data4 = date.getFullYear() + '-'
+            //                        + (date.getMonth() + 1) + '-'
+            //                        + date.getDate() + ' '
+            //                        + date.getHours() + ':'
+            //                        + date.getMinutes();
+            //                return data4 + ' : ' + params.value[1];
+            //            },
+            //            axisPointer: {
+            //                animation: false
+            //            }
+            //        },
+            //        xAxis: {
+            //            type: 'time',
+            //            splitLine: {
+            //                show: false
+            //            }
+            //        },
+            //        yAxis: {
+            //            type: 'value',
+            //            scale: true,
+            //            splitLine: {
+            //                show: false
+            //            }
+            //        },
+            //        series: [{
+            //                name: 'Price',
+            //                type: 'line',
+            //                showSymbol: false,
+            //                hoverAnimation: false,
+            //                data: data
+            //            }]
+            //    };
+
+            //    var chartVolume = echarts.init(document.getElementById('chart_volume'));
+            //    chartVolume.setOption(option);
+            //
+            //    var chartPrice = echarts.init(document.getElementById('chart_price'));
+            //    chartPrice.setOption(option);
+
+
+            setInterval(function () {
+                load();
+            }, 1000);
+
+
+            //    var allDataVolume = [];
+            //    var allDataPrice = [];
+            function load() {
+                var ex = $("#exchange").val();
+                if (ex === 'bitcoin_trade') {
+                    $.getJSON('https://api.bitcointrade.com.br/v1/public/BTC/ticker', function (data) {
+                        var price_now = data.data.last;
+                        var p_buy = data.data.buy;
+                        var p_sell = data.data.sell;
+
+                        setValues(price_now, p_buy, p_sell);
+                    });
+                    
+                } else if (ex === 'binance') {
+                    $.getJSON('binance.php', function (data) {
+                        var price_now = parseFloat(data.lastPrice).toFixed(2);
+                        var p_buy = parseFloat(data.bidPrice).toFixed(2);
+                        var p_sell = parseFloat(data.askPrice).toFixed(2);
+
+                        setValues(price_now, p_buy, p_sell);
+                    });
+                }
+            }
+
+
+            function setValues(price_now, p_buy, p_sell) {
+
+            
+                var spread = (p_sell - p_buy) * 100 / p_buy;
+                var compra = parseFloat($("#compra").val());
+
+                $("#price_compra").html('B ' + p_buy + '   <span style="margin-left:20px">S ' + spread.toFixed(2) + '%</span>');
+                $("#price_venda").html('S ' + p_sell);
+
+                $("#price_now").text(price_now);
+                $("#div_now").html('');
+
+
+                var venda_meta = parseFloat($("#venda").val());
+                var meta_p = (venda_meta - compra);
+                var base_p = (price_now - compra);
+
+                var porc_meta = base_p * 100 / meta_p;
+                $("#porc_progress").css('width', porc_meta.toFixed(2) + '%');
+
+                var saldo = parseFloat($("#saldo").val());
+                var taxa_compra = saldo * taxa;
+                var btc = (saldo - taxa_compra) / compra;
+
+                var venda = parseFloat(price_now);
+                var taxa_venda = btc * venda * taxa;
+                var novo_saldo = (btc * price_now) - taxa_venda;
+
+                var lucro = novo_saldo - saldo;
+                var diff_porc = (lucro) * 100 / saldo;
+
+                var diff_btc = (venda - compra) * 100 / compra;
+                var total_taxa = taxa_venda + taxa_compra;
+
+                //            divShow2(btc, 8, ' BTC');
+                //            divShow2(taxa_compra, 2, ' taxa compra');
+                //            divShow2(taxa_venda, 2, ' taxa venda');
+                divShow2(novo_saldo, 2, ' novo saldo', 'h4');
+                divShow2(lucro, 2, ' lucro', 'h2');
+                divShow2(total_taxa, 2, ' total taxa');
+                divShow2(diff_porc, 2, ' porc lucro');
+                divShow2(diff_btc, 2, ' change');
+                
+                
+                $("#title_page").html(price_now+' | '+lucro.toFixed(2));
+
+                return;
+                //
+                //            var date = new Date();
+                //
+                //            var rowVolume = {
+                //                name: 'volume',
+                //                value: [
+                //                    date,
+                //                    data.data.volume
+                //                ]
+                //            }
+                //
+                //            var rowPrice = {
+                //                name: 'price',
+                //                value: [
+                //                    date,
+                //                    price_now
+                //                ]
+                //            }
+                //
+                //            allDataVolume.push(rowVolume);
+                //            allDataPrice.push(rowPrice);
+                //
+                //            chartPrice.setOption({
+                //                series: [{
+                //                        data: allDataVolume
+                //                    }]
+                //            });
+                //
+                //            chartVolume.setOption({
+                //                series: [{
+                //                        data: allDataPrice
+                //                    }]
+                //            });
+            }
+
+
+        </script>
+
+    </body>
+</html>

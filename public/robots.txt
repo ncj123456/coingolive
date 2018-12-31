@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: http://coingolive.com/en/seo/sitemap/

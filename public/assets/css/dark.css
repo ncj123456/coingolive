@@ -1,0 +1,37 @@
+body{
+    background-color: black!important;
+}
+.chart{
+    background-color:rgba(255,255,255,0.1) !important;
+    border-radius: 6px !important;
+
+}
+
+.navbar.bg-primary {
+    color: #ffffffa6 !important;
+    background-color: #5f4371 !important;
+}
+.dropdown-menu{
+    background-color: #21212d!important;
+}
+
+.dropdown-menu .dropdown-item{
+    color: #a0a0a0!important;
+}
+.dropdown-menu{
+    color: #a0a0a0!important;
+}
+.dropdown-menu .dropdown-item:hover{
+    color: #fff!important;
+}
+.form-control{
+    color: #a0a0a0!important;
+}
+.btn-primary{
+    color: #ffffffa6 !important;
+      background-color: #5f4371 !important;
+}
+.btn-white{
+    background-color: #21212d !important;
+    color: #999999 !important;
+}

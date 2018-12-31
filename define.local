@@ -1,0 +1,19 @@
+<?php
+
+//seta se a aplicacao esta em modo debug e exibe os erros
+define('DEBUG', true);
+
+//seta a Raiz da aplicacao
+define('ROOT', __DIR__);
+
+
+define('DB_HOST', 'db');
+define('DB_PORT', '3306');
+define('DB_USER', 'root');
+define('DB_PASS', 'coingolive');
+define('DB_NAME', 'coingolive');
+
+
+date_default_timezone_set('America/Sao_Paulo');
+define('BASE_URL', 'http://localhost');
+#define('HOST_NODEJS', 'https://ws.coingolive.com');
