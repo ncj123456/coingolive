@@ -47,18 +47,13 @@ $_meta_description = _e('Estimativa do preço máximo da criptomoeda [1] utiliza
 <input type="hidden" id="porc_marketcap_perfil" value="<?= decimal($porc_market_cap_compare, 0) ?>"/>
 <input type="hidden" id="valor_marketcap_perfil" value="<?= decimal($market_cap_compare, 0) ?>"/>
 <input type="hidden" id="base_marketcap_perfil" value="<?= decimal($compare['market_cap_moeda'], 0) ?>"/>
-<?php
-if (!DEBUG) {
-    require __DIR__ . '/../inc/ads.inc.php';
-}
-?>
 <input type="hidden" id="input_compare_coin" value="<?= $compare_coin ?>"/>
 
 <div class="row">
-    <div class="col-md-10" >
+    <div class="col-md-12" >
         <?php require_once __DIR__ . "/../coinmaxprice/msg_alert.inc.php" ?>
     </div>
-    <div class="main main-raised  col-md-10"  style="margin: 0px!important">
+    <div class="main main-raised  col-md-12"  style="margin: 0px!important">
         <div class="container">
             <div style="position:absolute; top: 1px;right: 8px">
                 <?= _e('Ultima atualização') . ' ' . dateDesc($dados['data_alteracao']) ?>
@@ -74,7 +69,7 @@ if (!DEBUG) {
                     <div class="row">
                         <?php require __DIR__ . '/../inc/msg_help.inc.php' ?>
                         <div class="col-md-3  text-center">
-                            <img style="margin-right:10px;" src="/assets/img/coin/<?= $dados['codigo'] ?>.png">
+                            <img style="margin-right:10px;max-width:80px" src="/assets/img/coin/<?= $dados['codigo'] ?>.png">
                             <h2 class="title" style="line-height: 1.2em;margin-top: 3px"><?= $dados['name'] ?><br/> <small> <?= $dados['symbol'] ?></small></h2>
 
                         </div>
@@ -139,13 +134,6 @@ if (!DEBUG) {
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-2" >
-        <?php
-        if (!DEBUG) {
-            require __DIR__ . '/../inc/ads_lado.inc.php';
-        }
-        ?>
     </div>
 </div>
 <div class="text-center" style="margin-top: 40px">

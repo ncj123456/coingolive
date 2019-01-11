@@ -21,6 +21,8 @@ class Moeda extends \Base\DAO {
     protected $percent_dominance;
     protected $price_available_supply;
     protected $percent_available_supply;
+    protected $ath;
+    protected $ath_date;
 
     function descTable() {
         $attr = [
@@ -160,6 +162,14 @@ class Moeda extends \Base\DAO {
         $this->percent_change_24h = $percent_change_24h;
     }
 
+    function setAth($ath) {
+        $this->ath = $ath;
+    }
+
+    function setAthDate($ath_date) {
+        $this->ath_date = $ath_date;
+    }
+
     function findList($id_user, $favorite = false, $moeda, $search = null, $column = 'rank', $order = 'asc', $limit = null, $offset = 0, $min_rank = false, $max_rank = false) {
 
         $par = [];
@@ -185,7 +195,7 @@ class Moeda extends \Base\DAO {
                         m.data_alteracao,
                         f.id_coin as favorite
                   FROM moeda m
-                  ".$join_favorite." JOIN user_favorite_coin f 
+                  " . $join_favorite . " JOIN user_favorite_coin f 
                                               ON f.id_coin= m.codigo 
                                                AND f.id_user=:id_user";
         $sql .= ' WHERE m.moeda=:moeda ';
@@ -278,6 +288,85 @@ class Moeda extends \Base\DAO {
         $sql .= " WHERE moeda='USD'
                         ORDER BY rank ASC";
         return $this->query($sql);
+    }
+
+    function findAth($id_user, $favorite, $moeda, $limit = 100, $page = 0, $column = 'rank', $order = 'ASC', $busca = '', $min_rank = false, $max_rank = false) {
+
+        $column = $this->antiInjection($column);
+        $order = $this->antiInjection($order);
+        $par = [
+            'limit' => $limit,
+            'page' => $page * $limit,
+            'id_user' => $id_user,
+            'moeda_base' => strtoupper($moeda)
+        ];
+
+        $join_favorite = "LEFT";
+
+        if ($favorite) {
+            $join_favorite = "INNER";
+        }
+
+
+        $sql = "SELECT * FROM (
+                            SELECT 
+                            m.codigo as id_externo,
+                            m.ath as high_price,
+                            m.rank,
+                            m.name,
+                            m.symbol,
+                            m.price_moeda,
+                             m.moeda_char,
+                            m.volume_24h_moeda,
+                            m.data_alteracao,
+                            DATE_FORMAT(m.ath_date,'%Y-%m-%d') as high_date,
+                            ((m.ath-m.price_moeda)*100/m.price_moeda) as growth_high,
+                             ((m.price_moeda - m.ath)*100/m.ath) as porc_high,
+                              f.id_coin as favorite
+
+                            FROM moeda m
+                              " . $join_favorite . " JOIN user_favorite_coin f 
+                                              ON f.id_coin= m.codigo 
+                                               AND f.id_user=:id_user
+                           WHERE m.moeda=:moeda_base
+                        ) c ";
+
+        $where = [];
+
+        if (!empty($busca)) {
+            $where[] = " (name LIKE(:busca) OR  symbol LIKE(:busca)) ";
+            $par['busca'] = '%' . $busca . '%';
+        }
+
+        if ($min_rank) {
+            $where[] = " rank >= :min_rank ";
+            $par['min_rank'] = $min_rank;
+        }
+
+        if ($max_rank) {
+            $where[] = " rank <= :max_rank ";
+            $par['max_rank'] = $max_rank;
+        }
+        if (count($where) > 0) {
+            $sql .= ' WHERE ' . implode(' AND ', $where);
+        }
+
+        if (strtolower($order) === 'desc') {
+            $numOrder = -99999999;
+        } elseif (strtolower($order) === 'asc') {
+            $numOrder = 99999999;
+        } else {
+            return false;
+        }
+
+        $sql .= " ORDER BY COALESCE( " . $column . "," . $numOrder . " )  " . $order . " LIMIT :limit OFFSET :page";
+
+        return $this->query($sql, $par);
+    }
+
+    function findMaxRank() {
+        $sql = "SELECT max(rank) as max_rank FROM moeda";
+        return $this->query($sql)[0]['max_rank'];
     }
 
 }

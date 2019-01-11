@@ -27,13 +27,13 @@ class CoinAth {
 
 
         if (empty($max_rank)) {
-            $max_rank = (new \Model\CoinHistoryChange())->findMaxRank();
+            $max_rank = (new \Model\Moeda())->findMaxRank();
         }
 
         $id_user = \Base\Auth::getIdUser();
         $favorite = (isset($_GET['favorite']) && $_GET['favorite'] === "true") ? true : false;
 
-        $data = (new \Model\CoinHistoryChange())->findAth($id_user, $favorite, $moeda, $limit, $page, $name, $order, $busca, $min_rank, $max_rank);
+        $data = (new \Model\Moeda())->findAth($id_user, $favorite, $moeda, $limit, $page, $name, $order, $busca, $min_rank, $max_rank);
         return [
             'data' => $data,
             'limit' => $limit,

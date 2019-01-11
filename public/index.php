@@ -1,16 +1,5 @@
 <?php
-
-if(file_exists(__DIR__.'/setup.php')){
-    header('Location: /setup.php');
-    die;
-}
-
 header('Access-Control-Allow-Origin: *');
-//verifica o cache
-//if (isset($_GET['cache']) && $_GET['cache'] == 'true') {
-//    //salva o cache
-//    require __DIR__ . '/../cache.php';
-//}
 session_start();
 
 //isalva os erros gerados

@@ -33,7 +33,7 @@ class CronCoin
 
                 $marketGlobal_dinamico = $this->getGlobalMarket($moedaLower);
 
-                $url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" . $moedaLower . "&per_page=10000";
+                $url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" . $moedaLower . "";
                 $json = file_get_contents($url);
                 $data = json_decode($json, 1);
 
@@ -42,6 +42,8 @@ class CronCoin
                     //calcula o percentual de dominancia
                     $moeda_market_cap_dinamico = (float)$d['market_cap'];
                     $dominance = $moeda_market_cap_dinamico * 100 / $marketGlobal_dinamico;
+                    
+                    $athDate = explode('T',$d['ath_date'])[0];
 
                     $model = new \Model\Moeda($db);
                     $model->setCodigo($d['id']);
@@ -51,19 +53,21 @@ class CronCoin
                     $model->setName($d['name']);
                     $model->setSymbol($d['symbol']);
                     $model->setPriceMoeda((float)$d['current_price']);
-                    $model->setVolume24hMoeda($d['market_cap_change_24h']);
+                    $model->setVolume24hMoeda($d['total_volume']);
                     $model->setAvailableSupply($d['circulating_supply']);
                     $model->setTotalSupply($d['circulating_supply']);
                     $model->setMaxSupply($d['total_supply']);
                     $model->setMarketCapMoeda($d['market_cap']);
                     $model->setPercentDominance($dominance);
                     $model->setPercentChange24h($d['price_change_percentage_24h']);
+                    $model->setAth($d['ath']);
+                    $model->setAthDate($athDate);
                     $model->insert();
+                    
+                    $this->saveImage($d['image'],$d['id']);
 
                     echo "inserted: " . $d['symbol'] . '-' . $moeda . "\n";
                 }
-
-                sleep(1);
             }
             $db->commit();
 
@@ -82,45 +86,19 @@ class CronCoin
         $model->deleteAll();
     }
 
-    function saveImage()
+    private function saveImage($url,$code)
     {
-        $idCoin = $this->getIdCoin();
 
-        $data = (new \Model\Moeda())->findList('USD');
-        foreach ($data as $d) {
-            $fileName = ROOT . '/public/assets/img/coin/' . $d['codigo'] . '.png';
+            $fileName = ROOT . '/public/assets/img/coin/' . $code. '.png';
 
             if (!file_exists($fileName) || filesize($fileName) < 10) {
-                echo $d['codigo'] . "\n";
-                $image = file_get_contents('https://s2.coinmarketcap.com/static/img/coins/32x32/' . $idCoin[$d['codigo']] . '.png');
-                file_put_contents(ROOT . '/public/assets/img/coin/' . $d['codigo'] . '.png', $image);
+                
+                echo "image saved: ".$code.PHP_EOL;
+                $image = file_get_contents($url);
+                file_put_contents(ROOT . '/public/assets/img/coin/' . $code. '.png', $image);
             }
         }
-    }
-
-    function getIdCoin()
-    {
-        $max = 100000;
-        $coin = [];
-
-        for ($i = 0; $i <= $max; $i += 100) {
-            $json = file_get_contents('https://api.coinmarketcap.com/v2/ticker/?limit=100&start=' . $i);
-            $data = json_decode($json, 1)['data'];
-
-            if (count($data) == 0) {
-                break;
-            }
-
-            echo $i . "\n";
-
-            foreach ($data as $d) {
-                $coin[$d['website_slug']] = $d['id'];
-            }
-//            sleep(0.1);
-        }
-        return $coin;
-    }
-
+    
     function listAll()
     {
         $data = (new \Model\Moeda())->findAllName();

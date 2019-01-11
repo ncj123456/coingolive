@@ -85,9 +85,9 @@ function dateDesc($timestamp) {
 
     if ($h > 0) {
         if ($h == 1) {
-            return _e('há [1] hora',$d);
+            return _e('há [1] hora',$h);
         } else {
-            return _e('há [1] horas',$d);
+            return _e('há [1] horas',$h);
         }
     }
 

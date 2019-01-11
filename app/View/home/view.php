@@ -2,12 +2,6 @@
 $_title2=_e("Ferramentas para investidores de criptomoedas");
 $_meta_description = 'Ferramentas para investidores de criptomoedas, gráficos,  preços e históricos';
 $lang = \Base\I18n::getCurrentLang();
-
-    if (!DEBUG) {
-        require __DIR__ . '/../inc/ads.inc.php';
-    } else {
-        echo '<div style="width:728px;height:90px"></div>';
-    }
     ?>
 <div class="main main-raised"  style="margin: 0px!important">
     <div class="container">
@@ -29,37 +23,12 @@ $lang = \Base\I18n::getCurrentLang();
                             <?= _e('Variação das criptomoedas') ?></a>
                     </div>
                 </div>  
-                  <div class="col-md-4 ml-auto mr-auto">
-                    <h2 class="text-center"><?= _e('Histórico de crescimento criptomoedas') ?></h2>
-                    <h4 class="text-center description"><?= _e('Análise o crescimento das criptomoedas no período de 24 horas, 1 mês, 3 meses, 6 meses e 1 ano') ?></h4>
-                    <div class="text-center">
-                        <a href="<?= siteUrl('/coin/change-history'); ?>" class="btn btn-primary btn-raised">
-                            <?= _e('Histórico Crescimento') ?></a>
-                    </div>
-                </div>  
-                
-                <div class="col-md-4 ml-auto mr-auto">
-                    <h2 class="text-center"><?= _e('Histórico Rank criptomoedas') ?></h2>
-                    <h4 class="text-center description"><?= _e('Criptomoedas compare o histórico do rank baseado no Market Cap') ?></h4>
-                    <div class="text-center">
-                            <a href="<?= siteUrl('/coin-rank-history'); ?>" class="btn btn-primary btn-raised">
-                            <?= _e('Histórico Rank') ?></a>
-                    </div>
-                </div>  
                 <div class="col-md-4">
                     <h2 class="text-center"><?= _e('Alta histórica das Criptomoedas') ?></h2>
                     <h4 class="text-center description"><?= _e('Análise em qual data foi atingida a alta histórica, qual a posição do preço atual e quantos por cento será o crescimento do preço atual em relação à alta histórica') ?></h4>
                     <div class="text-center">
                         <a href="<?= siteUrl('/coin/ath'); ?>" class="btn btn-primary btn-raised">
                             <?= _e('Alta Histórica') ?></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h2 class="text-center"><?= _e('Comparar Crescimento das Criptomoedas') ?></h2>
-                    <h4 class="text-center description"><?= _e('Compare o histórico das criptomoedas, porcentagem de crescimento do preço e market cap') ?></h4>
-                    <div class="text-center">
-                        <a href="<?= siteUrl('/compare/coin'); ?>" class="btn btn-primary btn-raised">
-                            <?= _e('Comparar Crescimento') ?></a>
                     </div>
                 </div>
             </div>

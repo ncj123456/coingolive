@@ -27,7 +27,7 @@ class CoinMaxPrice {
         $moedaCompare = (new \Model\Moeda())->findOne($compare, $moeda);
 
         if (empty($max_rank)) {
-            $max_rank = (new \Model\CoinHistoryChange())->findMaxRank();
+            $max_rank = (new \Model\Moeda())->findMaxRank();
         }
 
         return [

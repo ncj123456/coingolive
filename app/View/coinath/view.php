@@ -5,10 +5,6 @@ $_meta_description = _e('Análise em qual data foi atingida a alta histórica, q
 
 $compare_coin = isset($_GET['compare']) ? $_GET['compare'] : 'bitcoin';
 $current_moeda = isset($_COOKIE['moeda']) ? $_COOKIE['moeda'] : 'USD';
-
-if (!DEBUG) {
-    require __DIR__ . '/../inc/ads.inc.php';
-}
 $listLangs = [
     'USD' => '$',
     'BTC' => 'BTC'
@@ -24,7 +20,7 @@ if (!isset($listLangs[$current_moeda])) {
     <div class="col-md-12">
         <h1 style="padding: 3px;margin-top:20px;font-size:25px"><?= _e($_title) ?></h1>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card" style="  margin-top: 0px;">
             <div class="card-body" style="padding:0;margin-left: 10px;margin-right: 10px">
                 <div class="row">
@@ -81,12 +77,7 @@ if (!isset($listLangs[$current_moeda])) {
             </div>
         </div>
     </div> 
-    <?php
-    if (!DEBUG) {
-        require __DIR__ . '/../inc/ads_lado.inc.php';
-    }
-    ?>
 </div>
 <div class="text-center">
-    <?= _e('Fonte dos dados:') ?> <a href="https://coinmarketcap.com" target="_blank">CoinMarketCap</a>
+     <?= _e('Fonte dos dados:') ?> <a href="https://coingecko.com" target="_blank">CoinGecko</a>
 </div>

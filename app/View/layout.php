@@ -91,30 +91,14 @@ $version = '1.3';
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="dropdown nav-item">
-                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="material-icons">apps</i>
-                                <?= _e('Ferramentas') ?></a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?= siteUrl('/coin/price') ?>"><?= _e('Cotação Máxima') ?></a>
-                                <a class="dropdown-item" href="<?= siteUrl('/coin-change/binance/btc') ?>"><?= _e('Variação Preços') ?> 24h</a>
-                                <a  class="dropdown-item" href="<?= siteUrl('/coin/change-history/') ?>"><?= _e('Histórico Crescimento') ?>
-                                </a>
-                                   <a  class="dropdown-item" href="<?= siteUrl('/coin-rank-history/') ?>"><?= _e('Histórico Rank') ?> 
-                                        <span style="margin-left: 4px" class="badge badge-success">new</span>
-                                </a>
-                                <a  class="dropdown-item" href="<?= siteUrl('/coin/ath/') ?>"><?= _e('Alta Histórica') ?>
-                                </a>
-                                <a class="dropdown-item" href="<?= siteUrl('/compare/coin/') ?>"><?= _e('Comparar Crescimento') ?></a>
-                            </div>
+                        <li class="nav-item">
+                            <a   class="nav-link"  href="<?= siteUrl('/coin/price') ?>"><?= _e('Cotação Máxima') ?></a>
                         </li>
                         <li class="nav-item">
-                            <a   class="nav-link"  href="<?= siteUrl('/feedback') ?>"><?= _e('Enviar Sugestão') ?></a>
+                            <a   class="nav-link" href="<?= siteUrl('/coin/ath/') ?>"><?= _e('Alta Histórica') ?></a>
                         </li>
-                        <li class="nav-item">
-                            <a  class="nav-link" href="<?= siteUrl('/partners/') ?>"><?= _e('Parceiros') ?></a>
-                        </li>
-                        <li class="nav-item">
-                            <a  class="nav-link" href="<?= siteUrl('/donate/') ?>"><?= _e('Doar') ?></a>
+                         <li class="nav-item">
+                            <a   class="nav-link" href="<?= siteUrl('/coin-change/binance/btc') ?>"><?= _e('Variação Preços') ?> 24h</a>
                         </li>
                         <?php if ($lang == 'pt-br') { ?>
                             <li class="nav-item">
@@ -215,11 +199,6 @@ $version = '1.3';
         </div>
     </footer>
 <?php require __DIR__.'/inc/news.inc.php' ?>
-    <div class="text-center" style="margin-top: 20px">
-        <div style="width:100%; overflow-x: auto; ">
-            <?php require_once __DIR__ . '/inc/ads_rodape.inc.php'; ?>
-        </div>
-    </div>
     <!--   Core JS Files   -->
     <script src="/assets/js/core/jquery.min.js?v=<?= $version ?>"></script>
     <script src="/assets/js/core/popper.min.js?v=<?= $version ?>"></script>
@@ -232,21 +211,6 @@ $version = '1.3';
     <script>
 <?= $this->js ?>
     </script>
-    <?php
-    if (!DEBUG) {
-        ?>
-        <script src="https://serve.czilladx.com/serve/jslib/sticky.js"></script>
-        <script>window.coinzilla_sticky = window.coinzilla_sticky || [];
-                                function czilla() {
-                                    coinzilla_sticky.push(arguments);
-                                }
-                                czilla('98865aa193af59e91');</script>
-        <script async src="https://serve.czilladx.com/serve/jslib/fb.js"></script>
-
-
-        <?php
-    }
-    ?>
     <?php if ($lang == 'pt-br') { ?>
         <script>
                                 $(document).ready(function () {

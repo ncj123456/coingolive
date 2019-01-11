@@ -1,10 +1,6 @@
 <?php
 $_title = ucfirst($exchange_current).' - '._e('Variação das criptomoedas em 24h');
 $_meta_description = _e('Encontre a moeda com maior variação na [1], veja a diferença entre o preço mínimo e o preço máximo das criptomoedas nas últimas 24h em diferentes exchanges e analise a posição do preço atual',ucfirst($exchange_current));
-
-    if (!DEBUG) {
-        require __DIR__ . '/../inc/ads.inc.php';
-    }
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -13,7 +9,7 @@ $_meta_description = _e('Encontre a moeda com maior variação na [1], veja a di
     <?php
     require __DIR__ . '/../inc/msg_help.inc.php'
     ?>
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card" style="  margin-top: 0px;">
             <div class="card-body" style="padding:0;margin-left: 10px;margin-right: 10px">
                 <div class="row">
@@ -141,9 +137,4 @@ $_meta_description = _e('Encontre a moeda com maior variação na [1], veja a di
             </div>
         </div>
     </div>
-   <?php 
-    if (!DEBUG) {
-        require __DIR__ . '/../inc/ads_lado.inc.php';
-    }
-?>
 </div>

@@ -3,7 +3,7 @@ CREATE TABLE `moeda` (
   `moeda` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
   `symbol` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `rank` int(11) NOT NULL,
+  `rank` int(11) DEFAULT NULL,
   `available_supply` decimal(20,2) DEFAULT NULL,
   `total_supply` decimal(20,2) DEFAULT NULL,
   `max_supply` decimal(20,2) DEFAULT NULL,
@@ -16,12 +16,15 @@ CREATE TABLE `moeda` (
   `price_available_supply` decimal(35,10) DEFAULT NULL,
   `percent_available_supply` decimal(20,2) DEFAULT NULL,
   `percent_change_24h` decimal(20,2) DEFAULT NULL,
+  `ath` decimal(35,10) DEFAULT NULL,
+  `ath_date` date DEFAULT NULL,
   PRIMARY KEY (`codigo`,`moeda`),
   KEY `symbol` (`symbol`),
   KEY `name` (`name`),
   KEY `codigo` (`codigo`),
   KEY `moeda_char` (`moeda_char`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 CREATE TABLE `coin_change` (
   `exchange` varchar(45) DEFAULT NULL,
@@ -39,70 +42,6 @@ CREATE TABLE `coin_change` (
   KEY `market` (`market`),
   KEY `exchange` (`exchange`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE `coin_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_externo` varchar(45) NOT NULL,
-  `price_btc` decimal(31,8) DEFAULT '0.00000000',
-  `price_usd` decimal(31,8) DEFAULT '0.00000000',
-  `volume_usd` decimal(31,8) DEFAULT '0.00000000',
-  `marketcap_usd` decimal(31,8) DEFAULT '0.00000000',
-  `date` timestamp NULL DEFAULT NULL,
-  `date_min` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `price_btc` (`price_btc`),
-  KEY `price_usd` (`price_usd`),
-  KEY `date` (`date`),
-  KEY `id_externo` (`id_externo`),
-  KEY `date_min` (`date_min`)
-) ENGINE=InnoDB AUTO_INCREMENT=2710671 DEFAULT CHARSET=latin1;
-
-CREATE TABLE `coin_history_change` (
-  `id_externo` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `moeda_base` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `high_price` decimal(31,8) DEFAULT NULL,
-  `high_date` timestamp NULL DEFAULT NULL,
-  `price7d` decimal(31,8) DEFAULT '0.00000000',
-  `price1m` decimal(31,8) DEFAULT '0.00000000',
-  `price3m` decimal(31,8) DEFAULT '0.00000000',
-  `price6m` decimal(31,8) DEFAULT '0.00000000',
-  `price1y` decimal(31,8) DEFAULT '0.00000000',
-  `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY `unique` (`id_externo`,`moeda_base`),
-  KEY `id_moeda` (`id_externo`),
-  KEY `moeda_base` (`moeda_base`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `coin_history_rank` (
-  `id_externo` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `high_rank` int(11) DEFAULT NULL,
-  `high_date` date DEFAULT NULL,
-  `rank7d` int(11) DEFAULT NULL,
-  `rank1m` int(11) DEFAULT NULL,
-  `rank3m` int(11) DEFAULT NULL,
-  `rank6m` int(11) DEFAULT NULL,
-  `rank1y` int(11) DEFAULT NULL,
-  `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY `unique` (`id_externo`),
-  KEY `id_moeda` (`id_externo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `coin_rank` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rank` int(11) NOT NULL,
-  `id_externo` varchar(45) NOT NULL,
-  `price_btc` decimal(31,8) DEFAULT '0.00000000',
-  `price_usd` decimal(31,8) DEFAULT '0.00000000',
-  `volume_usd` decimal(31,8) DEFAULT '0.00000000',
-  `marketcap_usd` decimal(31,8) DEFAULT '0.00000000',
-  `date` date NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `price_btc` (`price_btc`),
-  KEY `price_usd` (`price_usd`),
-  KEY `date` (`date`),
-  KEY `id_externo` (`id_externo`),
-  KEY `rank` (`rank`)
-) ENGINE=InnoDB AUTO_INCREMENT=735083 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `country` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
