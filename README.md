@@ -11,18 +11,20 @@ $ docker-compose up
 **You can visit http://localhost/setup.php to complete setup.**
 
 ## Writing Permission
-**public/assets/img/coin/** - images of cryptocurrencies, cron saves the images
-**public/assets/moedas.json** - list of all cryptocurrencies, used in the search options, updated file via cron
-**log/** - error logs
+
+ - **public/assets/img/coin/** - images of cryptocurrencies, cron saves the images
+ - **public/assets/moedas.json** - list of all cryptocurrencies, used in the search options, updated file via cron
+ - **log/** - error logs
 
 # Config
-**define.php** - configuration file (database connection)
-**app/route.php** - route of the application, call the controllers
 
+ - **define.php** - configuration file (database connection)
+ - **app/route.php** - route of the application, call the controllers
 
 # Crons
-**php console/execute.php coin-change** update data exchanges prices, data used in tool "*Cryptocurrency Change in 24h*"
-**php console/execute.php moeda** -- updates all cryptocurrencies data,  data used in tools "*Max Price*" and "*All-Time High*"
+
+ - **php console/execute.php coin-change** update data exchanges prices, data used in tool "*Cryptocurrency Change in 24h*"
+ - **php console/execute.php moeda** -- updates all cryptocurrencies data,  data used in tools "*Max Price*" and "*All-Time High*"
 
 scheduling cron:
 ```bash
