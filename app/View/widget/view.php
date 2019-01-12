@@ -34,7 +34,7 @@ if ($data['moeda_char'] == 'BTC') {
             <br>
         </div>
         <div style="text-align:right;padding:5px 0px;width:33%;">
-            <img src="<?= BASE_URL . '/assets/img/coin/' . $data['codigo'] . '.png' ?>">
+            <img style="max-width: 40px;" src="<?= BASE_URL . '/assets/img/coin/' . $data['codigo'] . '.png' ?>">
         </div>
     </div>
     <div style="border-top: 1px solid #E4E6EB;clear:both;">
