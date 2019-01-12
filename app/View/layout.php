@@ -124,9 +124,12 @@ $version = '1.3';
                         ?>
                                                     </div>
                                                 </li>-->
+                        <li class="nav-item">
+                            <a class="nav-link" target="_blank" href="https://github.com/CoinGoLive/coingolive"><i class="fa fa-github"></i></a>
+                          </li>
                         <li class="dropdown nav-item">
                             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                <i class="fa fa-globe"></i> <?= $lang ?>
+                                 <?= $lang ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right text-right">
                                 <?php
