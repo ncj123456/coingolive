@@ -34,7 +34,7 @@ class CronCoin {
                 $countResults = 1;
 
                 while ($countResults > 0) {
-                    $url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" . $moedaLower . "&per_page=250&page=" . $page;
+                    $url = "https://api.coingecko.com/api/v3/coins/markets?order=gecko_desc&vs_currency=" . $moedaLower . "&per_page=250&page=" . $page;
                     $json = file_get_contents($url);
                     $data = json_decode($json, 1);
 
