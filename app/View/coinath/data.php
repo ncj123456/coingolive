@@ -80,11 +80,11 @@
                         <a href="javascript:addFavorite('<?= $d['id_externo'] ?>')" style="margin-right:10px;">
                             <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['id_externo'] ?>"></i>
                         </a>
-                        <a href="<?= siteUrl('/compare/coin/?coins=' . $d['id_externo']) ?>">
+                        <!--<a href="<?= siteUrl('/compare/coin/?coins=' . $d['id_externo']) ?>">-->
                             <img style="margin-right:10px;    max-height: 20px;" src="/assets/img/coin/<?= $d['id_externo'] ?>.png">
                             <?= $d['symbol'] ?>
                             <!--<small><?= $d['symbol'] ?></small>-->
-                        </a>
+                        <!--</a>-->
                     </td>
                     <td class="text-center padding-table-3px"><?= $d['rank']; ?></td>
                     <td class="text-right" style="padding-left:3px"><?= $moeda_char ?> <?= decimal($d['price_moeda'], 2, true); ?></td>
