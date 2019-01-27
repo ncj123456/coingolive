@@ -107,12 +107,12 @@
                     <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_1y'], false); ?></td>
                     <!--<td class="text-center"><span<?= tooltip('$' . decimal($d['market_cap_moeda'], 0)) ?>>$<?= numFormat($d['market_cap_moeda'], 2); ?></span></td>-->
                     <!--<td class="text-center padding-table-3px"><?= $format_porc($d['ath_change_percentage'], $d['high_price'], $moeda_char, $d['high_date']); ?></td>-->
-                       <td class="text-center"data-toggle="tooltip" title='
+                       <td class="text-center"data-toggle="tooltip" title="
                         <?= $d['symbol'] ?><br/> 
                         <?= decimal($d['ath_change_percentage'], 2); ?>%<br/>
                          <?= $moeda_char. decimalAuto($d['high_price']); ?> <br/>
                          <?=  $d['high_date'] ?>
-                        ' data-html='true'>
+                        " data-html='true'>
                         <div class="progress progress-line-primary ">
                             <div class="progress-bar progress-bar-primary" role="progressbar" style="width: <?= round(100 + $d['ath_change_percentage'], 2) ?>%;">
                             </div>
