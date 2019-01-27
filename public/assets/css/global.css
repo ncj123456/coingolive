@@ -214,57 +214,68 @@ color: #b3b3b3!important;
 
 .green0{
     background-color: #bcdcb5!important;
+    color: #316525!important;
 }
 
 .green1{
     background-color: #9bce91!important;
+    color: #316525!important;
 }
 
 .green2{
     background-color: #77af6c!important;
+   color: #316525!important;
 }
 
 .green3{
     background-color: #70d04d!important;
+   color: #316525!important;
 }
 
 .green4{
     background-color: #3ab320!important;
+    color: #316525!important;
 }
 
 .green5{
     background-color: #2a8915!important;
+      color: #bbddb4!important;
 }
 
 .green6{
     background-color: #336528!important;
+      color: #bbddb4!important;
 }
 
 .red0{
         background-color: #f3c3bf!important;
+        color: #d82b14!important;
 }
 
 .red1{
         background-color: #f7a8a2!important;
+          color: #d82b14!important;
 }
 
 .red2{
         background-color: #f78880!important;
+          color: #d82b14!important;
 }
 
 .red3{
         background-color: #f36a60!important;
+            color: #f4c3be!important;
 }
 
 .red4{
         background-color: #f95347!important;
+            color: #f4c3be!important;
 }
 .red5{
         background-color: #f13729!important;
+            color: #f4c3be!important;
 }
 .red6{
         background-color: #cc2317!important;
-}
-.badge{
-        text-shadow: 0px 0px 3px #4e4e4e!important;
+            color: #f4c3be!important;
 }

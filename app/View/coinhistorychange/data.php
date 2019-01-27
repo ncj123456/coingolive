@@ -71,7 +71,7 @@
                     if ($price) {
                         $tooltip = 'data-toggle="tooltip" data-html="true" title="' . $desc . '<br>' . $moeda_char . decimal($price, 2, true) . ' "';
                     }
-                    return '<span style="font-size:13px;width:100%;border-radius: 3px;" ' . $tooltip . '  class="badge ' . $class_percent . '">' . decimal($porc, 2) . '%</span>';
+                    return '<span style="font-size:13px;width:100%;padding:14px;display:block;border-radius: 0px;" ' . $tooltip . '  class="badge ' . $class_percent . '">' . decimal($porc, 2) . '%</span>';
                 };
 
                 $favorite = '-o';
@@ -98,13 +98,13 @@
                     <td class="text-center padding-table-3px"><?= $d['rank']; ?></td>
                     
                     <td class="text-right" style="padding-left:3px"><?= $moeda_char ?><?= decimal($d['price_moeda'], 2, true); ?></td>
-                    <td class="text-center padding-table-3px"><?= $format_porc($d['price_change_percentage_1h'], false); ?></td>
-                    <td class="text-center padding-table-3px"><?= $format_porc($d['price_change_percentage_24h'], false); ?></td>
-                    <td class="text-center padding-table-3px"><?= $format_porc($d['price_change_percentage_7d'], false); ?></td>
-                    <td class="text-center padding-table-3px"><?= $format_porc($d['price_change_percentage_14d'], false); ?></td>
-                    <td class="text-center padding-table-3px"><?= $format_porc($d['price_change_percentage_30d'], false); ?></td>
-                    <td class="text-center padding-table-3px"><?= $format_porc($d['price_change_percentage_200d'], false); ?></td>
-                    <td class="text-center padding-table-3px"><?= $format_porc($d['price_change_percentage_1y'], false); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_1h'], false); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_24h'], false); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_7d'], false); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_14d'], false); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_30d'], false); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_200d'], false); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_1y'], false); ?></td>
                     <!--<td class="text-center"><span<?= tooltip('$' . decimal($d['market_cap_moeda'], 0)) ?>>$<?= numFormat($d['market_cap_moeda'], 2); ?></span></td>-->
                     <!--<td class="text-center padding-table-3px"><?= $format_porc($d['ath_change_percentage'], $d['high_price'], $moeda_char, $d['high_date']); ?></td>-->
                        <td class="text-center"data-toggle="tooltip" title='
