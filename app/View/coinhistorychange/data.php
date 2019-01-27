@@ -17,12 +17,13 @@
                     'name' => _e('Moeda'),
                     'rank' => _e('Rank'),
                     'price_moeda' => _e('Preço'),
+                    'volume_24h_moeda' => _e('Volume 24h'),
                     'price_change_percentage_1h' => '1 ' . _e('hora'),
                     'price_change_percentage_24h' => '24 ' . _e('horas'),
                     'price_change_percentage_7d' => '7 ' . _e('dias'),
                     'price_change_percentage_14d' => '14 ' . _e('dias'),
                     'price_change_percentage_30d' => '30 ' . _e('dias'),
-                     'price_change_percentage_200d' => '200 ' . _e('dias'),
+                    'price_change_percentage_200d' => '200 ' . _e('dias'),
                     'price_change_percentage_1y' => '1 ' . _e('ano'),
 //                    'market_cap_moeda' => _e('Cap. de Mercado'),
                     'ath_change_percentage' => _e('All Time High (ATH)'),
@@ -53,7 +54,7 @@
             foreach ($data as $d) {
 
                 $format_porc = function($porc, $price, $moeda_char = '', $desc = '') {
-                    
+
                     $numClass = round(abs($porc) / 20);
                     if ($numClass > 5) {
                         $numClass = 6;
@@ -64,7 +65,7 @@
                     } elseif ($porc > 0) {
                         $class_percent = 'green' . $numClass;
                     } else {
-                         return '--';
+                        return '--';
                         $class_percent = 'badge-default';
                     }
                     $tooltip = '';
@@ -83,6 +84,31 @@
                 if ($d['moeda_char'] == 'BTC') {
                     $moeda_char = "<span class='icon-moeda-char'><i class='fa fa-btc'></i> </span>";
                 }
+
+                //highlight volume
+
+//                $porcVol = ($d['volume_24h_moeda'] * 100 / $max_vol24);
+
+                $vol24 = $d['volume_24h_moeda'];
+                if ($vol24 > 1000000000) {
+                    $color_vol24 = "#00abd2";
+                    
+                } else if ($vol24 > 100000000) {
+                   $color_vol24 = "#74d9f1";
+                   
+                } else if ($vol24 > 10000000) {
+                      $color_vol24 = "#a1e1f1";
+                      
+                } else if ($vol24 > 1000000) {
+                      $color_vol24 = "#bfe7f1";
+                      
+                } else if ($vol24 > 100000) {
+                      $color_vol24 = "#dcf8ff";
+                      
+                }else {
+                      $color_vol24 = "#f4fcff";
+                }
+                
                 ?>
                 <tr >
                     <td class="text-left padding-table-3px" colspan="2"> 
@@ -90,14 +116,15 @@
                             <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['id_externo'] ?>"></i>
                         </a>
                         <!--<a href="<?= siteUrl('/compare/coin/?coins=' . $d['id_externo']) ?>">-->
-                            <img style="margin-right:10px;    max-height: 20px;" src="/assets/img/coin/<?= $d['id_externo'] ?>.png">
-                            <?= $d['symbol'] ?>
-                            <!--<small><?= $d['symbol'] ?></small>-->
+                        <img style="margin-right:10px;    max-height: 20px;" src="/assets/img/coin/<?= $d['id_externo'] ?>.png">
+                        <?= $d['symbol'] ?>
+                        <!--<small><?= $d['symbol'] ?></small>-->
                         <!--</a>-->
                     </td>
                     <td class="text-center padding-table-3px"><?= $d['rank']; ?></td>
-                    
+
                     <td class="text-right" style="padding-left:3px"><?= $moeda_char ?><?= decimal($d['price_moeda'], 2, true); ?></td>
+                    <td class="text-right" style="background-color:  <?= $color_vol24 ?>"> <?= $moeda_char . numFormat($d['volume_24h_moeda'], 2) ?> </td>
                     <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_1h'], false); ?></td>
                     <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_24h'], false); ?></td>
                     <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_7d'], false); ?></td>
@@ -107,11 +134,11 @@
                     <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_1y'], false); ?></td>
                     <!--<td class="text-center"><span<?= tooltip('$' . decimal($d['market_cap_moeda'], 0)) ?>>$<?= numFormat($d['market_cap_moeda'], 2); ?></span></td>-->
                     <!--<td class="text-center padding-table-3px"><?= $format_porc($d['ath_change_percentage'], $d['high_price'], $moeda_char, $d['high_date']); ?></td>-->
-                       <td class="text-center"data-toggle="tooltip" title="
+                    <td class="text-center"data-toggle="tooltip" title="
                         <?= $d['symbol'] ?><br/> 
                         <?= decimal($d['ath_change_percentage'], 2); ?>%<br/>
-                         <?= $moeda_char. decimalAuto($d['high_price']); ?> <br/>
-                         <?=  $d['high_date'] ?>
+                        <?= $moeda_char . decimalAuto($d['high_price']); ?> <br/>
+                        <?= $d['high_date'] ?>
                         " data-html='true'>
                         <div class="progress progress-line-primary ">
                             <div class="progress-bar progress-bar-primary" role="progressbar" style="width: <?= round(100 + $d['ath_change_percentage'], 2) ?>%;">

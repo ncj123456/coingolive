@@ -431,6 +431,7 @@ class Moeda extends \Base\DAO {
                             m.price_moeda,
                             m.moeda_char,
                             m.market_cap_moeda,
+                            m.volume_24h_moeda,
                             m.percent_change_24h as porc24h,
                             m.data_alteracao,
                             m.ath_change_percentage,
@@ -441,7 +442,7 @@ class Moeda extends \Base\DAO {
                             m.price_change_percentage_30d,
                             m.price_change_percentage_200d,
                              m.price_change_percentage_1y,
-                              f.id_coin as favorite
+                             f.id_coin as favorite
 
                             FROM moeda m
                               " . $join_favorite . " JOIN user_favorite_coin f 
@@ -488,6 +489,14 @@ class Moeda extends \Base\DAO {
     function findMaxRank() {
         $sql = "SELECT max(rank) as max_rank FROM moeda";
         return $this->query($sql)[0]['max_rank'];
+    }
+    
+       function findMaxVolume24h($moeda) {
+        $sql =  "SELECT max(volume_24h_moeda) as volume_24h_moeda "
+                . "FROM moeda "
+                . "WHERE moeda =:moeda ";
+          $par = ['moeda'=>$moeda];
+        return $this->query($sql,$par)[0]['volume_24h_moeda'];
     }
 
 }

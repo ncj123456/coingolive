@@ -29,6 +29,9 @@ class CoinHistoryChange {
         if (empty($max_rank)) {
             $max_rank = (new \Model\Moeda())->findMaxRank();
         }
+        
+        
+         $max_vol24= (new \Model\Moeda())->findMaxVolume24h($moeda);
 
         $id_user = \Base\Auth::getIdUser();
         $favorite = (isset($_GET['favorite']) && $_GET['favorite'] === "true") ? true : false;
@@ -41,7 +44,8 @@ class CoinHistoryChange {
             'order' => $order,
             'page' => $page,
             'max_rank' => $max_rank,
-            'min_rank' => $min_rank
+            'min_rank' => $min_rank,
+            'max_vol24'=>$max_vol24
         ];
     }
 
