@@ -137,5 +137,5 @@ $_meta_description = _e('Estimativa do preço máximo da criptomoeda [1] utiliza
     </div>
 </div>
 <div class="text-center" style="margin-top: 40px">
-    <?= _e('Fonte dos dados:') ?> <a href="https://coinmarketcap.com" target="_blank">CoinMarketCap</a>
+     <?= _e('Fonte dos dados:') ?> <a href="https://coingecko.com" target="_blank">CoinGecko</a>
 </div>
