@@ -84,6 +84,7 @@ return [
     'meses'=>'months',
     'dias'=>'days',
     'horas'=>'hours',
+    'hora'=>'hour',
     'Moeda'=>'Symbol',
     'Preço'=>'Price',
     'Rank fim'=>'Rank end',

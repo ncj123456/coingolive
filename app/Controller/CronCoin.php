@@ -34,7 +34,7 @@ class CronCoin {
                 $countResults = 1;
 
                 while ($countResults > 0) {
-                    $url = "https://api.coingecko.com/api/v3/coins/markets?order=gecko_desc&vs_currency=" . $moedaLower . "&per_page=250&page=" . $page;
+                    $url = "https://api.coingecko.com/api/v3/coins/markets?order=gecko_desc&vs_currency=" . $moedaLower . "&price_change_percentage=1h,24h,7d,14d,30d,200d,1y&per_page=250&page=" . $page;
                     $json = file_get_contents($url);
                     $data = json_decode($json, 1);
 
@@ -63,6 +63,14 @@ class CronCoin {
                         $model->setPercentChange24h($d['price_change_percentage_24h']);
                         $model->setAth($d['ath']);
                         $model->setAthDate($athDate);
+                        $model->setAthChangePercentage($d['ath_change_percentage']);
+                        $model->setPriceChangePercentage1h($d['price_change_percentage_1h_in_currency']);
+                        $model->setPriceChangePercentage24h($d['price_change_percentage_24h_in_currency']);
+                        $model->setPriceChangePercentage7d($d['price_change_percentage_7d_in_currency']);
+                        $model->setPriceChangePercentage14d($d['price_change_percentage_14d_in_currency']);
+                        $model->setPriceChangePercentage30d($d['price_change_percentage_30d_in_currency']);
+                        $model->setPriceChangePercentage200d($d['price_change_percentage_200d_in_currency']);
+                        $model->setPriceChangePercentage1y($d['price_change_percentage_1y_in_currency']);
                         $model->insert();
 
                         $this->saveImage($d['image'], $d['id']);

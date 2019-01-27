@@ -33,6 +33,10 @@ $app->get('/coin-change/cron', 'CronChange:save');
 $app->get('/coin/ath', 'CoinAth:view');
 $app->ajax('/coin/ath/data', 'CoinAth:data');
 
+//change history
+$app->get('/coin/change-history', 'CoinHistoryChange:view');
+$app->ajax('/coin/change-history/data', 'CoinHistoryChange:data');
+
 //user
 $app->ajax('/user/login/ajax', 'User:login');
 $app->ajax('/user/auth', 'User:auth');

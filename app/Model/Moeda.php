@@ -23,6 +23,14 @@ class Moeda extends \Base\DAO {
     protected $percent_available_supply;
     protected $ath;
     protected $ath_date;
+    protected $ath_change_percentage;
+    protected $price_change_percentage_1h;
+    protected $price_change_percentage_24h;
+    protected $price_change_percentage_7d;
+    protected $price_change_percentage_14d;
+    protected $price_change_percentage_30d;
+    protected $price_change_percentage_200d;
+    protected $price_change_percentage_1y;
 
     function descTable() {
         $attr = [
@@ -168,6 +176,38 @@ class Moeda extends \Base\DAO {
 
     function setAthDate($ath_date) {
         $this->ath_date = $ath_date;
+    }
+
+    function setAthChangePercentage($ath_change_percentage) {
+        $this->ath_change_percentage = $ath_change_percentage;
+    }
+
+    function setPriceChangePercentage1h($price_change_percentage_1h) {
+        $this->price_change_percentage_1h = $price_change_percentage_1h;
+    }
+
+    function setPriceChangePercentage24h($price_change_percentage_24h) {
+        $this->price_change_percentage_24h = $price_change_percentage_24h;
+    }
+
+    function setPriceChangePercentage7d($price_change_percentage_7d) {
+        $this->price_change_percentage_7d = $price_change_percentage_7d;
+    }
+
+    function setPriceChangePercentage14d($price_change_percentage_14d) {
+        $this->price_change_percentage_14d = $price_change_percentage_14d;
+    }
+
+    function setPriceChangePercentage30d($price_change_percentage_30d) {
+        $this->price_change_percentage_30d = $price_change_percentage_30d;
+    }
+
+    function setPriceChangePercentage200d($price_change_percentage_200d) {
+        $this->price_change_percentage_200d = $price_change_percentage_200d;
+    }
+
+    function setPriceChangePercentage1y($price_change_percentage_1y) {
+        $this->price_change_percentage_1y = $price_change_percentage_1y;
     }
 
     function findList($id_user, $favorite = false, $moeda, $search = null, $column = 'rank', $order = 'asc', $limit = null, $offset = 0, $min_rank = false, $max_rank = false) {
@@ -332,6 +372,87 @@ class Moeda extends \Base\DAO {
                         ) c ";
 
         $where = [];
+
+        if (!empty($busca)) {
+            $where[] = " (name LIKE(:busca) OR  symbol LIKE(:busca)) ";
+            $par['busca'] = '%' . $busca . '%';
+        }
+
+        if ($min_rank) {
+            $where[] = " rank >= :min_rank ";
+            $par['min_rank'] = $min_rank;
+        }
+
+        if ($max_rank) {
+            $where[] = " rank <= :max_rank ";
+            $par['max_rank'] = $max_rank;
+        }
+        if (count($where) > 0) {
+            $sql .= ' WHERE ' . implode(' AND ', $where);
+        }
+
+        if (strtolower($order) === 'desc') {
+            $numOrder = -99999999;
+        } elseif (strtolower($order) === 'asc') {
+            $numOrder = 99999999;
+        } else {
+            return false;
+        }
+
+        $sql .= " ORDER BY COALESCE( " . $column . "," . $numOrder . " )  " . $order . " LIMIT :limit OFFSET :page";
+
+        return $this->query($sql, $par);
+    }
+
+    function findPorcChange($id_user, $favorite, $moeda, $limit = 100, $page = 0, $column = 'rank', $order = 'ASC', $busca = '', $min_rank = false, $max_rank = false) {
+        $column = $this->antiInjection($column);
+        $order = $this->antiInjection($order);
+        $par = [
+            'limit' => $limit,
+            'page' => $page * $limit,
+            'id_user' => $id_user
+        ];
+
+        $join_favorite = "LEFT";
+
+        if ($favorite) {
+            $join_favorite = "INNER";
+        }
+
+
+        $sql = "SELECT * FROM (
+                            SELECT 
+                             m.codigo as id_externo,
+                            m.ath as high_price,
+                            DATE_FORMAT(m.ath_date,'%Y-%m-%d') as high_date,
+                            m.rank,
+                            m.name,
+                            m.symbol,
+                            m.price_moeda,
+                            m.moeda_char,
+                            m.market_cap_moeda,
+                            m.percent_change_24h as porc24h,
+                            m.data_alteracao,
+                            m.ath_change_percentage,
+                            m.price_change_percentage_1h,
+                            m.price_change_percentage_24h,
+                            m.price_change_percentage_7d,
+                            m.price_change_percentage_14d,
+                            m.price_change_percentage_30d,
+                            m.price_change_percentage_200d,
+                             m.price_change_percentage_1y,
+                              f.id_coin as favorite
+
+                            FROM moeda m
+                              " . $join_favorite . " JOIN user_favorite_coin f 
+                                              ON f.id_coin= m.codigo 
+                                               AND f.id_user=:id_user                            
+                            WHERE m.moeda =:moeda                   
+                        ) c ";
+
+        $where = [];
+
+        $par['moeda'] = $moeda;
 
         if (!empty($busca)) {
             $where[] = " (name LIKE(:busca) OR  symbol LIKE(:busca)) ";

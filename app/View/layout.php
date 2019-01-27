@@ -98,9 +98,9 @@ $version = '1.3';
                         <li class="nav-item">
                             <a   class="nav-link" href="<?= siteUrl('/coin/ath/') ?>"><?= _e('Alta Histórica') ?></a>
                         </li>
-<!--                        <li class="nav-item">
+                        <li class="nav-item">
                             <a  class="nav-link" href="<?= siteUrl('/coin/change-history/') ?>"><?= _e('Histórico Crescimento') ?></a>
-                          </li>-->
+                          </li>
                          <li class="nav-item">
                             <a   class="nav-link" href="<?= siteUrl('/coin-change/binance/btc') ?>"><?= _e('Variação Preços') ?> 24h</a>
                         </li>
