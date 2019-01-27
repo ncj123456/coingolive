@@ -64,8 +64,9 @@ $version = '1.3';
 
                 gtag('config', 'UA-114358769-1');
             </script>
-
-                                                <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+<!--ads-->
+            <script src="https://coinzillatag.com/lib/sticky.js"></script>
+<script>window.coinzilla_sticky = window.coinzilla_sticky || [];function czilla(){coinzilla_sticky.push(arguments);}czilla('98865aa193af59e91');</script>
 
             <?php
         }
@@ -97,6 +98,9 @@ $version = '1.3';
                         <li class="nav-item">
                             <a   class="nav-link" href="<?= siteUrl('/coin/ath/') ?>"><?= _e('Alta Histórica') ?></a>
                         </li>
+<!--                        <li class="nav-item">
+                            <a  class="nav-link" href="<?= siteUrl('/coin/change-history/') ?>"><?= _e('Histórico Crescimento') ?></a>
+                          </li>-->
                          <li class="nav-item">
                             <a   class="nav-link" href="<?= siteUrl('/coin-change/binance/btc') ?>"><?= _e('Variação Preços') ?> 24h</a>
                         </li>
@@ -163,6 +167,21 @@ $version = '1.3';
         </div>
     </nav>
     <div style="margin:10px;max-width: 1200px;" class="ml-auto mr-auto">
+        <?php if (!DEBUG) { ?>
+        <div class="text-center">
+             <!-- Coinzilla Banner 728x90 -->
+            <script async src="https://coinzillatag.com/lib/display.js"></script>
+            <div class="coinzilla" data-zone="C-415245a8c26c8245e2"></div>
+            <script>
+                window.coinzilla_display = window.coinzilla_display || [];
+                var c_display_preferences = {};
+                c_display_preferences.zone = "415245a8c26c8245e2";
+                c_display_preferences.width = "728";
+                c_display_preferences.height = "90";
+                coinzilla_display.push(c_display_preferences);
+            </script>
+        </div>
+        <?php } ?>
         <?= $this->content ?>
     </div>
     <!-- Button trigger modal -->
