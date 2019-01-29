@@ -35,7 +35,7 @@ $version = '1.3';
         <meta name="maValidation" content="2f7fd73164f4cc546df97e0e0a0fe559" />
         <link rel="icon" type="image/png" href="/assets/img/logo.png?v=<?= $version ?>1" />
         <link rel="stylesheet" href="/assets/css/material-kit.css?v=<?= $version ?>">
-        <link rel="stylesheet" href="/assets/css/global.css?v=<?= $version ?>14">
+        <link rel="stylesheet" href="/assets/css/global.css?v=<?= $version ?>15">
         <link href="/assets/css/pace.css" media="screen" rel="stylesheet" type="text/css">
 
         <?php
@@ -65,6 +65,8 @@ $version = '1.3';
                 gtag('config', 'UA-114358769-1');
             </script>
 <!--ads-->
+<script src="https://coinzillatag.com/lib/header.js"></script>
+<script>window.coinzilla_header = window.coinzilla_header || [];function czilla(){coinzilla_header.push(arguments);}czilla('7985c4f130d0f59a872');</script>
             <script src="https://coinzillatag.com/lib/sticky.js"></script>
 <script>window.coinzilla_sticky = window.coinzilla_sticky || [];function czilla(){coinzilla_sticky.push(arguments);}czilla('98865aa193af59e91');</script>
 
@@ -78,9 +80,17 @@ $version = '1.3';
                 return '/' + currentLang + url;
             }
         </script>
+        <style>
+            #CloseCoinzillaHeader{
+                display: none;
+            }
+        </style>
     </head>
     <body style="background-color: #f7f7f9;margin-bottom: 50px">
-        <?php if ($lang == 'pt-br') { ?>
+        <div style="width: 100%; height: 90px; position: relative; background-color: #a54bb5 !important;">
+             <div class="header-7985c4f130d0f59a872"></div>
+        </div>
+            <?php if ($lang == 'pt-br') { ?>
             <!--<div id="div_topo" style=" height: 45px;background-color: #79308c;"></div>-->
         <?php } ?>
         <nav class="navbar navbar-expand-lg  navbar-primary bg-primary" style=" z-index: 6000!important;">
@@ -168,7 +178,20 @@ $version = '1.3';
     </nav>
     <div style="margin:10px;max-width: 1200px;" class="ml-auto mr-auto">
         <?php if (!DEBUG) { ?>
-        <div class="text-center">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- topo coingolive -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1808881827490945"
+             data-ad-slot="1784707816"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <?php } ?>
+        <?= $this->content ?>
+        <div class="text-center" style="margin-top: 20px">
              <!-- Coinzilla Banner 728x90 -->
             <script async src="https://coinzillatag.com/lib/display.js"></script>
             <div class="coinzilla" data-zone="C-415245a8c26c8245e2"></div>
@@ -181,8 +204,6 @@ $version = '1.3';
                 coinzilla_display.push(c_display_preferences);
             </script>
         </div>
-        <?php } ?>
-        <?= $this->content ?>
     </div>
     <!-- Button trigger modal -->
 
@@ -326,7 +347,6 @@ if (isset($_GET['uuid'])) {
             link.media = 'all';
             head.appendChild(link);
         }
-
     </script>
 </body>
 </html>
