@@ -181,7 +181,7 @@ $version = '1.3';
         <?php if (!DEBUG) { ?>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <!-- topo 2 coingolive -->
-    <div style="overflow-x:auto">
+    <div style="overflow-x:auto;" class="text-center">
         <ins class="adsbygoogle"
              style="display:inline-block;width:728px;height:90px"
              data-ad-client="ca-pub-1808881827490945"
