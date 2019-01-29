@@ -80,11 +80,7 @@ $version = '1.3';
                 return '/' + currentLang + url;
             }
         </script>
-        <style>
-            #CloseCoinzillaHeader{
-                display: none;
-            }
-        </style>
+        
     </head>
     <body style="background-color: #f7f7f9;margin-bottom: 50px">
         <div style="width: 100%; height: 90px; position: relative; background-color: #a54bb5 !important;">
@@ -179,16 +175,16 @@ $version = '1.3';
     <div style="margin:10px;max-width: 1200px;" class="ml-auto mr-auto">
         <?php if (!DEBUG) { ?>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- topo coingolive -->
+    <!-- topo 2 coingolive -->
+    <div style="overflow-x:auto">
         <ins class="adsbygoogle"
-             style="display:block"
+             style="display:inline-block;width:728px;height:90px"
              data-ad-client="ca-pub-1808881827490945"
-             data-ad-slot="1784707816"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+             data-ad-slot="2640292782"></ins>
+    </div>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
         <?php } ?>
         <?= $this->content ?>
         <div class="text-center" style="margin-top: 20px">
