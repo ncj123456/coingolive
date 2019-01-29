@@ -80,6 +80,11 @@ $version = '1.3';
                 return '/' + currentLang + url;
             }
         </script>
+        <style>
+            #CloseCoinzillaHeader{
+                display: none;
+            }
+        </style>
         
     </head>
     <body style="background-color: #f7f7f9;margin-bottom: 50px">
