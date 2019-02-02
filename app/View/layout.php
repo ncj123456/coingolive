@@ -88,7 +88,7 @@ $version = '1.3';
         
     </head>
     <body style="background-color: #f7f7f9;margin-bottom: 50px">
-        <div style="width: 100%; height: 90px; position: relative; background-color: #a54bb5 !important;">
+        <div style="width: 100%; height: 90px; position: relative;">
              <div class="header-7985c4f130d0f59a872"></div>
         </div>
             <?php if ($lang == 'pt-br') { ?>
@@ -122,23 +122,6 @@ $version = '1.3';
                         <?php } ?>
                     </ul>
                     <ul class="navbar-nav ml-auto  dropdown-menu-left">
-                        <!--                        <li class="dropdown nav-item">
-                                                    <a href="#" class="dropdown-toggle nav-link moedaAtual" data-toggle="dropdown">
-                        <?= isset($_COOKIE['moeda']) ? $_COOKIE['moeda'] : 'USD' ?>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                        <?php
-                        $listLangs = \Base\I18n::getListMoeda();
-                        foreach ($listLangs as $name => $char) {
-                            ?>
-                                                                                                                                                                                            <a href="javascript:changeMoeda('<?= $name ?>',loadPage)" class="dropdown-item">
-                            <?= $name ?>
-                                                                                                                                                                                            </a>
-                            <?php
-                        }
-                        ?>
-                                                    </div>
-                                                </li>-->
                         <li class="nav-item">
                             <a class="nav-link" target="_blank" href="https://github.com/CoinGoLive/coingolive"><i class="fa fa-github"></i></a>
                           </li>
@@ -179,19 +162,6 @@ $version = '1.3';
     </nav>
     <div style="margin:10px;max-width: 1200px;" class="ml-auto mr-auto">
         <?php if (!DEBUG) { ?>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- topo 2 coingolive -->
-    <div style="overflow-x:auto;" class="text-center">
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:728px;height:90px"
-             data-ad-client="ca-pub-1808881827490945"
-             data-ad-slot="2640292782"></ins>
-    </div>
-    <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-        <?php } ?>
-        <?= $this->content ?>
         <div class="text-center" style="margin-top: 20px">
              <!-- Coinzilla Banner 728x90 -->
             <script async src="https://coinzillatag.com/lib/display.js"></script>
@@ -205,10 +175,9 @@ $version = '1.3';
                 coinzilla_display.push(c_display_preferences);
             </script>
         </div>
+        <?php } ?>
+        <?= $this->content ?>
     </div>
-    <!-- Button trigger modal -->
-
-
     <!-- Modal -->
     <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
