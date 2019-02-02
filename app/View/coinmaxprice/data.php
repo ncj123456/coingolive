@@ -30,7 +30,8 @@ if (isset($_GET['marketcap']) && $_GET['marketcap'] > 0) {
                     'price_available_supply' => _e('Preço Máximo'),
                     'percent_available_supply' => _e('Crescimento'),
                     'volume_24h_moeda' => _e('Volume 24h'),
-                    'percent_dominance' => _e('Dominancia'),
+                    'percent_dominance' => _e('Market Cap'),
+                    'available_supply'=> _e('Available Supply'),
                     'max_supply' => _e('Limite'),
                 ];
                 foreach ($table_head as $col_name => $col_desc) {
@@ -62,6 +63,7 @@ if (isset($_GET['marketcap']) && $_GET['marketcap'] > 0) {
                 $txtMax = $maximo;
                 $maxSymbol = $maximo . ' ' . $d['symbol'];
                 $maxTooltip = tooltip(decimal($d['max_supply'], 0) . ' ' . $d['symbol']);
+                $supplyTooltip = decimal($d['available_supply'],0).' '. $d['symbol'];
 
                 if ($d['max_supply'] == 0) {
                     $maxTooltip = tooltip(_e('Não existe um limite máximo de fornecimento'));
@@ -105,6 +107,9 @@ if (isset($_GET['marketcap']) && $_GET['marketcap'] > 0) {
                 if ($d['moeda_char'] == 'BTC') {
                     $moeda_char = "<span class='icon-moeda-char'><i class='fa fa-btc'></i></span> ";
                 }
+               
+                $color_vol24 = volumeColor($d['volume_24h_moeda']);                
+
                 ?>
                 <tr >
                     <td class="text-center"><a href="javascript:addFavorite('<?= $d['codigo'] ?>')">
@@ -119,20 +124,20 @@ if (isset($_GET['marketcap']) && $_GET['marketcap'] > 0) {
                             <small><?= $d['symbol'] ?></small>
                         </a>
                     </td>
-
-
                         <td class="text-right"><?= $moeda_char . decimal($price_moeda, 2, true) ?></td>
                         <td class="text-right"> <?= $moeda_char . decimal($max_price_moeda, 2, true) ?> </td>
 
                     <td class="text-right">
-                        <span style="font-size:13px" class="badge badge-<?= $class_percent ?>"><?= decimal($percent_available_supply, 0) ?>%</span
+                        <span style="font-size:13px" class="badge badge-<?= $class_percent ?>"><?= decimal($percent_available_supply, 0) ?>%</span>
                     </td>
 
-                        <td class="text-right"> <?= $moeda_char. numFormat($d['volume_24h_moeda'], 2) ?> </td>
-                        <td class="text-right" <?= tooltip($moeda_char. numFormat($d['market_cap_moeda'], 2)) ?>> 
-                            <?= decimalAuto($d['percent_dominance'], 2, 2) ?> % 
+                        <td class="text-right"  style="background-color:  <?= $color_vol24 ?>;"> <?= $moeda_char. numFormat($d['volume_24h_moeda'], 2) ?> </td>
+                        <td class="text-right" <?= tooltip( _e("Dominancia").': '.decimalAuto($d['percent_dominance'], 2, 2).' %' )?> > 
+                            <?= ($moeda_char. numFormat($d['market_cap_moeda'], 2)) ?>
                         </td>
 
+                        <td class="text-right" <?= tooltip($supplyTooltip) ?>> <?=  numFormat( $d['available_supply'], 2) ?> </td>
+                   
                     <td class="<?= $class ?> text-center" <?= $maxTooltip ?>> <?= $txtMax ?></td>
 
                 </tr>

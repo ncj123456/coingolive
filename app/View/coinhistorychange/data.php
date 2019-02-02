@@ -89,26 +89,7 @@
 
 //                $porcVol = ($d['volume_24h_moeda'] * 100 / $max_vol24);
 
-                $vol24 = $d['volume_24h_moeda'];
-                if ($vol24 > 1000000000) {
-                    $color_vol24 = "#00abd2";
-                    
-                } else if ($vol24 > 100000000) {
-                   $color_vol24 = "#74d9f1";
-                   
-                } else if ($vol24 > 10000000) {
-                      $color_vol24 = "#a1e1f1";
-                      
-                } else if ($vol24 > 1000000) {
-                      $color_vol24 = "#bfe7f1";
-                      
-                } else if ($vol24 > 100000) {
-                      $color_vol24 = "#dcf8ff";
-                      
-                }else {
-                      $color_vol24 = "#f4fcff";
-                }
-                
+                $color_vol24 = volumeColor($d['volume_24h_moeda']);                
                 ?>
                 <tr >
                     <td class="text-left padding-table-3px" colspan="2"> 

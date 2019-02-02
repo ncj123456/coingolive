@@ -46,6 +46,7 @@
         </thead>
         <tbody>
             <?php
+            
             foreach ($data as $d) {
 
                 $format_porc = function($porc, $price, $moeda_char,$desc = '') {
@@ -74,6 +75,7 @@
                 if ($d['moeda_char'] == 'BTC') {
                     $moeda_char = "<span class='icon-moeda-char'><i class='fa fa-btc'></i> </span>";
                 }
+               $color_vol24 = volumeColor($d['volume_24h_moeda']);         
                 ?>
                 <tr >
                     <td class="text-left padding-table-3px" colspan="2"> 
@@ -104,7 +106,7 @@
                             </div>
                         </div>
                     </td>
-                    <td class="text-center"><span<?= tooltip($moeda_char . decimal($d['volume_24h_moeda'], 0)) ?>>
+                    <td class="text-center"  style="background-color:  <?= $color_vol24 ?>;"><span<?= tooltip($moeda_char . decimal($d['volume_24h_moeda'], 0)) ?>>
                                 <?= $moeda_char ?><?= numFormat($d['volume_24h_moeda'], 2); ?></span></td>
                 </tr>
             <?php } ?>

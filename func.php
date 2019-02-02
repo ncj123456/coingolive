@@ -11,8 +11,8 @@ function decimal($v, $num = 2, $autoDecimal = false) {
         }
     }
     $lang = \Base\I18n::getCurrentLang();
-    if($lang==='en'){
-           return number_format($v, round($countDecimal), '.', ',');
+    if ($lang === 'en') {
+        return number_format($v, round($countDecimal), '.', ',');
     }
     return number_format($v, round($countDecimal), ',', '.');
 }
@@ -63,53 +63,53 @@ function dateDesc($timestamp) {
 
     if ($y > 0) {
         if ($y == 1) {
-            return _e('há [1] ano',$y);
+            return _e('há [1] ano', $y);
         } else {
-            return _e('há [1] anos',$y);
+            return _e('há [1] anos', $y);
         }
     }
-      if ($m > 0) {
+    if ($m > 0) {
         if ($m == 1) {
-            return _e('há [1] mês',$m);
+            return _e('há [1] mês', $m);
         } else {
-            return _e('há [1] meses',$m);
+            return _e('há [1] meses', $m);
         }
     }
     if ($d > 0) {
         if ($d == 1) {
-            return _e('há [1] dia',$d);
+            return _e('há [1] dia', $d);
         } else {
-            return _e('há [1] dias',$d);
+            return _e('há [1] dias', $d);
         }
     }
 
     if ($h > 0) {
         if ($h == 1) {
-            return _e('há [1] hora',$h);
+            return _e('há [1] hora', $h);
         } else {
-            return _e('há [1] horas',$h);
+            return _e('há [1] horas', $h);
         }
     }
 
     if ($i > 0) {
         if ($i == 1) {
-            return _e('há [1] minuto',$i);
+            return _e('há [1] minuto', $i);
         } else {
-            return _e('há [1] minutos',$i);
+            return _e('há [1] minutos', $i);
         }
     }
 
     if ($s > 0) {
         if ($s == 1) {
-            return _e('há [1] segundo',$s);
+            return _e('há [1] segundo', $s);
         } else {
-            return  _e('há [1] segundo',$s);
+            return _e('há [1] segundo', $s);
         }
     }
 }
 
 function _e($text) {
-   
+
     $lang = \Base\I18n::getCurrentLang();
     $file = __DIR__ . '/i18n/' . $lang . '.php';
 
@@ -119,17 +119,17 @@ function _e($text) {
     }
 
     if (isset($data[trim($text)])) {
-        $text= $data[$text];
+        $text = $data[$text];
     }
-    
+
     //remove o primeiro parametro que e o texto
     $args = func_get_args();
     unset($args[0]);
-    
-    foreach($args as $key=>$val){
-        $text =str_replace('['.$key.']',$val , $text);
+
+    foreach ($args as $key => $val) {
+        $text = str_replace('[' . $key . ']', $val, $text);
     }
-    
+
     return $text;
 }
 
@@ -146,10 +146,10 @@ function numFormat($n, $precision = 3) {
     } else if ($n < 1000000000) {
         // Anything less than a billion
         $n_format = number_format($n / 1000000, $precision) . 'M';
-    }else if ($n < 1000000000000) {
+    } else if ($n < 1000000000000) {
         // Anything less than a billion
         $n_format = number_format($n / 1000000000, $precision) . 'B';
-    }  else {
+    } else {
         // At least a trillion
         $n_format = number_format($n / 1000000000000, $precision) . 'T';
     }
@@ -157,8 +157,24 @@ function numFormat($n, $precision = 3) {
     return $n_format;
 }
 
+function tooltip($txt) {
+    $txt = str_replace('"', "'", $txt);
+    return ' data-toggle="tooltip" data-html="true" title="' . $txt . '"';
+}
 
-function tooltip($txt){
-    $txt= str_replace('"', "'",$txt);
-    return ' data-toggle="tooltip" data-html="true" title="'.$txt.'"';
+function volumeColor($vol24) {
+    if ($vol24 > 1000000000) {
+        $color_vol24 = "#00abd2";
+    } else if ($vol24 > 100000000) {
+        $color_vol24 = "#74d9f1";
+    } else if ($vol24 > 10000000) {
+        $color_vol24 = "#a1e1f1";
+    } else if ($vol24 > 1000000) {
+        $color_vol24 = "#bfe7f1";
+    } else if ($vol24 > 100000) {
+        $color_vol24 = "#dcf8ff";
+    } else {
+        $color_vol24 = "#f4fcff";
+    }
+    return $color_vol24;
 }
