@@ -179,7 +179,7 @@ function volumeColor($vol24) {
     return $color_vol24;
 }
 
-function btnBuy($symbol){
+function btnBuy($symbol,$large=false){
     
     $lang = \Base\I18n::getCurrentLang();
     if($lang != 'pt-br'){
@@ -226,11 +226,18 @@ function btnBuy($symbol){
                     </a>';
     }
     
+    $float="float:right;";
+    $size = 'btn-sm';
     
-    $html = '<div class="dropdown" style="margin:0;float:right;margin-left:10px; margin-top: -2px; margin-bottom: -2px;">
+    if($large){
+        $float="";
+        $size='';
+    }
+    
+    $html = '<div class="dropdown" style="margin:0;'.$float.'margin-left:10px; margin-top: -2px; margin-bottom: -2px;">
             <button title="Comprar criptomoeda '.$symbol.'" 
                 onclick="javascript:ga(\'send\', \'event\',\'openBtnBuy\', \'openBtnBuy\');" 
-                style="margin:0" class="btn-sm btn btn-primary  dropdown-toggle" 
+                style="margin:0" class="'.$size.' btn btn-primary  dropdown-toggle" 
                 type="button" 
                 data-toggle="dropdown">
                 BUY  <div class="ripple-container"></div></button>

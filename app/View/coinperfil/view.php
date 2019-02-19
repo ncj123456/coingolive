@@ -71,7 +71,9 @@ $_meta_description = _e('Estimativa do preço máximo da criptomoeda [1] utiliza
                         <div class="col-md-3  text-center">
                             <img style="margin-right:10px;max-width:80px" src="/assets/img/coin/<?= $dados['codigo'] ?>.png">
                             <h2 class="title" style="line-height: 1.2em;margin-top: 3px"><?= $dados['name'] ?><br/> <small> <?= $dados['symbol'] ?></small></h2>
-
+                            <div class="text-center">
+                                <?= btnBuy($dados['symbol'],true); ?>
+                            </div>
                         </div>
                         <div class="col-md-3 text-center" style="padding:5px">
                             <h3 class="description"><?= _e('Preço Atual') ?></h3>
