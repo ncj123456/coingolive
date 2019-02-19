@@ -112,12 +112,12 @@ if (isset($_GET['marketcap']) && $_GET['marketcap'] > 0) {
 
                 ?>
                 <tr >
-                    <td class="text-center"><a href="javascript:addFavorite('<?= $d['codigo'] ?>')">
+                    <td class="text-center" ><a href="javascript:addFavorite('<?= $d['codigo'] ?>')">
                             <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['codigo'] ?>"></i>
                         </a>
                     </td>
                     <td class="text-center"><?= $d['rank'] ?></td>
-                    <td class="text-left"> 
+                    <td class="text-left"  style="min-width: 250px;"> 
                         <a href="<?= siteUrl('/currencies/' . $d['codigo']) ?>">
                             <img style="margin-right:10px;    max-height: 20px;" src="/assets/img/coin/<?= $d['codigo'] ?>.png">
                             <?= $d['name'] ?>
