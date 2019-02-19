@@ -178,3 +178,65 @@ function volumeColor($vol24) {
     }
     return $color_vol24;
 }
+
+function btnBuy($symbol){
+    
+    $lang = \Base\I18n::getCurrentLang();
+    if($lang != 'pt-br'){
+        return false;
+    }
+    
+    $ads = [
+       'btc'=>['3xbit'],
+       'eth'=>['3xbit'],
+        'ltc'=>['3xbit'],
+        'bch'=>['3xbit'],
+        'bsv'=>['3xbit'],
+        'dash'=>['3xbit'],
+        'nano'=>['3xbit'],
+        'doge'=>['3xbit'],
+        'smart'=>['3xbit'],
+        'zcr'=>['3xbit'],
+        'leax'=>['3xbit'],
+        'tnj'=>['3xbit'],
+    ];
+    
+    $partners = [
+        '3xbit'=>[
+            'img'=>'/assets/img/partners/3xbit.png',
+            'link'=>'http://3xb.it/crie-sua-conta?utm_source=coingolive&utm_medium=button_buy',
+            'desc'=>'3XBIT'
+        ]
+    ];
+    
+    if(!isset($ads[$symbol])){
+        return false;
+    }
+    
+    $item = '';
+    
+    foreach($ads[$symbol] as $name){
+        $row = $partners[ $name];
+        
+        
+    $event ="javascript:ga('send', 'event', 'btnBuy', '".$row['desc']."');";
+        
+       $item .= ' <a href="'.$row['link'].'" onclick="'.$event.'" class="dropdown-item" target="_blank">
+                                        <img src="'.$row['img'].'" alt="'.$row['desc'].'" style="max-width:55px" />
+                    </a>';
+    }
+    
+    
+    $html = '<div class="dropdown" style="margin:0;float:right;margin-left:10px; margin-top: -2px; margin-bottom: -2px;">
+            <button title="Comprar criptomoeda '.$symbol.'" 
+                onclick="javascript:ga(\'send\', \'event\',\'openBtnBuy\', \'openBtnBuy\');" 
+                style="margin:0" class="btn-sm btn btn-primary  dropdown-toggle" 
+                type="button" 
+                data-toggle="dropdown">
+                BUY  <div class="ripple-container"></div></button>
+            <div class="dropdown-menu ">
+                                   '.$item.'
+                                </div>
+        </div>';
+    return $html;
+}

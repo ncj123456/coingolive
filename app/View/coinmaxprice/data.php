@@ -123,6 +123,7 @@ if (isset($_GET['marketcap']) && $_GET['marketcap'] > 0) {
                             <?= $d['name'] ?>
                             <small><?= $d['symbol'] ?></small>
                         </a>
+                        <?= btnBuy($d['symbol']) ?>
                     </td>
                         <td class="text-right"><?= $moeda_char . decimal($price_moeda, 2, true) ?></td>
                         <td class="text-right"> <?= $moeda_char . decimal($max_price_moeda, 2, true) ?> </td>

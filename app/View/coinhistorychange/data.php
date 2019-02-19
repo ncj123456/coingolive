@@ -72,7 +72,7 @@
                     if ($price) {
                         $tooltip = 'data-toggle="tooltip" data-html="true" title="' . $desc . '<br>' . $moeda_char . decimal($price, 2, true) . ' "';
                     }
-                    return '<span style="font-size:13px;width:100%;padding:14px;display:block;border-radius: 0px;" ' . $tooltip . '  class="badge ' . $class_percent . '">' . decimal($porc, 2) . '%</span>';
+                    return '<span style="font-size:13px;width:100%;height:100%;padding:14px;display:block;border-radius: 0px;" ' . $tooltip . '  class="badge ' . $class_percent . '">' . decimal($porc, 2) . '%</span>';
                 };
 
                 $favorite = '-o';
@@ -101,6 +101,7 @@
                         <?= $d['symbol'] ?>
                         <!--<small><?= $d['symbol'] ?></small>-->
                         <!--</a>-->
+                              <?= btnBuy($d['symbol']) ?>
                     </td>
                     <td class="text-center padding-table-3px"><?= $d['rank']; ?></td>
 

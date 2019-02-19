@@ -87,6 +87,7 @@
                             <?= $d['symbol'] ?>
                             <!--<small><?= $d['symbol'] ?></small>-->
                         <!--</a>-->
+                        <?= btnBuy($d['symbol']) ?>
                     </td>
                     <td class="text-center padding-table-3px"><?= $d['rank']; ?></td>
                     <td class="text-right" style="padding-left:3px"><?= $moeda_char ?> <?= decimal($d['price_moeda'], 2, true); ?></td>
