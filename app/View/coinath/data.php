@@ -78,7 +78,7 @@
                $color_vol24 = volumeColor($d['volume_24h_moeda']);         
                 ?>
                 <tr >
-                    <td class="text-left padding-table-3px" colspan="2" style="min-width: 180px;"> 
+                    <td class="text-left padding-table-3px" colspan="2" style="min-width: 200px;"> 
                         <a href="javascript:addFavorite('<?= $d['id_externo'] ?>')" style="margin-right:10px;">
                             <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['id_externo'] ?>"></i>
                         </a>
