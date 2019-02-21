@@ -129,6 +129,7 @@ return [
     'para'=>'to',
     'desde'=>'since',
     'Posição Preço Atual'=>'Position Current Price',
-    'Data'=>'Date'
+    'Data'=>'Date',
+    'Histórico de Preço'=>'Price History'
     
     ];
