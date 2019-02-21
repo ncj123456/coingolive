@@ -238,7 +238,7 @@ function btnBuy($symbol,$large=false){
         $size='';
     }
     
-    $html = '<div class="dropdown" style="margin:0;'.$float.'margin-left:10px; margin-top: -2px; margin-bottom: -2px;">
+    $html = '<div class="dropdown" style="margin:0;'.$float.' margin-top: -2px; margin-bottom: -2px;">
             <button title="Comprar criptomoeda '.$symbol.'" 
                 onclick="javascript:gtag(\'event\', \'btnBuyOpen\', {\'event_category\': \'btnBuy\' });" 
                 style="margin:0" class="'.$size.' btn btn-primary  dropdown-toggle" 
