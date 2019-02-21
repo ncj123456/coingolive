@@ -53,28 +53,6 @@
             <?php
             foreach ($data as $d) {
 
-                $format_porc = function($porc, $price, $moeda_char = '', $desc = '') {
-
-                    $numClass = round(abs($porc) / 20);
-                    if ($numClass > 5) {
-                        $numClass = 6;
-                    }
-
-                    if ($porc < 0) {
-                        $class_percent = 'red' . $numClass;
-                    } elseif ($porc > 0) {
-                        $class_percent = 'green' . $numClass;
-                    } else {
-                        return '--';
-                        $class_percent = 'badge-default';
-                    }
-                    $tooltip = '';
-                    if ($price) {
-                        $tooltip = 'data-toggle="tooltip" data-html="true" title="' . $desc . '<br>' . $moeda_char . decimal($price, 2, true) . ' "';
-                    }
-                    return '<span style="font-size:13px;width:100%;height:100%;padding:14px;display:block;border-radius: 0px;" ' . $tooltip . '  class="badge ' . $class_percent . '">' . decimal($porc, 2) . '%</span>';
-                };
-
                 $favorite = '-o';
                 if ($d['favorite'] === $d['id_externo']) {
                     $favorite = '';
@@ -96,26 +74,25 @@
                         <a href="javascript:addFavorite('<?= $d['id_externo'] ?>')" style="margin-right:10px;">
                             <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['id_externo'] ?>"></i>
                         </a>
-                        <!--<a href="<?= siteUrl('/compare/coin/?coins=' . $d['id_externo']) ?>">-->
+                     <a href="<?= siteUrl('/currencies/' . $d['id_externo']) ?>">
                         <img style="margin-right:10px;    max-height: 20px;" src="/assets/img/coin/<?= $d['id_externo'] ?>.png">
                         <?= $d['symbol'] ?>
-                        <!--<small><?= $d['symbol'] ?></small>-->
-                        <!--</a>-->
+                        </a>
                               <?= btnBuy($d['symbol']) ?>
                     </td>
                     <td class="text-center padding-table-3px"><?= $d['rank']; ?></td>
 
                     <td class="text-right" style="padding-left:3px"><?= $moeda_char ?><?= decimal($d['price_moeda'], 2, true); ?></td>
                     <td class="text-right" style="background-color:  <?= $color_vol24 ?>"> <?= $moeda_char . numFormat($d['volume_24h_moeda'], 2) ?> </td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_1h'], false); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_24h'], false); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_7d'], false); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_14d'], false); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_30d'], false); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_200d'], false); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= $format_porc($d['price_change_percentage_1y'], false); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_1h']); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_24h']); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_7d']); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_14d']); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_30d']); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_200d']); ?></td>
+                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_1y']); ?></td>
                     <!--<td class="text-center"><span<?= tooltip('$' . decimal($d['market_cap_moeda'], 0)) ?>>$<?= numFormat($d['market_cap_moeda'], 2); ?></span></td>-->
-                    <!--<td class="text-center padding-table-3px"><?= $format_porc($d['ath_change_percentage'], $d['high_price'], $moeda_char, $d['high_date']); ?></td>-->
+                    <!--<td class="text-center padding-table-3px"><?= formatPorc($d['ath_change_percentage'], $d['high_price'], $moeda_char, $d['high_date']); ?></td>-->
                     <td class="text-center"data-toggle="tooltip" title="
                         <?= $d['symbol'] ?><br/> 
                         <?= decimal($d['ath_change_percentage'], 2); ?>%<br/>

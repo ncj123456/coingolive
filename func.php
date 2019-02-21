@@ -181,10 +181,12 @@ function volumeColor($vol24) {
 
 function btnBuy($symbol,$large=false){
     
-    $lang = \Base\I18n::getCurrentLang();
-    if($lang != 'pt-br'){
-        return false;
-    }
+    
+    $symbol = strtolower($symbol);
+//    $lang = \Base\I18n::getCurrentLang();
+//    if($lang != 'pt-br'){
+//        return false;
+//    }
     
     $ads = [
        'btc'=>['3xbit'],
@@ -248,4 +250,26 @@ function btnBuy($symbol,$large=false){
                                 </div>
         </div>';
     return $html;
+}
+
+ function formatPorc($porc, $price=false, $moeda_char = '', $desc = '',$border='0px') {
+
+                    $numClass = round(abs($porc) / 20);
+                    if ($numClass > 5) {
+                        $numClass = 6;
+                    }
+
+                    if ($porc < 0) {
+                        $class_percent = 'red' . $numClass;
+                    } elseif ($porc > 0) {
+                        $class_percent = 'green' . $numClass;
+                    } else {
+                        return '--';
+                        $class_percent = 'badge-default';
+                    }
+                    $tooltip = '';
+                    if ($price) {
+                        $tooltip = 'data-toggle="tooltip" data-html="true" title="' . $desc . '<br>' . $moeda_char . decimal($price, 2, true) . ' "';
+                    }
+                    return '<span style="font-size:13px;width:100%;height:100%;padding:14px;display:block;border-radius: '.$border.';" ' . $tooltip . '  class="badge ' . $class_percent . '">' . decimal($porc, 2) . '%</span>';
 }

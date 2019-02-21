@@ -121,6 +121,14 @@ return [
     'Histórico Rank criptomoedas'=>'Historical Rank Cryptocurrency',
     'Histórico Rank'=>'Historical Rank',
     'Selecione uma ou mais criptomoedas'=>'Select one or more cryptocurrencies',
-    'Criptomoedas compare o histórico do rank baseado no Market Cap'=>'Cryptocurrencies compare the rank history based on the Market Cap'
+    'Criptomoedas compare o histórico do rank baseado no Market Cap'=>'Cryptocurrencies compare the rank history based on the Market Cap',
+    'Market Cap Estimado'=>'Estimated Market Cap',
+    'Dominância Atual'=>'Current Dominance',
+    'Market Cap Atual'=>'Current Market Cap',
+    'Fornecimento Circulante'=>'Circulating Supply',
+    'para'=>'to',
+    'desde'=>'since',
+    'Posição Preço Atual'=>'Position Current Price',
+    'Data'=>'Date'
     
     ];

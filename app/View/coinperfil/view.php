@@ -43,6 +43,8 @@ $style_title = ' margin-top: 0px;';
 //seo
 $_title = $dados['name'] . ' (' . $dados['symbol'] . ')';
 $_meta_description = _e('Estimativa do preço máximo da criptomoeda [1] utilizando a captalização de mercado da [2]', $dados['name'], ucfirst($compare_coin));
+
+$color_vol24 = volumeColor($dados['volume_24h_moeda']);         
 ?>
 <input type="hidden" id="porc_marketcap_perfil" value="<?= decimal($porc_market_cap_compare, 0) ?>"/>
 <input type="hidden" id="valor_marketcap_perfil" value="<?= decimal($market_cap_compare, 0) ?>"/>
@@ -53,7 +55,7 @@ $_meta_description = _e('Estimativa do preço máximo da criptomoeda [1] utiliza
     <div class="col-md-12" >
         <?php require_once __DIR__ . "/../coinmaxprice/msg_alert.inc.php" ?>
     </div>
-    <div class="main main-raised  col-md-12"  style="margin: 0px!important">
+    <div class="main main-raised  col-md-12"  style="margin: 0px!important;background-color: #f9f9f9;">
         <div class="container">
             <div style="position:absolute; top: 1px;right: 8px">
                 <?= _e('Ultima atualização') . ' ' . dateDesc($dados['data_alteracao']) ?>
@@ -72,38 +74,126 @@ $_meta_description = _e('Estimativa do preço máximo da criptomoeda [1] utiliza
                             <img style="margin-right:10px;max-width:80px" src="/assets/img/coin/<?= $dados['codigo'] ?>.png">
                             <h2 class="title" style="line-height: 1.2em;margin-top: 3px"><?= $dados['name'] ?><br/> <small> <?= $dados['symbol'] ?></small></h2>
                             <div class="text-center">
-                                <?= btnBuy($dados['symbol'],true); ?>
+                                <?= btnBuy($dados['symbol'], true); ?>
                             </div>
                         </div>
-                        <div class="col-md-3 text-center" style="padding:5px">
-                            <h3 class="description"><?= _e('Preço Atual') ?></h3>
-                            <h2  style="<?= $style_title ?>"><?= $price_current ?></h2>
+                        <div class="col-md-5 text-center" style="padding:5px">
+                            <div class="card card-body"  style="margin-top: 0px;margin-bottom: 5px;">
+                                <h4 class="description"><?= _e('Cotação Máxima') ?></h4>
+                                <table class="table ">
+                                    <tr>
+                                        <td><?= _e('Preço Atual') ?></td>
+                                        <td><?= $price_current ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= _e('Preço Máximo') ?>  <i data-toggle="tooltip" title="" class="fa fa-question-circle-o help" id="btn_help_max_price" style="color:#9124a3;font-size: 20px" data-original-title="<?= _e('Ajuda') ?>"></i></td>
+                                        <td><?= $price_available_supply ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= _e('Crescimento') ?></td>
+                                        <td style="background-color:#ff9800;color:#fff;  border-radius: 5px;"><?= decimal($percent_available_supply, 0) ?>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= _e('Market Cap Atual') ?></td>
+                                        <td><?= $dados['moeda_char'] . ' ' . decimal($dados['market_cap_moeda'], 0) ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= _e('Market Cap Estimado').' ('.$compare['symbol'].')' ?></td>
+                                        <td><?= $dados['moeda_char'] . ' ' . decimal($market_cap_compare, 0) ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= _e('Dominância Atual') ?></td>
+                                        <td><?= decimal($dados['percent_dominance'], 3) ?> %</td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= _e('Fornecimento Circulante') ?></td>
+                                        <td><?= decimal($available_supply, 0) . ' ' . $dados['symbol']; ?> </td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= _e('Fornecimento Máximo') ?></td>
+                                        <td>
+                                            <?php
+                                            echo decimal($dados['max_supply'], 0) . ' ';
+                                            echo ($dados['max_supply'] > 0) ? $dados['symbol'] : null;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= _e('Volume 24h') ?></td>
+                                        <td   style="background-color:  <?= $color_vol24 ?>;  border-radius: 5px;" >
+                                     <?= $dados['moeda_char'] . ' ' . decimal($dados['volume_24h_moeda'],0) ?> 
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
                         </div>
-                        <div class="col-md-3 text-center" style="padding:5px">
-                            <h3 class="description" ><?= _e('Preço Máximo') ?> <i data-toggle="tooltip" title="" class="fa fa-question-circle-o help" id="btn_help_max_price" style="color:#9124a3;font-size: 30px" data-original-title="<?= _e('Ajuda') ?>"></i></h3>
-                            <h2 style="<?= $style_title ?>" ><?= $price_available_supply ?></h2>
-                        </div>
-                        <div class="col-md-3 text-center" style="padding:5px">
-                            <h3 class="description" ><?= _e('Crescimento') ?></h3>
-                            <h2   style="<?= $style_title . ' color:' . $color_percent; ?>" ><?= decimal($percent_available_supply, 0) ?>%</h2>
-                        </div>
-                        <div class="col-md-3 text-center" style="padding:5px">
-                        </div>
-                        <div class="col-md-3 text-center" style="padding:5px">
-                            <h4 class="description"><?= _e('Dominancia') ?></h4>
-                            <h3  style="<?= $style_title ?>"> <?= decimal($dados['percent_dominance'], 2, true) ?>% </h3>
-                        </div>
-                        <div class="col-md-3 text-center" style="padding:5px">
-                            <h4 class="description"><?= _e('Volume 24h') ?></h4>
-                            <h3 style="<?= $style_title ?>"> <?= $dados['moeda_char'] . ' ' . decimal($dados['volume_24h_moeda']) ?> </h3>
-                        </div>
-                        <div class="col-md-3 text-center" style="padding:5px">
-                            <h4 class="description"><?= _e('Fornecimento Máximo') ?></h4>
-                            <h3 style="<?= $style_title ?>"> 
-                                <?php
-                                echo decimal($dados['max_supply'], 2) . '<br/>';
-                                echo ($dados['max_supply'] > 0) ? $dados['symbol'] : null;
-                                ?> </h3>
+                        <div class="col-md-4 text-center" style="padding:5px">
+                         
+                            <div class="card card-body"  style="margin-top: 0px;margin-bottom: 5px;">
+                                <h4 class="description"><?= _e('Histórico de Preço') ?></h4>
+                                <table class="table ">
+                                    <tr>
+                                        <td>1 <?= _e('hora') ?></td>
+                                        <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_1h'],false,'','','5px') ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>24 <?= _e('horas') ?></td>
+                                        <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_24h'],false,'','','5px') ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>7 <?= _e('dias') ?></td>
+                                        <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_7d'],false,'','','5px') ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= _e('14 dias') ?></td>
+                                        <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_14d'],false,'','','5px') ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>30 <?= _e('dias') ?></td>
+                                        <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_30d'],false,'','','5px') ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>200 <?= _e('dias') ?></td>
+                                        <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_200d'],false,'','','5px') ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1 <?= _e('ano') ?></td>
+                                        <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_1y'],false,'','','5px') ?></td>
+                                    </tr>
+                                </table>
+                            </div>
+                               <div class="card card-body"  style="margin-top: 0px;">
+                                <h4 class="description"><?= _e('Alta Histórica') ?></h4>
+                                <table class="table ">
+                                    <tr>
+                                        <td><?= _e('Preço') ?> ATH</td>
+                                        <td><?= $dados['moeda_char'] ?> <?= decimal($dados['high_price'], 2, true); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= _e('Data') ?> ATH</td>
+                                        <td><?= $dados['high_date'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>% <?= _e('para') ?> ATH</td>
+                                        <td style="padding:0px!important; "><?= formatPorc($dados['growth_high'],false,'','','5px') ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>% <?= _e('desde') ?> ATH</td>
+                                        <td style="padding:0px!important; "><?= formatPorc($dados['porc_high'],false,'','','5px') ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?= _e('Posição Preço Atual') ?></td>
+                                        <td>
+                                            <div class="progress progress-line-primary " style="height: 20px;">
+                                                <div class="progress-bar progress-bar-primary" role="progressbar" style="width: <?= round(100 + $dados['porc_high'], 2) ?>%;heigth:10px">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -139,5 +229,5 @@ $_meta_description = _e('Estimativa do preço máximo da criptomoeda [1] utiliza
     </div>
 </div>
 <div class="text-center" style="margin-top: 40px">
-     <?= _e('Fonte dos dados:') ?> <a href="https://coingecko.com" target="_blank">CoinGecko</a>
+    <?= _e('Fonte dos dados:') ?> <a href="https://coingecko.com" target="_blank">CoinGecko</a>
 </div>

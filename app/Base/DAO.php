@@ -2,7 +2,7 @@
 
 namespace Base;
 
-abstract class DAO {
+class DAO {
 
     private $db;
     private $lastInsertId;
