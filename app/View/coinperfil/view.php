@@ -172,7 +172,7 @@ $color_vol24 = volumeColor($dados['volume_24h_moeda']);
                                     </tr>
                                     <tr>
                                         <td><?= _e('Data') ?> ATH</td>
-                                        <td><?= $dados['high_date'] ?></td>
+                                        <td><?= $dados['high_date'] ?> <small>( <?= dateDesc($dados['high_date']) ?> )</small></td>
                                     </tr>
                                     <tr>
                                         <td>% <?= _e('para') ?> ATH</td>
