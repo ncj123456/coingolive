@@ -160,7 +160,14 @@ $version = '1.3';
             </div>
         </div>
     </nav>
-    <div style="margin:10px;max-width: 1200px;" class="ml-auto mr-auto">
+    <div style="margin:10px;max-width: 1200px;"  class="ml-auto mr-auto">
+        <div class="text-center" style="margin-bottom:10px;height: 90px">
+            <a  target="_blanck" href="https://brave.com/coi957">
+                <img id="imgBrave1" style="width: 100%;max-width: 728px" src="/assets/img/brave/brave1_<?= $lang?>.jpg" />
+                <img id="imgBrave2"  style="width: 100%;max-width: 728px;display:none"  src="/assets/img/brave/brave2_<?= $lang?>.jpg" />
+            </a>
+        </div>
+        <?= $this->content ?>
         <?php if (!DEBUG) { ?>
         <div class="text-center" style="margin-top: 20px">
              <!-- Coinzilla Banner 728x90 -->
@@ -176,7 +183,6 @@ $version = '1.3';
             </script>
         </div>
         <?php } ?>
-        <?= $this->content ?>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-hidden="true">
@@ -317,6 +323,12 @@ if (isset($_GET['uuid'])) {
             link.media = 'all';
             head.appendChild(link);
         }
+    </script>
+    <script>
+        setInterval(function(){
+         $("#imgBrave1").toggle();
+         $("#imgBrave2").toggle();
+        },6000);
     </script>
 </body>
 </html>
