@@ -146,7 +146,7 @@ $color_vol24 = volumeColor($dados['volume_24h_moeda']);
                                         <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_7d'],false,'','','5px') ?></td>
                                     </tr>
                                     <tr>
-                                        <td><?= _e('14 dias') ?></td>
+                                        <td>14 <?= _e('dias') ?></td>
                                         <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_14d'],false,'','','5px') ?></td>
                                     </tr>
                                     <tr>
