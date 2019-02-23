@@ -162,7 +162,7 @@ $version = '1.3';
     </nav>
     <div style="margin:10px;max-width: 1200px;"  class="ml-auto mr-auto">
         <div class="text-center" style="margin-bottom:10px;height: 90px">
-            <a  target="_blanck" href="https://brave.com/coi957">
+            <a  target="_blanck" href="https://brave.com/coi957" onclick="gtag('event', 'topBrave', {'event_category': 'topBrave' });">
                 <img id="imgBrave1" style="width: 100%;max-width: 728px" src="/assets/img/brave/brave1_<?= $lang?>.jpg" />
                 <img id="imgBrave2"  style="width: 100%;max-width: 728px;display:none"  src="/assets/img/brave/brave2_<?= $lang?>.jpg" />
             </a>
