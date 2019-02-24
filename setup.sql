@@ -97,3 +97,30 @@ CREATE TABLE `user_favorite_coin` (
   KEY `fk_user_favorite_coin_id_user_idx` (`id_user`),
   CONSTRAINT `fk_user_favorite_coin_id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3970 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `video_channel` (
+  `id` varchar(100) NOT NULL,
+  `title` varchar(400) DEFAULT NULL,
+  `link` varchar(400) DEFAULT NULL,
+  `published` timestamp NULL DEFAULT NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `video` (
+  `id_video` varchar(100) NOT NULL,
+  `id_channel` varchar(45) DEFAULT NULL,
+  `title` varchar(400) DEFAULT NULL,
+  `thumbnail` varchar(400) DEFAULT NULL,
+  `rating` decimal(2,2) DEFAULT NULL,
+  `likes` int(11) DEFAULT NULL,
+  `views` int(11) DEFAULT NULL,
+  `link` varchar(400) DEFAULT NULL,
+  `description` varchar(4000) DEFAULT NULL,
+  `published` timestamp NULL DEFAULT NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_video`),
+  KEY `id_channel_idx` (`id_channel`),
+  CONSTRAINT `id_channel` FOREIGN KEY (`id_channel`) REFERENCES `video_channel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

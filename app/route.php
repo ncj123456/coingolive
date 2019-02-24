@@ -37,6 +37,9 @@ $app->ajax('/coin/ath/data', 'CoinAth:data');
 $app->get('/coin/change-history', 'CoinHistoryChange:view');
 $app->ajax('/coin/change-history/data', 'CoinHistoryChange:data');
 
+
+$app->get('/videos-criptomoedas', 'Video:view');
+
 //user
 $app->ajax('/user/login/ajax', 'User:login');
 $app->ajax('/user/auth', 'User:auth');
@@ -46,6 +49,8 @@ $app->get('/user/logout', 'User:logout');
 $app->post('/user/civic', 'User:civic');
 $app->ajax('/country/list', 'Country:listJson');
 
+$app->get('/videos-criptomoedas', 'Video:view');
+
 //favorite
 $app->post('/user/favorite/coin', 'UserFavorite:favoriteCoin');
 
@@ -53,5 +58,6 @@ $app->post('/user/favorite/coin', 'UserFavorite:favoriteCoin');
 $app->ajax('/widget/view', 'Widget:view');
 //monitor
 $app->get('/monitor', 'Monitor:check');
+
 
 $app->execute();
