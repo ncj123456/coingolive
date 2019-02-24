@@ -104,20 +104,23 @@ $version = '1.3';
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a   class="nav-link"  href="<?= siteUrl('/coin/price') ?>"><?= _e('Cotação Máxima') ?></a>
+                            <a   class="nav-link" style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin/price') ?>"><?= _e('Cotação Máxima') ?></a>
                         </li>
                         <li class="nav-item">
-                            <a   class="nav-link" href="<?= siteUrl('/coin/ath/') ?>"><?= _e('Alta Histórica') ?></a>
+                            <a   class="nav-link"  style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin/ath/') ?>"><?= _e('Alta Histórica') ?></a>
                         </li>
                         <li class="nav-item">
-                            <a  class="nav-link" href="<?= siteUrl('/coin/change-history/') ?>"><?= _e('Histórico Crescimento') ?></a>
+                            <a  class="nav-link"  style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin/change-history/') ?>"><?= _e('Histórico Crescimento') ?></a>
                           </li>
                          <li class="nav-item">
-                            <a   class="nav-link" href="<?= siteUrl('/coin-change/binance/btc') ?>"><?= _e('Variação Preços') ?> 24h</a>
+                            <a   class="nav-link"  style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin-change/binance/btc') ?>"><?= _e('Variação Preços') ?> 24h</a>
                         </li>
                         <?php if ($lang == 'pt-br') { ?>
+                           <li class="nav-item">
+                               <a  class="nav-link"  style="padding-right: 7px;padding-left:7px;"  href="<?= siteUrl('/videos-criptomoedas') ?>"><?= _e('Vídeos') ?> <span class="badge badge-success">novo</span></a>
+                            </li>
                             <li class="nav-item">
-                                <a  class="nav-link"target="_blank" href="https://livecoins.com.br/"><?= _e('Notícias') ?></a>
+                                <a  class="nav-link"  style="padding-right: 7px;padding-left: 7px;"  target="_blank" href="https://livecoins.com.br/"><?= _e('Notícias') ?></a>
                             </li>
                         <?php } ?>
                     </ul>
@@ -127,7 +130,7 @@ $version = '1.3';
                           </li>
                         <li class="dropdown nav-item">
                             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                 <?= $lang ?>
+                                 <?= str_replace('-', '_', $lang) ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right text-right">
                                 <?php

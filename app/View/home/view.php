@@ -59,6 +59,19 @@ $lang = \Base\I18n::getCurrentLang();
                         </div>
                     </div> 
                 </div>
+                    <div class="col-md-4">
+                    <div class="card card-body" >
+                        <h2 class="text-center" style=" font-size: 25px;;">Vídeos recentes sobre Bitcoin e Criptomoedas</h2>
+                        <a href="<?= siteUrl('/videos-criptomoedas') ?>">
+                            <img src="/assets/img/5.jpg" style="width: 100%;" />
+                        </a>
+                        <h4 class="text-center description">Filtramos os melhores vídeos sobre Bitcoin e criptomoedas em apenas um lugar.Nosso robo busca constantemente novos conteúdos no Youtube, fique atualizado!</h4>
+                        <div class="text-center">
+                            <a href="<?= siteUrl('/videos-criptomoedas') ?>" class="btn btn-primary btn-raised">
+                                Vídeos sobre criptomoedas</a>
+                        </div>
+                    </div> 
+                </div>
             </div>
         </div>
     </div>
