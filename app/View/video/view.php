@@ -1,11 +1,11 @@
 <?php
 $_title = "Vídeos recentes sobre Bitcoin e Criptomoedas";
-$_meta_description = "Filtramos os melhores vídeos sobre Bitcoin e criptomoedas em apenas um lugar.Nosso robo busca constantemente novos conteúdos no Youtube, fique atualizado!";
+$_meta_description = "Filtramos os melhores vídeos sobre Bitcoin e criptomoedas em apenas um lugar.Nosso robô busca constantemente novos conteúdos no Youtube, fique atualizado!";
 ?>
 <div class="card">
     <div class="text-center">
         <h1 style="padding: 3px;margin-top:20px;font-size:25px;">Filtramos os melhores vídeos sobre Bitcoin e criptomoedas <br/> em apenas um lugar. </h1>
-        <p style="margin-top: 0;margin-bottom: 15px">Nosso robo busca constantemente novos conteúdos no Youtube, fique atualizado!</p>
+        <p style="margin-top: 0;margin-bottom: 15px">Nosso robô busca constantemente novos conteúdos no Youtube, fique atualizado!</p>
     </div>
 </div>
 <hr/>
