@@ -65,8 +65,6 @@ $version = '1.3';
                 gtag('config', 'UA-114358769-1');
             </script>
 <!--ads-->
-<script src="https://coinzillatag.com/lib/header.js"></script>
-<script>window.coinzilla_header = window.coinzilla_header || [];function czilla(){coinzilla_header.push(arguments);}czilla('7985c4f130d0f59a872');</script>
             <script src="https://coinzillatag.com/lib/sticky.js"></script>
 <script>window.coinzilla_sticky = window.coinzilla_sticky || [];function czilla(){coinzilla_sticky.push(arguments);}czilla('98865aa193af59e91');</script>
 
@@ -79,18 +77,9 @@ $version = '1.3';
             function siteUrl(url) {
                 return '/' + currentLang + url;
             }
-        </script>
-        <style>
-            #CloseCoinzillaHeader{
-                display: none;
-            }
-        </style>
-        
+        </script>        
     </head>
     <body style="background-color: #f7f7f9;margin-bottom: 50px">
-        <div style="width: 100%; height: 90px; position: relative;">
-             <div class="header-7985c4f130d0f59a872"></div>
-        </div>
             <?php if ($lang == 'pt-br') { ?>
             <!--<div id="div_topo" style=" height: 45px;background-color: #79308c;"></div>-->
         <?php } ?>
@@ -164,13 +153,6 @@ $version = '1.3';
         </div>
     </nav>
     <div style="margin:10px;max-width: 1200px;"  class="ml-auto mr-auto">
-        <div class="text-center" style="margin-bottom:10px;height: 90px">
-            <a  target="_blanck" href="https://brave.com/coi957" onclick="gtag('event', 'topBrave', {'event_category': 'topBrave' });">
-                <img id="imgBrave1" style="width: 100%;max-width: 728px" src="/assets/img/brave/brave1_<?= $lang?>.jpg" />
-                <img id="imgBrave2"  style="width: 100%;max-width: 728px;display:none"  src="/assets/img/brave/brave2_<?= $lang?>.jpg" />
-            </a>
-        </div>
-        <?= $this->content ?>
         <?php if (!DEBUG) { ?>
         <div class="text-center" style="margin-top: 20px">
              <!-- Coinzilla Banner 728x90 -->
@@ -186,6 +168,7 @@ $version = '1.3';
             </script>
         </div>
         <?php } ?>
+        <?= $this->content ?>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-hidden="true">
@@ -326,12 +309,6 @@ if (isset($_GET['uuid'])) {
             link.media = 'all';
             head.appendChild(link);
         }
-    </script>
-    <script>
-        setInterval(function(){
-         $("#imgBrave1").toggle();
-         $("#imgBrave2").toggle();
-        },6000);
     </script>
 </body>
 </html>
