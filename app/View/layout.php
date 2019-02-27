@@ -78,6 +78,7 @@ $version = '1.3';
                 return '/' + currentLang + url;
             }
         </script>        
+        <script src="https://coinzillatag.com/lib/wpnative.js"></script><script>var c_widget = czilla_widget_popup || [];var c_widget_preferences = {}; c_widget_preferences.zone = "183275ad4c9f709767"; c_widget_preferences.x = "right"; c_widget_preferences.y = "top"; c_widget.push(c_widget_preferences);</script>
     </head>
     <body style="background-color: #f7f7f9;margin-bottom: 50px">
             <?php if ($lang == 'pt-br') { ?>
