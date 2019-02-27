@@ -35,7 +35,7 @@ $version = '1.3';
         <meta name="maValidation" content="2f7fd73164f4cc546df97e0e0a0fe559" />
         <link rel="icon" type="image/png" href="/assets/img/logo.png?v=<?= $version ?>1" />
         <link rel="stylesheet" href="/assets/css/material-kit.css?v=<?= $version ?>">
-        <link rel="stylesheet" href="/assets/css/global.css?v=<?= $version ?>15">
+        <link rel="stylesheet" href="/assets/css/global.css?v=<?= $version ?>16">
         <link href="/assets/css/pace.css" media="screen" rel="stylesheet" type="text/css">
 
         <?php

@@ -279,9 +279,3 @@ user
     background-color: #cc2317!important;
     color: #f4c3be!important;
 }
-
-@media screen and (max-width: 991px) {
-    #navbarSupportedContent {
-        margin-top: 90px!important;
-    }
-}
