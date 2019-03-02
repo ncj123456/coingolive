@@ -201,6 +201,8 @@ function btnBuy($symbol,$large=false){
         'zcr'=>['3xbit'],
         'leax'=>['3xbit'],
         'tnj'=>['3xbit'],
+        'usdt'=>['3xbit'],
+         'tusd'=>['3xbit'],
     ];
     
     $partners = [
