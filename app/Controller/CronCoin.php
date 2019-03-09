@@ -13,6 +13,15 @@ class CronCoin {
     }
 
     function insert() {
+        
+        $pid = file_get_contents(__DIR__.'/pid.txt');
+        if(!empty($pid) && file_exists('/proc/'.$pid)){
+            echo 'already this process running pid '.$pid.PHP_EOL;
+            return false;
+        }
+        
+        $myPid = getmypid();
+        file_put_contents(__DIR__.'/pid.txt',$myPid);
 
 
         $db = \Base\DB::connect();
