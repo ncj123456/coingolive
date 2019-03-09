@@ -13,7 +13,7 @@ var allMoedas = false;
 function loadAlllCoinJson(callback) {
     if (!allMoedas) {
         //$('.go_selectbox').on('click', function () {
-        $.getJSON('/assets/moedas.json', function (json) {
+        $.getJSON('/moedas.php', function (json) {
             allMoedas = json;
             callback();
         });
