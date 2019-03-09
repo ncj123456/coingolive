@@ -8,7 +8,6 @@ function changeMoeda(moeda, callback) {
 
 }
 
-
 var allMoedas = false;
 
 function loadAlllCoinJson(callback) {
@@ -48,12 +47,14 @@ $(".go_selectbox").each(function () {
 
         for (var i in allMoedas) {
             var desc = allMoedas[i];
+             let idCoin = i.split('|')[1];
+             
             var corresponde = desc.toString().toLowerCase().indexOf(nomeFiltro) >= 0;
             if (corresponde) {
                 if (count < limit) {
                     console.log(desc);
-                    var icon = '<img style="width:25px;padding-right:5px" src="/assets/img/coin/' + i + '.png" /> ';
-                    html += '<a href="javascript:compareCoin(\'' + i + '\')" class="dropdown-item">' + icon + desc + '</a>';
+                    var icon = '<img style="width:25px;padding-right:5px" src="/assets/img/coin/' + idCoin + '.png" /> ';
+                    html += '<a href="javascript:compareCoin(\'' +idCoin + '\')" class="dropdown-item">' + icon + desc + '</a>';
                     count++;
                 } else {
                     break;
@@ -99,7 +100,7 @@ function toMoeda(val, dec) {
     if (currentLang === 'en') {
         return val.toFixed(dec).replace(/(.)(?=(\d{3})+$)/g, '$1,');
     }
-    return val.toFixed(dec).replace(/(.)(?=(\d{3})+$)/g, '$1.');
+    return val.toFixed(dec).replace('.',',').replace(/(.)(?=(\d{3})+$)/g, '$1.');
 }
 
 if (currentLang === 'en') {
@@ -193,4 +194,89 @@ function formAjax(obj) {
         }
     });
     return false;
+}
+
+
+$(".go-top-search").each(function () {
+    var input = $(this);
+
+    input.on('focus', function () {
+        loadAlllCoinJson(function () {
+            input.trigger('keyup');
+        });
+        $(this).parents('.dropdown').find('.dropdown-menu').addClass('show');
+    });
+    
+    input.on('focusout', function () {
+        let obj1 = $(this);
+        setTimeout(function(){
+              obj1.parents('.dropdown').find('.dropdown-menu').removeClass('show');
+        },200);
+    });
+    
+    let restulActive = '';
+    
+    input.on('keyup', function (e) {
+        var nomeFiltro = $(this).val().toLowerCase();
+        var element = $(this).parents('.dropdown').find('.opts');
+        var limit = 8;
+        var count = 0;
+        var html = '';
+        
+        
+        //enter
+        if(e.keyCode===13){
+          window.location.href = siteUrl("/currencies/"+restulActive+"/");
+        }
+        
+        if(!allMoedas){
+             loadAlllCoinJson(function () {
+                input.trigger('keyup');
+            });
+        }
+
+        for (var i in allMoedas) {
+            
+            let idCoin = i.split('|')[1];
+            var desc = allMoedas[i];
+            var corresponde = desc.toString().toLowerCase().indexOf(nomeFiltro) >= 0;
+            if (corresponde) {
+                if (count < limit) {
+                    let classActive = (count ===0)?'search-item-active':null;
+                    
+                    if(classActive){
+                        restulActive=idCoin;
+                    }
+                    var icon = '<img style="width:25px;padding-right:5px" src="/assets/img/coin/' + idCoin+ '.png" /> ';
+                    html += '<a href="/'+currentLang+'/currencies/' +idCoin + '/" class="dropdown-item '+classActive+'">' + icon + desc + '</a>';
+                    count++;
+                } else {
+                    break;
+                }
+            }
+        }
+        element.html(html);
+    });
+});
+
+$.getJSON('/en/global-data/',function(data){
+    
+    let base_symbol = data.base_symbol;
+    
+    $('#global_coins').text(data.coins);
+    $('#global_market_cap').text(base_symbol+toMoeda(data.total_market_cap));
+    $('#global_volume').text(base_symbol+toMoeda(data.total_volume));
+    
+    let dominance = toMoeda(data.dominance.btc,2);
+    $('#global_dominance_btc').text(dominance+'%');
+}); 
+
+function toggleSearch(){
+    if($('#top-search-coin').is(':visible')){ 
+            $('.go-top-search').focusout();
+             $('#top-search-coin').slideUp();
+    }else{
+        $('#top-search-coin').slideDown();
+         $('.go-top-search').focus();
+    }
 }

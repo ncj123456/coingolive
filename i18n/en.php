@@ -130,6 +130,24 @@ return [
     'desde'=>'since',
     'Posição Preço Atual'=>'Position Current Price',
     'Data'=>'Date',
-    'Histórico de Preço'=>'Price History'
-    
+    'Histórico de Preço'=>'Price History',
+    'Cálculo Preço ATH'=>'ATH Price Calculation',
+    'Período'=>'Time',
+    'Variação'=> 'Change',
+    'Total calculado'=>'Total calculated',
+    'Hoje'=>'Today',
+    'Atual Market Cap BTC'=>'Current Market Cap BTC' ,
+    'Cálculo de preço com o valor de mercado atual do Bitcoin'=>'Price calculation with Bitcoin current Market Cap',
+    'Market Cap Atual BTC'=>'Current Market Cap BTC',
+    'Market Cap BTC na ATH'=>'Market Cap BTC at ATH',
+    'Cálculo de preço com o maior valor de mercado do Bitcoin'=>'Price calculation with the higher Bitcoin Market Cap',
+    'Maior MarketCap BTC'=>'Higher Market Cap BTC',
+    '% do Atual <br/> Market Cap BTC'=>'% of Current <br/> Market Cap BTC',
+    'calculado'=>'calculated',
+    'Total <br/> calculado'=>'Total <br/> calculated',
+    'Posição <br/> Rank'=>'Rank',
+    'Crescimento <br/> necessário'=>'Growth <br/> needed',
+    '% do Maior <br/> MarketCap BTC'=>'% bigger <br/> MarketCap BTC',
+    'Market Cap Ouro'=>'Gold Market Cap',
+    'Cálculo de preço com o valor de mercado aproximado do Ouro'=>'Calculation of price with the approximate market cap of Gold'
     ];

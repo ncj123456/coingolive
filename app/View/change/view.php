@@ -2,7 +2,7 @@
 $_title = ucfirst($exchange_current).' - '._e('Variação das criptomoedas em 24h');
 $_meta_description = _e('Encontre a moeda com maior variação na [1], veja a diferença entre o preço mínimo e o preço máximo das criptomoedas nas últimas 24h em diferentes exchanges e analise a posição do preço atual',ucfirst($exchange_current));
 ?>
-<div class="row">
+<div class="row" style="margin: 0px;">
     <div class="col-md-12">
         <h1 style="padding: 3px;margin-top:20px;font-size:25px"><?= _e($_title) ?></h1>
     </div>

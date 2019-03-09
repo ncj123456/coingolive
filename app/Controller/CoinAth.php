@@ -12,11 +12,11 @@ class CoinAth {
 
     function data() {
         $moeda = $_COOKIE['moeda'];
-        $listMoeda = ['USD', 'BTC'];
-        if (!in_array($moeda, $listMoeda)) {
+        $listMoeda = \Base\I18n::getListMoeda();
+        if (!isset($listMoeda[$moeda])) {
             $moeda = 'USD';
             setcookie('moeda', 'USD', time() + 2592000, '/');
-        }
+        } 
         $name = isset($_GET['name']) ? $_GET['name'] : '';
         $order = isset($_GET['order']) ? $_GET['order'] : '';
         $busca = isset($_GET['busca']) ? $_GET['busca'] : '';

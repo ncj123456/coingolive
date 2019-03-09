@@ -61,6 +61,22 @@
                 <loc><?= $urlBase . '/' . $name . '/currencies/' . $d['codigo'] . '/'; ?></loc>
                 <priority>0.80</priority>
             </url>
+              <url>
+                <loc><?= $urlBase . '/' . $name . '/currencies/' . $d['codigo'] . '/usd/'; ?></loc>
+                <priority>0.80</priority>
+            </url>
+            <url>
+                <loc><?= $urlBase . '/' . $name . '/currencies/' . $d['codigo'] . '/eur/'; ?></loc>
+                <priority>0.80</priority>
+            </url>
+            <url>
+                <loc><?= $urlBase . '/' . $name . '/currencies/' . $d['codigo'] . '/brl/'; ?></loc>
+                <priority>0.80</priority>
+            </url>
+            <url>
+                <loc><?= $urlBase . '/' . $name . '/currencies/' . $d['codigo'] . '/btc/'; ?></loc>
+                <priority>0.80</priority>
+            </url>
             <?php
         }
     }

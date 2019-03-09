@@ -1,0 +1,19 @@
+    thead th{
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 19px;
+    }
+    .porc-change{
+        color:#de8603;
+    }
+    .porc-change-negative{
+        color:#de0303;
+    }
+    .bmd-form-group {
+        position: relative;
+        padding-top: 0px!important;
+    }
+    .price-total{
+        color: #9c27b0;
+        font-weight: 500;
+    }

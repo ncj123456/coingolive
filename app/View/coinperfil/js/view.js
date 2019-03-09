@@ -1,37 +1,82 @@
-$("#btn_help_max_price").on('click', function () {
-    $("#help_max_price").slideToggle();
-});
-
 function loadPage(page, marketcap) {
-    var compare = $("#input_compare_coin").val();
-    if (typeof marketcap === 'undefined') {
-        marketcap = '';
-    }
-    window.location = "?compare=" + compare + "&marketcap=" + marketcap;
+       location.reload();
 }
 
+$('#topMoedaAtual').hide();
 
-function compareCoin(codigo) {
-    window.location = "?compare=" + codigo;
+$(".market-cap-rank").each(function () {
+    var loading = '<i class="fa fa-refresh fa-spin"></i>';
+    var obj = $(this);
+    obj.html(loading);
+    var merket_cap = obj.data('market-cap');
+    var url = siteUrl('/market-cap-rank/?market_cap=' + merket_cap);
+    $.get(url, function (data) {
+        data = JSON.parse(data);
+        obj.text(data.rank);
+    });
+});
+
+$("#amount_from").on('keyup', function () {
+    var from = parseFloat($("#amount_from").val());
+    
+    var result = price_coin*from;
+    
+      if(result > 1){
+        result = result.toFixed(2);
+    }else{
+         result =result.toFixed(8);
+    }
+    
+    $("#amount_to").val(result);
+      setTotal(from);
+});
+$("#amount_to").on('keyup', function () {
+    var to = parseFloat($("#amount_to").val());
+    
+    var result = to/price_coin;
+    
+    if(result > 1){
+        result =result.toFixed(2);
+    }else{
+        result =result.toFixed(8);
+    }
+    
+    $("#amount_from").val(result);
+    
+     setTotal(result);
+});
+$("#amount_to,#amount_from").on('focus',function(){
+    $(this).select();
+});
+
+$("#amount_from").val('1');
+$("#amount_from").trigger('keyup');
+
+
+function setTotal(amount){
+    $(".price-total").each(function(){
+        let price = parseFloat($(this).data('price'));
+        let total = amount*price;
+        
+            if(total > 1){
+                total =formatTotal(total,2);
+            }else{
+                total =formatTotal(total,8); 
+            }
+            
+            $(this).text(amount+'x = '+total);
+    });
 }
 
-$("#formBusca").on('submit', function () {
-
-    var busca = $("#input_busca").val();
-    window.location = siteUrl('/coin/price/?busca=' + busca);
-    return false;
-});
-
-$("#porc_total_market_cap_compare").val($("#porc_marketcap_perfil").val());
-$("#valor_total_market_cap_compare").val($("#valor_marketcap_perfil").val());
-$("#valor_total_market_cap_compare_base").val($("#base_marketcap_perfil").val());
-
-
-var show_widget = false;
-$("#btn_widget").on('click', function () {
-    if (!show_widget) {
-        loadWidgetCoinGoLive();
-        show_widget = true;
+function formatTotal(val, dec) {
+    if (currentLang === 'en') {
+        if(val<1){
+             return moeda_char+val.toFixed(dec);
+        }
+        return moeda_char+val.toFixed(dec).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    $("#codigo_widget").slideToggle();
-});
+     if(val<1){
+             return moeda_char+val.toFixed(dec);
+        }
+    return moeda_char+val.toFixed(dec).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}

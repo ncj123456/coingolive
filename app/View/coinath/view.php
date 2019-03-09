@@ -5,18 +5,16 @@ $_meta_description = _e('Análise em qual data foi atingida a alta histórica, q
 
 $compare_coin = isset($_GET['compare']) ? $_GET['compare'] : 'bitcoin';
 $current_moeda = isset($_COOKIE['moeda']) ? $_COOKIE['moeda'] : 'USD';
-$listLangs = [
-    'USD' => '$',
-    'BTC' => 'BTC'
-];
-if (!isset($listLangs[$current_moeda])) {
-    $current_moeda = 'USD';
+$listMoeda = \Base\I18n::getListMoeda();
+        
+if(!isset($listMoeda[$current_moeda])){
+    $current_moeda='USD';
 }
 ?>
 <input type="hidden" id="order_name" value="rank"/>
 <input type="hidden" id="order_type" value="asc"/>
 
-<div class="row">
+<div class="row" style="margin: 0px;">
     <div class="col-md-12">
         <h1 style="padding: 3px;margin-top:20px;font-size:25px"><?= _e($_title) ?></h1>
     </div>
@@ -32,7 +30,7 @@ if (!isset($listLangs[$current_moeda])) {
                             </button>
                             <div class="dropdown-menu ">
                                 <?php
-                                foreach ($listLangs as $n => $char) {
+                                foreach ($listMoeda as $n => $char) {
                                     ?>
                                     <a href="javascript:changeMoeda('<?= $n ?>',loadPage)" class="dropdown-item">
                                         <?= $n ?>

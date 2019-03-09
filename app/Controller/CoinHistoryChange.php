@@ -12,8 +12,8 @@ class CoinHistoryChange {
 
     function data() {
         $moeda = $_COOKIE['moeda'];
-        $listMoeda = ['USD', 'BTC'];
-        if (!in_array($moeda,$listMoeda)) {
+        $listMoeda = \Base\I18n::getListMoeda();
+        if (!isset($listMoeda[$moeda])) {
             $moeda = 'USD';
             setcookie('moeda', 'USD', time() + 2592000, '/');
         } 

@@ -279,3 +279,41 @@ user
     background-color: #cc2317!important;
     color: #f4c3be!important;
 }
+
+@media screen and (max-width: 991px) {
+
+    .cg-hide-mobile{
+        display: none!important;
+    }
+    .cg-show-mobile{
+        display: block!important;
+    }
+    #nav-global-data .nav-item .nav-link{
+        padding-top:5px!important;
+        padding-bottom:5px!important;
+        padding-left:2px!important;
+        padding-right: 2px!important;
+    }
+    #nav-global-data{
+        flex-direction: row!important;
+    }
+    #div_global_coins{
+        display: none;
+    }
+
+}
+.has-white input{
+    color: #fff!important;
+}
+.dropdown > .bmd-form-group {
+    position: relative;
+    padding-top: 0px!important;
+}
+.dropdown  .search-item-active{
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+    background-color: #9c27b0;
+    color: #FFFFFF;
+}
+#modalLoginBody{
+    margin-top: 140px;
+}

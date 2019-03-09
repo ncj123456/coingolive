@@ -4,12 +4,12 @@ namespace Controller;
 
 class CronCoin {
 
-    function getGlobalMarket($moeda) {
+    private function getGlobalData($moeda) {
         $url = "https://api.coingecko.com/api/v3/global";
         $json = file_get_contents($url);
         $data = json_decode($json, 1);
 
-        return $data['data']['total_market_cap'][$moeda];
+        return $data['data'];
     }
 
     function insert() {
@@ -22,13 +22,17 @@ class CronCoin {
             $this->deleteAll($db);
 
             $listMoedas = \Base\I18n::getListMoeda();
+            
+            $globalData = $this->getGlobalData();
+            $this->saveGlobalData($db, $globalData);
 
+             $marketGlobalDinamicAll = $globalData['total_market_cap'];
 
             foreach ($listMoedas as $moeda => $char) {
 
                 $moedaLower = strtolower($moeda);
 
-                $marketGlobal_dinamico = $this->getGlobalMarket($moedaLower);
+                $marketGlobalDinamic = $marketGlobalDinamicAll[$moedaLower];
 
                 $page = 1;
                 $countResults = 1;
@@ -42,7 +46,7 @@ class CronCoin {
 
                         //calcula o percentual de dominancia
                         $moeda_market_cap_dinamico = (float) $d['market_cap'];
-                        $dominance = $moeda_market_cap_dinamico * 100 / $marketGlobal_dinamico;
+                        $dominance = $moeda_market_cap_dinamico * 100 / $marketGlobalDinamic;
 
                         $athDate = explode('T', $d['ath_date'])[0];
 
@@ -116,10 +120,21 @@ class CronCoin {
         $retorno = [];
 
         foreach ($data as $d) {
-            $retorno[$d['codigo']] = $d['name'] . '  (' . $d['symbol'] . ')';
+            $retorno[$d['rank'].'|'.$d['codigo']] = $d['name'] . '  (' . $d['symbol'] . ')';
         }
 
         return json_encode($retorno);
+    }
+    
+    private function saveGlobalData($db,$data){
+        
+        (new \Model\CoinGlobal($db))->deleteAll();
+        
+        $json = json_encode($data);
+        
+        $model = new \Model\CoinGlobal($db);
+        $model->setDataJson($json);
+        $model->insert();
     }
 
 }

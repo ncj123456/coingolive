@@ -8,12 +8,17 @@ $app->get('/contact', 'Home:contact');
 $app->get('/feedback', 'Home:feedback');
 $app->get('/partners', 'Home:partners');
 
+$app->get('/global-data', 'CoinGlobal:json');
+
 //Coin max price
 $app->get('/coin/price', 'CoinMaxPrice:listar');
 $app->ajax('/coin/price/data', 'CoinMaxPrice:data');
 
+$app->get('/market-cap-rank', 'CoinPerfil:rankMarketCap');
+
 //perfil moeda
 $app->get('/currencies/:name', 'CoinPerfil:view');
+$app->get('/currencies/:name/:moeda', 'CoinPerfil:view');
 
 //change moeda
 $app->get('/moeda/change', 'Moeda:change');

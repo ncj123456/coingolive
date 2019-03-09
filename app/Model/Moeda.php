@@ -334,12 +334,16 @@ class Moeda extends \Base\DAO {
 
     function findAllName() {
         $sql = "SELECT 
+                        CASE 
+                            WHEN rank > 0 THEN rank
+                            ELSE 9999999
+                         END as rank,
                         codigo,
                         name,
-                        symbol
+                        UPPER(symbol) as symbol
                   FROM moeda ";
         $sql .= " WHERE moeda='USD'
-                        ORDER BY rank ASC";
+                        ORDER BY COALESCE(rank,99999999) ASC";
         return $this->query($sql);
     }
 
@@ -510,6 +514,19 @@ class Moeda extends \Base\DAO {
                 . "WHERE moeda =:moeda ";
           $par = ['moeda'=>$moeda];
         return $this->query($sql,$par)[0]['volume_24h_moeda'];
+    }
+    
+    function findRankByMarketCap($marketCap,$baseCoin){
+              $sql = "SELECT rank  FROM moeda 
+                            WHERE market_cap_moeda <= :market_cap 
+                            AND moeda=:baseCoin
+                           ORDER BY market_cap_moeda DESC LIMIT 1";
+              $par = [
+                  'market_cap'=>$marketCap,
+                  'baseCoin'=>$baseCoin
+                    ];
+              
+        return $this->query($sql,$par)[0]['rank'];
     }
 
 }

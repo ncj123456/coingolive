@@ -124,3 +124,8 @@ CREATE TABLE `video` (
   KEY `id_channel_idx` (`id_channel`),
   CONSTRAINT `id_channel` FOREIGN KEY (`id_channel`) REFERENCES `video_channel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `coin_global` (
+  `data_json` json NOT NULL,
+  `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
