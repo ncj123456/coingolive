@@ -515,7 +515,7 @@ if($dados['moeda_char']=='BTC'){
                                             <td><?= $dados['moeda_char'] . decimal($market_cap_gold, 0); ?></td>
                                         </tr>
                                         <tr>
-                                            <td>Data </td>
+                                            <td><?= _e('Data') ?></td>
                                             <td>2017</td>
                                         </tr>
                                     </tbody>
