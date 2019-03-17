@@ -18,7 +18,7 @@ class Auth {
             }
         }
 
-        return false;
+        return self::$id_user;
     }
     
    static  function getUser(){
