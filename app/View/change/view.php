@@ -6,9 +6,6 @@ $_meta_description = _e('Encontre a moeda com maior variação na [1], veja a di
     <div class="col-md-12">
         <h1 style="padding: 3px;margin-top:20px;font-size:25px"><?= _e($_title) ?></h1>
     </div>
-    <?php
-    require __DIR__ . '/../inc/msg_help.inc.php'
-    ?>
     <div class="col-md-12">
         <div class="card" style="  margin-top: 0px;">
             <div class="card-body" style="padding:0;margin-left: 10px;margin-right: 10px">
