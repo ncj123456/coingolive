@@ -23,7 +23,8 @@ return [
  
 //menu
     'Ferramentas'=>'Tools',
-    'Cotação Máxima'=>'Max Price',
+     'Cotação Máxima'=>'Max Price',
+    'Cotação Máxima Criptomoedas'=>'Cryptocurrency Max Price',
     'Página Principal'=>'Home',
     'Enviar Sugestão'=>'FeedBack',
     'Contato'=>'Contact',
@@ -149,5 +150,25 @@ return [
     'Crescimento <br/> necessário'=>'Growth <br/> needed',
     '% do Maior <br/> MarketCap BTC'=>'% bigger <br/> MarketCap BTC',
     'Market Cap Ouro'=>'Gold Market Cap',
-    'Cálculo de preço com o valor de mercado aproximado do Ouro'=>'Calculation of price with the approximate market cap of Gold'
+    'Cálculo de preço com o valor de mercado aproximado do Ouro'=>'Calculation of price with the approximate market cap of Gold',
+    'Buscar criptomoeda'=>'Search crypto',
+    'BTC hoje'=>'BTC today',
+    'Mercado de Bitcoin e Criptomoedas, Preços e Históricos'=>'Bitcoin and Cryptocurrency Prices, Market Cap List',
+    'Ferramentas para analisar o mercado de bitcoin e criptomoedas, confira preços, históricos e valor de mercado'=>'Tools for market analysis of bitcoin and cryptocurrencies, compare crypto prices, history and market cap',
+    'Preço das Criptomoedas na Alta Histórica ATH'=>'All-Time High (ATH) Cryptocurrency Price List',
+    'Confira o maior preço atingido (ATH) das criptomoedas, data da alta histórica, a desvalorização desde o maior valor alcançado e a porcentagem de crescimento necessária para voltar à maior cotação da história'=>'All-time high (ath) prices of cryptocurrencies, ath date, price drop since ath and percentage needed to increase of the current value up to highest price in history',
+    '% Queda preço desde ATH'=>'% Price Drop Since ATH',
+    'ATH é uma abreviação do termo em ingles "all-time high" que traduzindo significa "alta de todos os tempos", é a máxima histórica de uma criptomoeda, o maior preço atingido desde sua existência'=>'ATH is an abbreviation of the term "all-time high", it is the historical maximum price of a cryptocurrency, the highest price reached since its existence',
+    'Criptomoeda'=>'Cryptocurrency',
+    '% Desde ATH'=>'% Since ATH',
+    'Histórico Preço Criptomoedas, Valorização e Desvalorização'=>'Price Change History Cryptocurrency, Gain and Loss of Value ',
+    'Histórico de preço bitcoin e criptomoedas, acompanhe a variação do valor em diferentes períodos 1 hora, 7 dias, 1 mês e 1 ano, ordene e filtre a porcentagem de valorização e desvalorização das criptomoedas.'=>'Price history bitcoin and cryptocurrencies, track the change in value in different periods 1 hour, 7 days, 1 month and 1 year, order and filter the percentage of gain and loss of the cryptocurrencies.',
+    'Histórico Preço Criptomoedas'=>'Historical Price Cryptocurrencies',
+    'Histórico Preço'=>'Price Change History',
+    'Página não encontrada!'=>'Page not found!',
+    'Voltar para página principal'=>'Back to Home Page',
+    'Calcular Preço Criptomoeda'=>'Calculate Price Cryptocurrency',
+    'Calcular Preço'=>'Calculate Price',
+    'Calcular Preço Criptomoedas Alterando o Market Cap'=>'Calculate Price Cryptocurrency by Changing the Market Cap',
+    'Calcule o preço das criptomoedas com a mesma capitalização de mercado do Bitcoin, altere o valor do Market Cap e veja o crescimento necessário para alcançá-lo'=>'Calculate the price of the cryptocurrencies with the same market capitalization as Bitcoin, change the  Market Cap and see the growth needed to reach it'
     ];

@@ -317,3 +317,8 @@ user
 #modalLoginBody{
     margin-top: 140px;
 }
+
+.coin-h1{
+    font-size: 15px;
+    font-weight: 400;
+}

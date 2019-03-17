@@ -58,6 +58,11 @@ class CronCoin {
                         $dominance = $moeda_market_cap_dinamico * 100 / $marketGlobalDinamic;
 
                         $athDate = explode('T', $d['ath_date'])[0];
+                        
+                        //rewrite name xrp
+                        if($d['symbol']=='xrp'){
+                            $d['name'] = 'Ripple';
+                        }
 
                         $model = new \Model\Moeda($db);
                         $model->setCodigo($d['id']);

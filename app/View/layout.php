@@ -7,8 +7,10 @@ $current_url = function($lang) {
     return "https://" . $_SERVER['HTTP_HOST'] . '/' . $lang . $this->base . '/';
 };
 
-$urlDefault = "https://" . $_SERVER['HTTP_HOST'] . $this->base . '/';
-$version = '2.0';
+$canonicalLink = $current_url($lang);
+
+$urlDefault = "https://" . $_SERVER['HTTP_HOST'] .'/en/' .$this->base . '/';
+$version = '2.1';
 ?>
 <!doctype html>
 <html lang="<?= $lang; ?>"> 
@@ -39,7 +41,7 @@ $version = '2.0';
         <link rel="stylesheet" href="/assets/css/material-kit.css?v=<?= $version ?>">
         <link rel="stylesheet" href="/assets/css/global.css?v=<?= $version ?>20">
         <link href="/assets/css/pace.css" media="screen" rel="stylesheet" type="text/css">
-
+        <link rel="canonical" href="<?= $canonicalLink ?>" />
         <?php
         foreach ($_css as $c) {
             echo '<link rel="stylesheet" href="' . $c . '?v=' . $version . '">';
@@ -160,7 +162,7 @@ $version = '2.0';
                                 <?= explode(' ', $user['name'])[0] ?>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right text-right">
-                                <a class="dropdown-item" href="<?= siteUrl('/user/logout') ?>"><i class="material-icons" style="font-size: 18px;margin-right: 5px">power_settings_new</i> <?= _e('Sair') ?></a>
+                                <a class="dropdown-item" href="<?= siteUrl('/user/logout/') ?>"><i class="material-icons" style="font-size: 18px;margin-right: 5px">power_settings_new</i> <?= _e('Sair') ?></a>
                             </div>
                         </li>
                     <?php } else { ?>
@@ -178,7 +180,7 @@ $version = '2.0';
                     <form class="form-inline mr-auto" style="margin-bottom: 0;padding-bottom: 10px" onsubmit=" return false;">
                         <div class="dropdown ml-auto" style="    width: 100%;">
                             <div class="form-group has-white bmd-form-group"  style="margin-top: 10px">
-                                <input type="text" class="form-control go-top-search" style="width: 90%;float: left;display: block" placeholder="Search coin">
+                                <input type="text" class="form-control go-top-search" style="width: 90%;float: left;display: block" placeholder="<?= _e('Buscar Criptomoedas') ?>">
                                 <i class="material-icons" style="color: #fff;width: 10%;float: left;display: block;cursor: pointer" onclick="toggleSearch()" >close</i>
                             </div>
 
@@ -194,7 +196,7 @@ $version = '2.0';
 
         <nav class="navbar navbar-expand-lg  navbar-primary bg-primary" style=" z-index: 6000!important;border-radius: 0px!important; ">
             <div class="container">
-                <a href="<?= siteUrl('/') ?>"  style="margin-right: 10px;"><img src="/assets/img/logo8_min.png" width="150"/></a>
+                <a href="<?= siteUrl('/') ?>"  style="margin-right: 10px;"><img alt="CoinGoLive Logo" title="CoinGoLive" src="/assets/img/logo8_min.png" width="150"/></a>
                 <button type="button" class="cg-show-mobile" onclick="toggleSearch()"  style="display: none;margin-bottom: -8px;margin-right: -70px;cursor: pointer; background: transparent;border:0">
                     <i class="material-icons" style="color:#fff">search</i>
                 </button>
@@ -205,20 +207,20 @@ $version = '2.0';
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a   class="nav-link" style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin/price') ?>"><?= _e('Cotação Máxima') ?></a>
+                            <a   class="nav-link" style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin/price/') ?>"><?= _e('Calcular Preço') ?></a>
                         </li>
                         <li class="nav-item">
-                            <a   class="nav-link"  style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin/ath/') ?>"><?= _e('Alta Histórica') ?></a>
+                            <a   class="nav-link"  style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin/ath-price/') ?>"><?= _e('Alta Histórica') ?></a>
                         </li>
                         <li class="nav-item">
-                            <a  class="nav-link"  style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin/change-history/') ?>"><?= _e('Histórico Crescimento') ?></a>
+                            <a  class="nav-link"  style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin/price-change-history/') ?>"><?= _e('Histórico Preço') ?></a>
                         </li>
                         <li class="nav-item">
-                            <a   class="nav-link"  style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin-change/binance/btc') ?>"><?= _e('Variação Preços') ?> 24h</a>
+                            <a   class="nav-link"  style="padding-right: 7px;padding-left: 7px;"  href="<?= siteUrl('/coin-change/binance/btc/') ?>"><?= _e('Variação Preços') ?> 24h</a>
                         </li>
                         <?php if ($lang == 'pt-br') { ?>
                             <li class="nav-item">
-                                <a  class="nav-link"  style="padding-right: 7px;padding-left:7px;"  href="<?= siteUrl('/videos-criptomoedas') ?>"><?= _e('Vídeos') ?> <span class="badge badge-success">novo</span></a>
+                                <a  class="nav-link"  style="padding-right: 7px;padding-left:7px;"  href="<?= siteUrl('/videos-criptomoedas/') ?>"><?= _e('Vídeos') ?> <span class="badge badge-success">novo</span></a>
                             </li>
                             <li class="nav-item ">
                                 <a  class="nav-link"  style="padding-right: 7px;padding-left: 7px;"  target="_blank" href="https://livecoins.com.br/"><?= _e('Notícias') ?></a>
@@ -231,7 +233,7 @@ $version = '2.0';
                         <form class="form-inline ml-auto cg-hide-mobile" onsubmit=" return false;">
                             <div class="dropdown">
                                 <div class="form-group has-white bmd-form-group">
-                                    <input type="text" class="form-control go-top-search" placeholder="Search coin">
+                                    <input type="text" class="form-control go-top-search" placeholder="<?= _e('Buscar criptomoeda') ?>">
                                 </div>
                                 <button type="buttom" class="btn btn-primary btn-raised btn-fab btn-round">
                                     <i class="material-icons">search</i>
@@ -289,7 +291,7 @@ $version = '2.0';
             </div>
         </div>
     </nav>
-    <div style="margin:10px;max-width: 1200px;"  class="ml-auto mr-auto">
+    <div style="margin:10px;max-width: 1500px;"  class="ml-auto mr-auto">
         <?php if (!DEBUG) { ?>
             <div class="text-center" style="margin-top: 5px;margin-bottom: 5px;">
                 <!-- Coinzilla Banner 728x90 -->
@@ -323,12 +325,12 @@ $version = '2.0';
             <nav class="pull-left">
                 <ul>
                     <li>
-                        <a href="<?= siteUrl('/contact') ?>">
+                        <a href="<?= siteUrl('/contact/') ?>">
                             <?= _e('Contato'); ?>
                         </a>
                     </li>
                     <li>
-                        <a href="<?= siteUrl('/feedback') ?>">
+                        <a href="<?= siteUrl('/feedback/') ?>">
                             <?= _e('Feedback'); ?>
                         </a>
                     </li>
@@ -376,17 +378,6 @@ $version = '2.0';
                 })
             });
 
-            loadTopo();
-
-            setInterval(function () {
-                loadTopo();
-            }, 60000);
-
-            function loadTopo() {
-                $("#div_topo").load(siteUrl('/bitcoin/brasil/resume/?cache=true'), function () {
-                    $(window).trigger('topo.loaded');
-                });
-            }
         </script>
     <?php } ?>
     <script>

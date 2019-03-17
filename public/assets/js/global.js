@@ -226,7 +226,7 @@ $(".go-top-search").each(function () {
         
         //enter
         if(e.keyCode===13){
-          window.location.href = siteUrl("/currencies/"+restulActive+"/");
+          window.location.href = siteUrl("/coins/"+restulActive+"/");
         }
         
         if(!allMoedas){
@@ -248,7 +248,7 @@ $(".go-top-search").each(function () {
                         restulActive=idCoin;
                     }
                     var icon = '<img style="width:25px;padding-right:5px" src="/assets/img/coin/' + idCoin+ '.png" /> ';
-                    html += '<a href="/'+currentLang+'/currencies/' +idCoin + '/" class="dropdown-item '+classActive+'">' + icon + desc + '</a>';
+                    html += '<a href="/'+currentLang+'/coins/' +idCoin + '/" class="dropdown-item '+classActive+'">' + icon + desc + '</a>';
                     count++;
                 } else {
                     break;

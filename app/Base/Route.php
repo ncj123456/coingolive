@@ -26,7 +26,7 @@ class Route {
 
         //redireciona para / as urls com finais sem  barra
         if (substr($base, -1) != '/') {
-
+            header( "HTTP/1.1 301 Moved Permanently" );
             header('Location:' . $base . '/');
             exit();
         }
@@ -97,11 +97,6 @@ class Route {
         $this->routes[$url . '@JSON'] = $controller;
     }
 
-    function notFount() {
-        http_response_code(404);
-        echo "404";
-    }
-
     function execute() {
         //obtem apenas todas as rotas definidas
         $routes = array_keys($this->routes);
@@ -167,7 +162,8 @@ class Route {
             }
         }
 
-        $this->notFount();
+        http_response_code(404);
+        return (new View('Page404', 'view', [], 'GET', $this->base))->render();
     }
 
 }

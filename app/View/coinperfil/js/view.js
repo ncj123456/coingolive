@@ -16,7 +16,7 @@ $(".market-cap-rank").each(function () {
     });
 });
 
-$("#amount_from").on('keyup', function () {
+$("#amount_from").on('keyup click change', function () {
     var from = parseFloat($("#amount_from").val());
     
     var result = price_coin*from;
@@ -30,7 +30,7 @@ $("#amount_from").on('keyup', function () {
     $("#amount_to").val(result);
       setTotal(from);
 });
-$("#amount_to").on('keyup', function () {
+$("#amount_to").on('keyup click change', function () {
     var to = parseFloat($("#amount_to").val());
     
     var result = to/price_coin;

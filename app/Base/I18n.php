@@ -29,7 +29,10 @@ class I18n {
     }
 
     static function getCurrentLang() {
-        return self::$currentLang;
+        if(!empty(self::$currentLang)){
+                return self::$currentLang;
+        }
+        return 'en';
     }
 
 }

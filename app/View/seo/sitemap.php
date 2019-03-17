@@ -30,11 +30,11 @@
             <priority>1</priority>
         </url>
         <url>
-            <loc><?= $urlBase . '/' . $name . '/coin/change-history/' ?></loc>
+            <loc><?= $urlBase . '/' . $name . '/coin/price-change-history/' ?></loc>
             <priority>1</priority>
         </url>
         <url>
-            <loc><?= $urlBase . '/' . $name . '/coin/ath/' ?></loc>
+            <loc><?= $urlBase . '/' . $name . '/coin/ath-price/' ?></loc>
             <priority>1</priority>
         </url>
         <url>
@@ -58,23 +58,23 @@
         foreach ($langs as $name => $desc) {
             ?>
             <url>
-                <loc><?= $urlBase . '/' . $name . '/currencies/' . $d['codigo'] . '/'; ?></loc>
+                <loc><?= $urlBase . '/' . $name . '/coins/' . $d['codigo'] . '/'; ?></loc>
                 <priority>0.80</priority>
             </url>
               <url>
-                <loc><?= $urlBase . '/' . $name . '/currencies/' . $d['codigo'] . '/usd/'; ?></loc>
+                <loc><?= $urlBase . '/' . $name . '/coins/' . $d['codigo'] . '/usd/'; ?></loc>
                 <priority>0.80</priority>
             </url>
             <url>
-                <loc><?= $urlBase . '/' . $name . '/currencies/' . $d['codigo'] . '/eur/'; ?></loc>
+                <loc><?= $urlBase . '/' . $name . '/coins/' . $d['codigo'] . '/eur/'; ?></loc>
                 <priority>0.80</priority>
             </url>
             <url>
-                <loc><?= $urlBase . '/' . $name . '/currencies/' . $d['codigo'] . '/brl/'; ?></loc>
+                <loc><?= $urlBase . '/' . $name . '/coins/' . $d['codigo'] . '/brl/'; ?></loc>
                 <priority>0.80</priority>
             </url>
             <url>
-                <loc><?= $urlBase . '/' . $name . '/currencies/' . $d['codigo'] . '/btc/'; ?></loc>
+                <loc><?= $urlBase . '/' . $name . '/coins/' . $d['codigo'] . '/btc/'; ?></loc>
                 <priority>0.80</priority>
             </url>
             <?php

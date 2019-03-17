@@ -11,14 +11,16 @@ $app->get('/partners', 'Home:partners');
 $app->get('/global-data', 'CoinGlobal:json');
 
 //Coin max price
-$app->get('/coin/price', 'CoinMaxPrice:listar');
-$app->ajax('/coin/price/data', 'CoinMaxPrice:data');
+$app->get('/coin/price', 'CoinMaxPrice:data');
 
 $app->get('/market-cap-rank', 'CoinPerfil:rankMarketCap');
 
 //perfil moeda
-$app->get('/currencies/:name', 'CoinPerfil:view');
-$app->get('/currencies/:name/:moeda', 'CoinPerfil:view');
+$app->get('/currencies/:name', 'CoinPerfil:redirect');
+$app->get('/currencies/:name/:moeda', 'CoinPerfil:redirect');
+
+$app->get('/coins/:name', 'CoinPerfil:view');
+$app->get('/coins/:name/:moeda', 'CoinPerfil:view');
 
 //change moeda
 $app->get('/moeda/change', 'Moeda:change');
@@ -35,12 +37,12 @@ $app->get('/coin-change/:exchange/:market', 'Change:view');
 $app->get('/coin-change/cron', 'CronChange:save');
 
 //ath
-$app->get('/coin/ath', 'CoinAth:view');
-$app->ajax('/coin/ath/data', 'CoinAth:data');
+$app->get('/coin/ath-price', 'CoinAth:data');
+$app->get('/coin/ath', 'CoinAth:redirect');
 
 //change history
-$app->get('/coin/change-history', 'CoinHistoryChange:view');
-$app->ajax('/coin/change-history/data', 'CoinHistoryChange:data');
+$app->get('/coin/price-change-history', 'CoinHistoryChange:data');
+$app->get('/coin/change-history', 'CoinHistoryChange:redirect');
 
 
 $app->get('/videos-criptomoedas', 'Video:view');

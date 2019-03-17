@@ -47,5 +47,18 @@ class CoinPerfil {
 
         echo json_encode(['rank' => $rank]);
     }
+    
+    function redirect($codigo, $baseMoeda) {
+        $lang = \Base\I18n::getCurrentLang();
+        $newUrl =  '/'.$lang.'/coins/'.$codigo.'/';
+        
+        if(!empty($baseMoeda)){
+            $newUrl = '/'.$lang.'/coins/'.$codigo.'/'.$baseMoeda.'/';
+        }
+     
+        header( "HTTP/1.1 301 Moved Permanently" );
+        header("Location: ".$newUrl);
+        
+    }
 
 }

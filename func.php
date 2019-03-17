@@ -237,7 +237,6 @@ function btnBuy($symbol,$large=false){
     
     if($large){
         $float="";
-        $size='';
     }
     
     $html = '<div class="dropdown" style="margin:0;'.$float.' margin-top: -2px; margin-bottom: -2px;">

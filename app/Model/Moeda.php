@@ -223,7 +223,7 @@ class Moeda extends \Base\DAO {
                         m.codigo,
                         m.rank,
                         m.name,
-                        m.symbol,
+                        UPPER(m.symbol) symbol,
                         m.moeda,
                         m.moeda_char,
                         m.price_moeda,                        
@@ -413,7 +413,8 @@ class Moeda extends \Base\DAO {
         } elseif (strtolower($order) === 'asc') {
             $numOrder = 99999999;
         } else {
-            return false;
+            $order='asc';
+             $numOrder = -99999999;
         }
 
         $sql .= " ORDER BY COALESCE( " . $column . "," . $numOrder . " )  " . $order . " LIMIT :limit OFFSET :page";

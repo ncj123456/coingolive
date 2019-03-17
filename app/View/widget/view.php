@@ -28,7 +28,7 @@ if ($data['moeda_char'] == 'BTC') {
     <div>
         <div style="float:right;width:67%;border: 0px solid #000;text-align:left;padding:5px 0px;line-height:25px;margin-left: 10px">
             <span style="font-size: 18px;">
-                <a href="<?= BASE_URL . '/currencies/' . $data['codigo'] . '/' ?>" target="_blank" style="text-decoration: none; color: #9c27b0;">
+                <a href="<?= BASE_URL . '/coins/' . $data['codigo'] . '/' ?>" target="_blank" style="text-decoration: none; color: #9c27b0;">
                     <?= $data['name'] . ' (' . $data['symbol'] . ')' ?></a>
             </span>
             <br>
