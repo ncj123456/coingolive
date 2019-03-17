@@ -1,6 +1,6 @@
 <?php
 $_title = _e('Calcular Preço Criptomoedas Alterando o Market Cap');
-$_meta_description = _e('Calcule o preço das criptomoedas com a mesma capitalização de mercado do Bitcoin.');
+$_meta_description = _e('Calcule o preço das criptomoedas com a mesma capitalização de mercado do Bitcoin, altere o valor do Market Cap e veja o crescimento necessário para alcançá-lo');
 
 $compare_coin = isset($_GET['compare']) ? $_GET['compare'] : 'bitcoin';
 $current_moeda = isset($_COOKIE['moeda']) ? $_COOKIE['moeda'] : 'USD';
