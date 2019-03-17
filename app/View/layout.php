@@ -9,7 +9,7 @@ $current_url = function($lang) {
 
 $canonicalLink = $current_url($lang);
 
-$urlDefault = "https://" . $_SERVER['HTTP_HOST'] .'/en/' .$this->base . '/';
+$urlDefault = "https://" . $_SERVER['HTTP_HOST'] .'/en' .$this->base . '/';
 $version = '2.1';
 ?>
 <!doctype html>
