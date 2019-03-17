@@ -1,7 +1,7 @@
 <?php
 $_title = _e("Histórico Preço Criptomoedas, Valorização e Desvalorização");
 
-$_meta_description = _e('histórico de preço bitcoin e criptomoedas, acompanhe a variação do valor em diferentes períodos 1 hora, 7 dias, 1 mês e 1 ano, ordene e filtre a porcentagem de valorização e desvalorização das criptomoedas.');
+$_meta_description = _e('Histórico de preço bitcoin e criptomoedas, acompanhe a variação do valor em diferentes períodos 1 hora, 7 dias, 1 mês e 1 ano, ordene e filtre a porcentagem de valorização e desvalorização das criptomoedas.');
 
 $compare_coin = isset($_GET['compare']) ? $_GET['compare'] : 'bitcoin';
 $current_moeda = isset($_COOKIE['moeda']) ? $_COOKIE['moeda'] : 'USD';
