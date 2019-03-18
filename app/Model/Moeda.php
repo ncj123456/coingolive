@@ -347,7 +347,7 @@ class Moeda extends \Base\DAO {
         return $this->query($sql);
     }
 
-    function findAth($id_user, $favorite, $moeda, $limit = 100, $page = 0, $column = 'rank', $order = 'ASC', $busca = '', $min_rank = false, $max_rank = false,$vol24h=false) {
+    function findAth($id_user, $favorite, $moeda, $limit = 100, $page = 0, $column = 'rank', $order = 'ASC', $busca = '', $min_rank = false, $max_rank = false, $vol24h = false) {
 
         $column = $this->antiInjection($column);
         $order = $this->antiInjection($order);
@@ -404,7 +404,7 @@ class Moeda extends \Base\DAO {
             $where[] = " rank <= :max_rank ";
             $par['max_rank'] = $max_rank;
         }
-         if (empty($busca) && $vol24h) {
+        if (empty($busca) && $vol24h) {
             $where[] = " volume_24h_moeda >= :vol_24h ";
             $par['vol_24h'] = $vol24h;
         }
@@ -417,8 +417,8 @@ class Moeda extends \Base\DAO {
         } elseif (strtolower($order) === 'asc') {
             $numOrder = 99999999;
         } else {
-            $order='asc';
-             $numOrder = -99999999;
+            $order = 'asc';
+            $numOrder = -99999999;
         }
 
         $sql .= " ORDER BY COALESCE( " . $column . "," . $numOrder . " )  " . $order . " LIMIT :limit OFFSET :page";
@@ -426,7 +426,7 @@ class Moeda extends \Base\DAO {
         return $this->query($sql, $par);
     }
 
-    function findPorcChange($id_user, $favorite, $moeda, $limit = 100, $page = 0, $column = 'rank', $order = 'ASC', $busca = '', $min_rank = false, $max_rank = false) {
+    function findPorcChange($id_user, $favorite, $moeda, $limit = 100, $page = 0, $column = 'rank', $order = 'ASC', $busca = '', $min_rank = false, $max_rank = false, $vol24h) {
         $column = $this->antiInjection($column);
         $order = $this->antiInjection($order);
         $par = [
@@ -491,6 +491,10 @@ class Moeda extends \Base\DAO {
             $where[] = " rank <= :max_rank ";
             $par['max_rank'] = $max_rank;
         }
+        if (empty($busca) && $vol24h) {
+            $where[] = " volume_24h_moeda >= :vol_24h ";
+            $par['vol_24h'] = $vol24h;
+        }
         if (count($where) > 0) {
             $sql .= ' WHERE ' . implode(' AND ', $where);
         }
@@ -512,26 +516,26 @@ class Moeda extends \Base\DAO {
         $sql = "SELECT max(rank) as max_rank FROM moeda";
         return $this->query($sql)[0]['max_rank'];
     }
-    
-       function findMaxVolume24h($moeda) {
-        $sql =  "SELECT max(volume_24h_moeda) as volume_24h_moeda "
+
+    function findMaxVolume24h($moeda) {
+        $sql = "SELECT max(volume_24h_moeda) as volume_24h_moeda "
                 . "FROM moeda "
                 . "WHERE moeda =:moeda ";
-          $par = ['moeda'=>$moeda];
-        return $this->query($sql,$par)[0]['volume_24h_moeda'];
+        $par = ['moeda' => $moeda];
+        return $this->query($sql, $par)[0]['volume_24h_moeda'];
     }
-    
-    function findRankByMarketCap($marketCap,$baseCoin){
-              $sql = "SELECT rank  FROM moeda 
+
+    function findRankByMarketCap($marketCap, $baseCoin) {
+        $sql = "SELECT rank  FROM moeda 
                             WHERE market_cap_moeda <= :market_cap 
                             AND moeda=:baseCoin
                            ORDER BY market_cap_moeda DESC LIMIT 1";
-              $par = [
-                  'market_cap'=>$marketCap,
-                  'baseCoin'=>$baseCoin
-                    ];
-              
-        return $this->query($sql,$par)[0]['rank'];
+        $par = [
+            'market_cap' => $marketCap,
+            'baseCoin' => $baseCoin
+        ];
+
+        return $this->query($sql, $par)[0]['rank'];
     }
 
 }

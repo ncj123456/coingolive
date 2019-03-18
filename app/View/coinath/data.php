@@ -75,7 +75,7 @@ $optionsFilterVol24h = [
                         <!--<div id="sliderLimit" class="slider" style=""></div>-->
                     </div>
                     <?php if($current_moeda=='USD'){ ?>
-                    <div class="col-md-3 col-6">
+                    <div class="col-md-3 col-5">
                             <div class="form-group" style="padding-top: 0px!important;margin-top: 15px;">
                                 <?= _e('Filtro volume 24h') ?> <br/>
                                 <button class="btn-sm btn btn-primary  dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?= !empty($inputBusca)?'disabled': '' ?>> <?= $optionsFilterVol24h[$inputOrderFilterVol24h] ?></button>
@@ -89,7 +89,7 @@ $optionsFilterVol24h = [
                         </div>
                     </div>
                     <?php } ?>
-                    <div class="col-6 col-md-3 ml-auto">
+                    <div class="col-7 col-md-3 ml-auto">
                         <form method="POST" id="formBusca">
                             <div  class="form-group input-group has-default bmd-form-group">
                                 <input type="text" name="input_busca" id="input_busca"  class="form-control" placeholder="<?= _e('Pesquisar moeda'); ?>"  value="<?= isset($_GET['s']) ? $_GET['s'] : '' ?>">
