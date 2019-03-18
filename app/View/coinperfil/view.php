@@ -118,7 +118,7 @@ if ($currentLang === 'pt-br') {
     $description = 'Price '.$nameCoin . ' today' . $descBaseMoeda . ', cryptocurrency all time high ATH,'
             . ' see the price change history with percentage gain and loss, compare with the Bitcoin and Gold market cap';
 
-    $titleH1 = $nameCoin . '<br/><span class="coin-h1"> Price' . $descBaseMoeda . ' today,Price Change History, Market Cap, All Time High ATH';
+    $titleH1 = $nameCoin . '<br/><span class="coin-h1"> Price' . $descBaseMoeda . ' today, Price Change History, Market Cap, All Time High ATH';
 }
 $_meta_description = $description;
 $_css[] = "/assets/css/coin-perfil.css";
