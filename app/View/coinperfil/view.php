@@ -114,11 +114,11 @@ if ($currentLang === 'pt-br') {
         $descBaseMoeda = ' to ' . $descFiat[$baseMoeda] . ' (' . $baseMoeda . ')';
     }
 
-    $_title = $nameCoin . ' Price' . $descBaseMoeda . ', Historical Price Change, Market Cap, ATH';
+    $_title = $nameCoin . ' Price' . $descBaseMoeda . ', Price Change History, Market Cap, ATH';
     $description = 'Price '.$nameCoin . ' today' . $descBaseMoeda . ', cryptocurrency all time high ATH,'
-            . ' see the historical price change with percentage gain and loss, compare with the Bitcoin and Gold market cap';
+            . ' see the price change history with percentage gain and loss, compare with the Bitcoin and Gold market cap';
 
-    $titleH1 = $nameCoin . '<br/><span class="coin-h1"> Price' . $descBaseMoeda . ' today, Historical Price Change, Market Cap, All Time High ATH';
+    $titleH1 = $nameCoin . '<br/><span class="coin-h1"> Price' . $descBaseMoeda . ' today,Price Change History, Market Cap, All Time High ATH';
 }
 $_meta_description = $description;
 $_css[] = "/assets/css/coin-perfil.css";
