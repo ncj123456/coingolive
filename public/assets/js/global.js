@@ -53,7 +53,7 @@ $(".go_selectbox").each(function () {
             if (corresponde) {
                 if (count < limit) {
                     console.log(desc);
-                    var icon = '<img style="width:25px;padding-right:5px" src="/assets/img/coin/' + idCoin + '.png" /> ';
+                    var icon = '<img style="width:25px;padding-right:5px" src="/assets/img/coin/' + idCoin + '-small.png" /> ';
                     html += '<a href="javascript:compareCoin(\'' +idCoin + '\')" class="dropdown-item">' + icon + desc + '</a>';
                     count++;
                 } else {
@@ -247,7 +247,7 @@ $(".go-top-search").each(function () {
                     if(classActive){
                         restulActive=idCoin;
                     }
-                    var icon = '<img style="width:25px;padding-right:5px" src="/assets/img/coin/' + idCoin+ '.png" /> ';
+                    var icon = '<img style="width:25px;padding-right:5px" src="/assets/img/coin/' + idCoin+ '-small.png" /> ';
                     html += '<a href="/'+currentLang+'/coins/' +idCoin + '/" class="dropdown-item '+classActive+'">' + icon + desc + '</a>';
                     count++;
                 } else {

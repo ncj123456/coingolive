@@ -351,7 +351,7 @@ $version = '2.1';
     <script src="/assets/js/bootstrap-material-design.js?v=<?= $version ?>"></script>
     <script src="/assets/js/material-kit.js?v=<?= $version ?>"></script>
     <script src="/assets/js/plugins/jquery.mask.min.js?v=<?= $version ?>"></script>
-    <script src="/assets/js/global.js?v=<?= $version ?>10"></script>    
+    <script src="/assets/js/global.js?v=<?= $version ?>11"></script>    
     <script type="text/javascript" src="/assets/js/plugins/pace.js"></script>    
     <script src="https://hosted-sip.civic.com/js/civic.sip.min.js"></script>
     <script>

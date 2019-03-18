@@ -118,13 +118,32 @@ class CronCoin {
 
     private function saveImage($url, $code) {
 
+        //largue img
         $fileName = ROOT . '/public/assets/img/coin/' . $code . '.png';
 
         if (!file_exists($fileName) || filesize($fileName) < 10) {
 
             echo "image saved: " . $code . PHP_EOL;
             $image = file_get_contents($url);
-            file_put_contents(ROOT . '/public/assets/img/coin/' . $code . '.png', $image);
+            file_put_contents($fileName, $image);
+        }
+        
+         //small img
+        $fileName2 = ROOT . '/public/assets/img/coin/' . $code . '-small.png';
+
+        if (!file_exists($fileName2) || filesize($fileName2) < 10) {
+            
+            $url2 = str_replace('large', 'small', $url);
+
+            echo "image small saved: " . $code . PHP_EOL;
+            $image2 = file_get_contents($url2);
+            file_put_contents($fileName2, $image2);
+            
+            //if error save image large
+            if (!file_exists($fileName2) || filesize($fileName2) < 10) {
+                    echo "======".$code."==== error small- replace large image".PHP_EOL;
+                    file_put_contents($fileName2, $image);
+            }
         }
     }
 

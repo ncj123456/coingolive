@@ -110,7 +110,7 @@
                     <td class="text-center"><?= $d['rank'] ?></td>
                     <td class="text-left"  style="min-width: 250px;"> 
                         <a href="<?= siteUrl('/coins/' . $d['codigo']) ?>/">
-                            <img style="margin-right:10px;max-height: 20px;" alt="<?= $nameCoin ?>" title="<?= $nameCoin ?>" src="/assets/img/coin/<?= $d['codigo'] ?>.png">
+                            <img style="margin-right:10px;max-height: 20px;" alt="<?= $nameCoin ?>" title="<?= $nameCoin ?>" src="/assets/img/coin/<?= $d['codigo'] ?>-small.png">
                             <?= $d['name'] ?>
                             <small><?= $d['symbol'] ?></small>
                         </a>
