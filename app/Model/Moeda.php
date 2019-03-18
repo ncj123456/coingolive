@@ -347,7 +347,7 @@ class Moeda extends \Base\DAO {
         return $this->query($sql);
     }
 
-    function findAth($id_user, $favorite, $moeda, $limit = 100, $page = 0, $column = 'rank', $order = 'ASC', $busca = '', $min_rank = false, $max_rank = false) {
+    function findAth($id_user, $favorite, $moeda, $limit = 100, $page = 0, $column = 'rank', $order = 'ASC', $busca = '', $min_rank = false, $max_rank = false,$vol24h=false) {
 
         $column = $this->antiInjection($column);
         $order = $this->antiInjection($order);
@@ -403,6 +403,10 @@ class Moeda extends \Base\DAO {
         if ($max_rank) {
             $where[] = " rank <= :max_rank ";
             $par['max_rank'] = $max_rank;
+        }
+         if (empty($busca) && $vol24h) {
+            $where[] = " volume_24h_moeda >= :vol_24h ";
+            $par['vol_24h'] = $vol24h;
         }
         if (count($where) > 0) {
             $sql .= ' WHERE ' . implode(' AND ', $where);

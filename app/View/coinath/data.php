@@ -1,14 +1,14 @@
 <?php
 $_title = _e("Preço das Criptomoedas na Alta Histórica ATH");
 
-$_meta_description = _e('Confira o maior preço atingido (ATH) das criptomoedas, data da alta histórica, a desvalorização desde o maior valor alcançado e a porcentagem de crescimento necessária para voltar à maior cotação da história'); 
+$_meta_description = _e('Confira o maior preço atingido (ATH) das criptomoedas, data da alta histórica, a desvalorização desde o maior valor alcançado e a porcentagem de crescimento necessária para voltar à maior cotação da história');
 
 $compare_coin = isset($_GET['compare']) ? $_GET['compare'] : 'bitcoin';
 $current_moeda = isset($_COOKIE['moeda']) ? $_COOKIE['moeda'] : 'USD';
 $listMoeda = \Base\I18n::getListMoeda();
-        
-if(!isset($listMoeda[$current_moeda])){
-    $current_moeda='USD';
+
+if (!isset($listMoeda[$current_moeda])) {
+    $current_moeda = 'USD';
 }
 
 //filters
@@ -16,12 +16,23 @@ $inputBusca = isset($_GET['s']) ? $_GET['s'] : '';
 $inputOrderName = isset($_GET['name']) ? $_GET['name'] : 'rank';
 $inputOrderType = isset($_GET['order']) ? $_GET['order'] : 'asc';
 $inputFavorite = isset($_GET['favorite']) ? $_GET['favorite'] : '';
+$inputOrderFilterVol24h = isset($_GET['vol24h']) ? $_GET['vol24h'] : '1M';
+$optionsFilterVol24h = [
+    '10M'=>'$10 Million+',
+    '1M'=>'$1 Million+',
+    '100K'=>'$100K+',
+    '10K'=>'$10K+',
+    '1K'=>'$1K+',
+    'ALL'=>'ALL'
+]
 ?>
 <input type="hidden" id="order_name" value="<?= $inputOrderName ?>"/>
 <input type="hidden" id="order_type" value="<?= $inputOrderType ?>"/>
+<input type="hidden" id="order_filter_vol24h" value="<?= $inputOrderFilterVol24h ?>"/>
+
 
 <script>
-var max_rank_all = <?= $max_rank_all ?>;
+    var max_rank_all = <?= $max_rank_all ?>;
 </script>
 <div class="row" style="margin: 0px;">
     <div class="col-md-12">
@@ -50,7 +61,7 @@ var max_rank_all = <?= $max_rank_all ?>;
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-7">
+                    <div class="col-md-2 col-7">
                         <div class="row">
                             <div class="form-group col-6" style="padding-top: 0px!important;margin-top: 15px; max-width: 110px">
                                 <?= _e('Rank início') ?>
@@ -63,7 +74,22 @@ var max_rank_all = <?= $max_rank_all ?>;
                         </div>
                         <!--<div id="sliderLimit" class="slider" style=""></div>-->
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12 ml-auto">
+                    <?php if($current_moeda=='USD'){ ?>
+                    <div class="col-md-3 col-6">
+                            <div class="form-group" style="padding-top: 0px!important;margin-top: 15px;">
+                                <?= _e('Filtro volume 24h') ?> <br/>
+                                <button class="btn-sm btn btn-primary  dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?= !empty($inputBusca)?'disabled': '' ?>> <?= $optionsFilterVol24h[$inputOrderFilterVol24h] ?></button>
+                                <div class="dropdown-menu ">
+                                <?php foreach($optionsFilterVol24h as $optKey=>$optVal){ ?>
+                                    <a href="javascript:filterVol24h('<?= $optKey ?>')" class="dropdown-item">
+                                        <?= $optVal ?>
+                                    </a>
+                                <?php } ?>
+                                </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <div class="col-6 col-md-3 ml-auto">
                         <form method="POST" id="formBusca">
                             <div  class="form-group input-group has-default bmd-form-group">
                                 <input type="text" name="input_busca" id="input_busca"  class="form-control" placeholder="<?= _e('Pesquisar moeda'); ?>"  value="<?= isset($_GET['s']) ? $_GET['s'] : '' ?>">
@@ -75,22 +101,22 @@ var max_rank_all = <?= $max_rank_all ?>;
                     </div>
                 </div>
                 <div  >
-                    <?php  
-                    require_once __DIR__.'/data_content.php';
+                    <?php
+                    require_once __DIR__ . '/data_content.php';
                     ?>
                 </div>
             </div>
         </div>
         <div class="alert alert-info">
             <div class="container">
-              <div class="alert-icon">
-                <i class="material-icons">info_outline</i>
-              </div>
-              <?= _e('ATH é uma abreviação do termo em ingles "all-time high" que traduzindo significa "alta de todos os tempos", é a máxima histórica de uma criptomoeda, o maior preço atingido desde sua existência'); ?>
+                <div class="alert-icon">
+                    <i class="material-icons">info_outline</i>
+                </div>
+                <?= _e('ATH é uma abreviação do termo em ingles "all-time high" que traduzindo significa "alta de todos os tempos", é a máxima histórica de uma criptomoeda, o maior preço atingido desde sua existência'); ?>
             </div>
-      </div>
+        </div>
     </div> 
 </div>
 <div class="text-center">
-     <?= _e('Fonte dos dados:') ?> <a href="https://coingecko.com" target="_blank">CoinGecko</a>
+    <?= _e('Fonte dos dados:') ?> <a href="https://coingecko.com" target="_blank">CoinGecko</a>
 </div>

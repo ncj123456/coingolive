@@ -18,7 +18,23 @@ class CoinAth {
         $limit = 100;
         $min_rank = (int) ((isset($_GET['min_rank']) && !empty($_GET['min_rank'])) ? $_GET['min_rank'] : 1);
         $max_rank = (int) (isset($_GET['max_rank']) ? $_GET['max_rank'] : 0);
+        $filter_vol24h =  isset($_GET['vol24h']) ? $_GET['vol24h'] : '1M';
         
+       $optsVol24 = [
+           '10M'=>10000000,
+           '1M'=>1000000,
+           '100K'=>100000,
+           '10K'=>10000,
+           '1K'=>1000,
+           'ALL'=>0
+       ];
+       
+       $vol24h = $optsVol24[$filter_vol24h];
+       
+       if($moeda != 'USD'){
+           $vol24h=0;
+       }
+       
         $table_head = $this->getTableHead();
         
         //check order column in array 
@@ -34,7 +50,7 @@ class CoinAth {
         $id_user = \Base\Auth::getIdUser();
         $favorite = (isset($_GET['favorite']) && $_GET['favorite'] === "true") ? true : false;
 
-        $data = (new \Model\Moeda())->findAth($id_user, $favorite, $moeda, $limit, $page, $name, $order, $busca, $min_rank, $max_rank);
+        $data = (new \Model\Moeda())->findAth($id_user, $favorite, $moeda, $limit, $page, $name, $order, $busca, $min_rank, $max_rank,$vol24h);
         
         return [
             'data' => $data,

@@ -8,12 +8,18 @@ function loadPage(page) {
 
     var name = $("#order_name").val();
     var order = $("#order_type").val();
+    var order_filter_vol24h= $("#order_filter_vol24h").val();
     var busca = $('#input_busca').val().toString().trim();
     var min_rank = $("#min_rank").val();
     var max_rank = $("#max_rank").val();
     var user_favorite = localStorage.getItem("favorite");
     
     var url = '/coin/ath-price/?p=' + page;
+    
+            if(order_filter_vol24h!='1M'){
+                url+='&vol24h=' + order_filter_vol24h;
+            }
+    
             if(busca){
                 url+='&s=' + busca;
             }
@@ -63,3 +69,8 @@ $("#formBusca").on('submit', function () {
 
         loadPage();
     });
+    
+    function filterVol24h(type){
+        $("#order_filter_vol24h").val(type);
+        loadPage();
+    }
