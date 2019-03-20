@@ -169,7 +169,7 @@ return [
     'Voltar para página principal'=>'Back to Home Page',
     'Calcular Preço Criptomoeda'=>'Calculate Cryptocurrency Price',
     'Calcular Preço'=>'Calculate Price',
-    'Calcular Preço Criptomoedas Alterando o Market Cap'=>'Calculate Price Cryptocurrency by Changing the Market Cap',
+    'Calcular Preço Criptomoedas Alterando o Market Cap'=>'Calculate Cryptocurrency Price by Changing the Market Cap',
     'Calcule o preço das criptomoedas com a mesma capitalização de mercado do Bitcoin, altere o valor do Market Cap e veja o crescimento necessário para alcançá-lo'=>'Calculate the price of the cryptocurrencies with the same market capitalization as Bitcoin, change the  Market Cap and see the growth needed to reach it',
     'Filtro volume 24h'=>'24h volume filter'
     ];
