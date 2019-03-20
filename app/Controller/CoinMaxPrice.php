@@ -6,6 +6,11 @@ class CoinMaxPrice {
 
     function data() {
         $moeda = $_COOKIE['moeda'];
+        $listMoeda = \Base\I18n::getListMoeda();
+        if (!isset($listMoeda[$moeda])) {
+            $moeda = 'USD';
+            setcookie('moeda', 'USD', time() + 2592000, '/');
+        } 
         $compare = isset($_GET['compare']) ? $_GET['compare'] : 'bitcoin';
         $busca = isset($_GET['s']) ? $_GET['s'] : null;
         $p = (int) (isset($_GET['p']) && $_GET['p']>=0) ? $_GET['p'] : 0;
