@@ -206,28 +206,3 @@
         </div>
     <?php } ?>
 </div>
-<script>
-//    $(document).ready(function () {
-//
-//        $('.column-order').on('click', function () {
-//            var name = $(this).data('name');
-//            var order = $(this).data('order');
-//
-//            $("#order_name").val(name);
-//            $("#order_type").val(order);
-//
-//            loadPage();
-//        });
-//
-//        $('[data-toggle="tooltip"]').tooltip();
-//
-//        $("#valor_total_market_cap_compare").val("<?= decimal($market_cap_compare, 0) ?>");
-//        $("#valor_total_market_cap_compare_base").val("<?= decimal($compare['market_cap_moeda'], 0) ?>");
-//        $("#porc_total_market_cap_compare").val("<?= decimal($porc_market_cap_compare, 0) ?>");
-//        $(".moeda-char").html("<?= $moeda_char ?>");
-//
-//        $("#min_rank").val('<?= $min_rank; ?>');
-//        $("#max_rank").val('<?= $max_rank; ?>');
-//
-//    });
-</script>

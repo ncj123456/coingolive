@@ -27,7 +27,6 @@ function loadPage(page, marketcap) {
     var compare = $('#compare_coin').val();
     var min_rank = $("#min_rank").val();
     var max_rank = $("#max_rank").val();
-    var user_favorite = localStorage.getItem("favorite");
 
     var url = '/coin/price/';
 //            if(page>0){
@@ -59,7 +58,7 @@ function loadPage(page, marketcap) {
                 url+='&max_rank=' + max_rank
             }
             
-            if(user_favorite=='true'){
+            if(user_favorite){
                     url+= '&favorite=' + user_favorite;
              }
     

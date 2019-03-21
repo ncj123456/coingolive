@@ -168,13 +168,11 @@ function modalLogin() {
 }
 
 function favoriteFilter() {
-    var favorite = localStorage.getItem("favorite");
-    if (favorite == "true") {
-        favorite = "false";
-    } else {
-        favorite = "true";
+    if (user_favorite) {
+        user_favorite = false;
+    }else{
+       user_favorite = true;
     }
-    localStorage.setItem("favorite", favorite);
     loadPage();
 }
 

@@ -25,6 +25,7 @@ $optionsFilterVol24h = [
 ?>
 <script>
 var max_rank_all = <?= $max_rank_all ?>;
+  var user_favorite = <?= ($inputFavorite)?'true':'false' ?>;
 </script>
 <input type="hidden" id="order_name" value="<?= $inputOrderName ?>"/>
 <input type="hidden" id="order_type" value="<?= $inputOrderType ?>"/>

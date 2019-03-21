@@ -12,7 +12,6 @@ function loadPage(page) {
     var busca = $('#input_busca').val().toString().trim();
     var min_rank = $("#min_rank").val();
     var max_rank = $("#max_rank").val();
-    var user_favorite = localStorage.getItem("favorite");
     
     var url = '/coin/ath-price/?p=' + page;
     
@@ -37,7 +36,8 @@ function loadPage(page) {
              if(max_rank_all!=max_rank){
                   url+='&max_rank=' + max_rank;
             }
-              if(user_favorite =='true' ){
+            alert('a'+user_favorite);
+              if(user_favorite){
                   url+='&favorite=' + user_favorite;
             }
         window.location.href =encodeURI(siteUrl(url));

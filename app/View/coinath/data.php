@@ -33,6 +33,7 @@ $optionsFilterVol24h = [
 
 <script>
     var max_rank_all = <?= $max_rank_all ?>;
+    var user_favorite = <?= ($inputFavorite)?'true':'false' ?>;
 </script>
 <div class="row" style="margin: 0px;">
     <div class="col-md-12">

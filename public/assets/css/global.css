@@ -322,3 +322,6 @@ user
     font-size: 15px;
     font-weight: 400;
 }
+.table th, .table td {
+    font-weight: 500;
+}
