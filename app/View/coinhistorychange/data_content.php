@@ -57,10 +57,12 @@
                 ?>
                 <tr >
                     <td class="text-left padding-table-3px" colspan="2"  style="min-width: 200px;"> 
-                        <a href="javascript:addFavorite('<?= $d['id_externo'] ?>')" style="margin-right:10px;">
-                            <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['id_externo'] ?>"></i>
-                        </a>
-                     <a href="<?= siteUrl('/coins/' . $d['id_externo']) ?>/"><img alt="<?= $coinName ?>"  style="margin-right:10px;    max-height: 20px;" src="/assets/img/coin/<?= $d['id_externo'] ?>-small.png"> <?= $d['name'].' <span class="small"> '.$d['symbol'].'</span>';  ?></a>
+                           <div style="float: left;">
+                                <a href="javascript:addFavorite('<?= $d['id_externo'] ?>')" style="margin-right:10px;">
+                                    <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['id_externo'] ?>"></i>
+                                </a>
+                                <a href="<?= siteUrl('/coins/' . $d['id_externo']) ?>/"><img alt="<?= $coinName ?>"  style="margin-right:10px;    max-height: 20px;" src="/assets/img/coin/<?= $d['id_externo'] ?>-small.png"> <?= $d['name'].' <span class="small"> '.$d['symbol'].'</span>';  ?></a>
+                           </div>
                               <?= btnBuy($d['symbol']) ?>
                     </td>
                     <td class="text-center padding-table-3px"><?= $d['rank']; ?></td>

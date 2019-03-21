@@ -109,11 +109,13 @@
                     </td>
                     <td class="text-center"><?= $d['rank'] ?></td>
                     <td class="text-left"  style="min-width: 250px;"> 
-                        <a href="<?= siteUrl('/coins/' . $d['codigo']) ?>/">
-                            <img style="margin-right:10px;max-height: 20px;" alt="<?= $nameCoin ?>" title="<?= $nameCoin ?>" src="/assets/img/coin/<?= $d['codigo'] ?>-small.png">
-                            <?= $d['name'] ?>
-                            <small><?= $d['symbol'] ?></small>
-                        </a>
+                        <div style="float: left;">
+                            <a href="<?= siteUrl('/coins/' . $d['codigo']) ?>/">
+                                <img style="margin-right:10px;max-height: 20px;" alt="<?= $nameCoin ?>" title="<?= $nameCoin ?>" src="/assets/img/coin/<?= $d['codigo'] ?>-small.png">
+                                <?= $d['name'] ?>
+                                <small><?= $d['symbol'] ?></small>
+                            </a>
+                        </div>
                         <?= btnBuy($d['symbol']) ?>
                     </td>
                     <td class="text-right"><?= $moeda_char . decimal($price_moeda, 2, true) ?></td>
@@ -147,7 +149,7 @@
         <?php
     }
     $page = $p;
-    
+
     if (count($data) >= $limit || $p > 0) {
         ?>
         <div class="col-md-4 ml-auto  text-right " style="margin-bottom:15px">
