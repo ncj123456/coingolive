@@ -36,7 +36,7 @@ function loadPage(page) {
              if(max_rank_all!=max_rank){
                   url+='&max_rank=' + max_rank;
             }
-            alert('a'+user_favorite);
+           
               if(user_favorite){
                   url+='&favorite=' + user_favorite;
             }
