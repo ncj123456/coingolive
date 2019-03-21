@@ -15,7 +15,7 @@ if (!isset($listMoeda[$current_moeda])) {
 $inputBusca = isset($_GET['s']) ? $_GET['s'] : '';
 $inputOrderName = isset($_GET['name']) ? $_GET['name'] : 'rank';
 $inputOrderType = isset($_GET['order']) ? $_GET['order'] : 'asc';
-$inputFavorite = isset($_GET['favorite']) ? $_GET['favorite'] : '';
+$inputFavorite = isset($_GET['favorite']) ? $_GET['favorite'] : false;
 $inputOrderFilterVol24h = isset($_GET['vol24h']) ? $_GET['vol24h'] : '1M';
 $optionsFilterVol24h = [
     '10M'=>'$10 Million+',

@@ -11,6 +11,7 @@ if(!isset($listMoeda[$current_moeda])){
     $current_moeda='USD';
 }
 $inputBusca = isset($_GET['s']) ? $_GET['s'] : '';
+$inputFavorite = isset($_GET['favorite']) ? $_GET['favorite'] : false;
 $inputOrderName = isset($_GET['name']) ? $_GET['name'] : 'rank';
 $inputOrderType = isset($_GET['order']) ? $_GET['order'] : 'asc';
 $inputOrderFilterVol24h = isset($_GET['vol24h']) ? $_GET['vol24h'] : '1M';

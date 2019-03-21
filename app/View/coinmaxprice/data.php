@@ -19,7 +19,7 @@ $inputBusca = isset($_GET['s']) ? $_GET['s'] : '';
 $inputOrderName = isset($_GET['name']) ? $_GET['name'] : 'rank';
 $inputOrderType = isset($_GET['order']) ? $_GET['order'] : 'asc';
 $inputMarketCap = isset($_GET['marketcap']) ? $_GET['marketcap'] : 0;
-$inputFavorite = isset($_GET['favorite']) ? $_GET['favorite'] : '';
+$inputFavorite = isset($_GET['favorite']) ? $_GET['favorite'] : false;
 ?>
 <script>
     var max_rank_all = <?= $max_rank_all ?>;
