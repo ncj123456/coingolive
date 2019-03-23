@@ -17,7 +17,7 @@
                     'rank' => _e('#'),
                     'name' => _e('Criptomoeda'),
                     'price_moeda' => _e('Preço Atual'),
-                    'price_moeda' => _e('Preço Máximo'),
+                    'price_available_supply' => _e('Preço Máximo'),
                     'percent_available_supply' => _e('Crescimento'),
                     'volume_24h_moeda' => _e('Volume 24h'),
                     'percent_dominance' => _e('Market Cap'),
