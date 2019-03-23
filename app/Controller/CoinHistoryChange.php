@@ -71,17 +71,17 @@ class CoinHistoryChange {
     private function getTableHead(){
         
                 $table_head = [
+                    'rank' => _e('#'),
                     'name' => _e('Criptomoeda'),
-                    'rank' => _e('Rank'),
                     'price_moeda' => _e('Preço'),
-                    'volume_24h_moeda' => _e('Volume 24h'),
-                    'price_change_percentage_1h' => '1 ' . _e('hora'),
-                    'price_change_percentage_24h' => '24 ' . _e('horas'),
-                    'price_change_percentage_7d' => '7 ' . _e('dias'),
-                    'price_change_percentage_14d' => '14 ' . _e('dias'),
-                    'price_change_percentage_30d' => '30 ' . _e('dias'),
-                    'price_change_percentage_200d' => '200 ' . _e('dias'),
-                    'price_change_percentage_1y' => '1 ' . _e('ano'),
+                    'volume_24h_moeda' => _e('Vol 24h'),
+                    'price_change_percentage_1h' => '1' . _e('h'),
+                    'price_change_percentage_24h' => '24' . _e('h'),
+                    'price_change_percentage_7d' => '7' . _e('d'),
+                    'price_change_percentage_14d' => '14' . _e('d'),
+                    'price_change_percentage_30d' => '30' . _e('d'),
+                    'price_change_percentage_200d' => '200' . _e('d'),
+                    'price_change_percentage_1y' => '1' . _e('y'),
 //                    'market_cap_moeda' => _e('Cap. de Mercado'),
                     'ath_change_percentage' => _e('% Desde ATH'),
                 ];

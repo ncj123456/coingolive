@@ -1,5 +1,5 @@
 <div  style="overflow-x: auto" >
-    <table class="table table-striped table-nowrap">
+    <table class="table table-striped table-nowrap" >
         <thead>
 
             <tr>  
@@ -34,7 +34,7 @@
                 <?php } ?>
             </tr>
         </thead>
-        <tbody>
+        <tbody class=" table-coin">
             <?php
             foreach ($data as $d) {
 
@@ -65,18 +65,28 @@
                     $moeda_char = "<span class='icon-moeda-char'><i class='fa fa-btc'></i> </span>";
                 }
                 $color_vol24 = volumeColor($d['volume_24h_moeda']);
-                
-                $coinName = $d['name'].' ('.$d['symbol'].')';
+
+                $coinName = $d['name'] . ' (' . $d['symbol'] . ')';
                 ?>
                 <tr >
-                    <td class="text-left padding-table-3px" colspan="2" style="min-width: 200px;"> 
-                        <a href="javascript:addFavorite('<?= $d['id_externo'] ?>')" style="margin-right:10px;">
-                            <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['id_externo'] ?>"></i>
+                    <td class="text-center" ><a href="javascript:addFavorite('<?= $d['codigo'] ?>')">
+                            <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['codigo'] ?>"></i>
                         </a>
-                        <a href="<?= siteUrl('/coins/' . $d['id_externo']) ?>/"><img alt="<?= $coinName ?>" style="margin-right:10px;    max-height: 20px;" src="/assets/img/coin/<?= $d['id_externo'] ?>-small.png"> <?= $d['name'].' <span class="small"> '.$d['symbol'].'</span>';  ?></a>
-                        <?= btnBuy($d['symbol']) ?>
                     </td>
                     <td class="text-center padding-table-3px"><?= $d['rank']; ?></td>
+                    <td class="text-left td-name"> 
+                        <div class="d-flex flex-row align-items-center" style="height:100%">
+                            <div>
+                                <div class="d-flex align-items-center">
+                                    <a href="<?= siteUrl('/coins/' . $d['id_externo'].'/') ?>"><img alt="<?= $coinName ?>" src="/assets/img/coin/<?= $d['id_externo'] ?>-small.png" /></a>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <a class="coin-link" href="<?= siteUrl('/coins/' . $d['id_externo'].'/') ?>"><?= $d['symbol'] ?></a>
+                                    <?= btnAds($d['symbol']) ?></div><div class="desc"><?= $d['name'] ?></div></div>
+                        </div>
+                    </td>
                     <td class="text-right" style="padding-left:3px"><?= $moeda_char ?><?= decimal($d['price_moeda'], 2, true); ?></td>
                     <td class="text-right" style="padding-left:3px"><?= $moeda_char ?><?= decimal($d['high_price'], 2, true); ?></td>
                     <td class="text-center padding-table-3px">
@@ -86,14 +96,14 @@
                         <small><?= dateDesc($d['high_date']) ?></small>
                     </td>
                     <td class="text-center">
-<!--                        <div class="progress progress-line-primary ">
-                            <div class="progress-bar progress-bar-primary" role="progressbar" style="width: <?= round(100 + $d['porc_high'], 2) ?>%;">
-                            </div>
-                        </div>-->
+                        <!--                        <div class="progress progress-line-primary ">
+                                                    <div class="progress-bar progress-bar-primary" role="progressbar" style="width: <?= round(100 + $d['porc_high'], 2) ?>%;">
+                                                    </div>
+                                                </div>-->
                         <div class="progress" style="height: 25px;margin-bottom: 0px;">
-                                <div class="progress-bar bg-danger"  role="progressbar" style="width: <?= round(abs($d['porc_high']), 2) ?>%;display:block">
-                               <?= decimal($d['porc_high'], 2); ?>%
-                                </div>
+                            <div class="progress-bar bg-danger"  role="progressbar" style="width: <?= round(abs($d['porc_high']), 2) ?>%;display:block">
+                                <?= decimal($d['porc_high'], 2); ?>%
+                            </div>
                         </div>
                     </td>
                     <td class="text-center"  style="background-color:  <?= $color_vol24 ?>;"><span<?= tooltip($moeda_char . decimal($d['volume_24h_moeda'], 0)) ?>>
@@ -116,7 +126,6 @@
         ?>
         <div class="col-md-4 ml-auto  text-right " style="margin-bottom:15px">
             <?php
-
             //url pagination
             if (!empty($inputBusca)) {
                 $urlPage .= '&s=' . $inputBusca;
@@ -139,21 +148,21 @@
             if ($inputFavorite == 'true') {
                 $urlPage .= '&favorite=' . $inputFavorite;
             }
-            
-            $urlPagePrev = siteUrl('/coin/ath-price/').'?p=' . ($page - 1) .$urlPage;
-            $urlPageNext = siteUrl('/coin/ath-price/').'?p=' . ($page + 1) .$urlPage;
-            
-            
+
+            $urlPagePrev = siteUrl('/coin/ath-price/') . '?p=' . ($page - 1) . $urlPage;
+            $urlPageNext = siteUrl('/coin/ath-price/') . '?p=' . ($page + 1) . $urlPage;
+
+
             //if disabled
             $disabledPrev = '';
             $disabledNext = '';
             if ($page == 0) {
                 $disabledPrev = 'disabled';
-                $urlPagePrev='javascript:void(0)';
+                $urlPagePrev = 'javascript:void(0)';
             }
             if (count($data) < $limit) {
                 $disabledNext = 'disabled';
-                $urlPageNext='javascript:void(0)';
+                $urlPageNext = 'javascript:void(0)';
             }
             ?>
             <a href="<?= $urlPagePrev ?>"  class="btn btn-primary btn-round <?= $disabledPrev ?>">< <?= _e('Anterior') ?></a>

@@ -179,98 +179,108 @@ function volumeColor($vol24) {
     return $color_vol24;
 }
 
-function btnBuy($symbol,$large=false){
-    
-    
+function btnAds($symbol, $large = false) {
+
+
     $symbol = strtolower($symbol);
 //    $lang = \Base\I18n::getCurrentLang();
 //    if($lang != 'pt-br'){
 //        return false;
 //    }
-    
+
     $ads = [
-       'btc'=>['3xbit'],
-       'eth'=>['3xbit'],
-        'ltc'=>['3xbit'],
-        'bch'=>['3xbit'],
-        'bsv'=>['3xbit'],
-        'dash'=>['3xbit'],
-        'nano'=>['3xbit'],
-        'doge'=>['3xbit'],
-        'smart'=>['3xbit'],
-        'zcr'=>['3xbit'],
-        'leax'=>['3xbit'],
-        'tnj'=>['3xbit'],
-        'usdt'=>['3xbit'],
-         'tusd'=>['3xbit'],
+        'btc' => ['Buy', 'Get Loan'],
+        'eth' => ['Buy', 'Get Loan'],
+        'xrp' => ['Get Loan'],
+        'bnb' => ['Get Loan'],
+        'ltc' => ['Buy'],
+        'bch' => ['Buy'],
+        'bsv' => ['Buy'],
+        'dash' => ['Buy'],
+        'nano' => ['Buy'],
+        'doge' => ['Buy'],
+        'smart' => ['Buy'],
+        'zcr' => ['Buy'],
+        'leax' => ['Buy'],
+        'tnj' => ['Buy'],
+        'usdt' => ['Buy', 'Earn Interest'],
+        'tusd' => ['Buy', 'Earn Interest'],
+        'usdc' => ['Earn Interest'],
+        'pax' => ['Earn Interest'],
+        'dai' => ['Earn Interest']
     ];
-    
+
     $partners = [
-        '3xbit'=>[
-            'img'=>'/assets/img/partners/3xbit.png',
-            'link'=>'http://3xb.it/crie-sua-conta?utm_source=coingolive&utm_medium=button_buy',
-            'desc'=>'3XBIT'
-        ]
+        'Buy' => [
+            'link' => 'http://3xb.it/crie-sua-conta?utm_source=coingolive&utm_medium=button_buy',
+        ],
+        'Get Loan' => [
+            'link' => 'https://nexo.io/?utm_source=coingolive&utm_medium=fixed&utm_term=get_loan&utm_content=web_integration&utm_campaign=nexoeverywhere'
+        ], 
+        'Earn Interest' => [
+            'link' => 'https://nexo.io/?utm_source=coingolive&utm_medium=fixed&utm_term=earn_interest&utm_content=web_integration&utm_campaign=nexoeverywhere'
+        ],
     ];
-    
-    if(!isset($ads[$symbol])){
+
+    if (!isset($ads[$symbol])) {
         return false;
     }
-    
-    $item = '';
-    
-    foreach($ads[$symbol] as $name){
-        $row = $partners[ $name];
+
+    $html = '';
+    $float = "float:left;margin-left:3px";
+    $size = 'btn-ads btn-white';
+    foreach ($ads[$symbol] as $name) {
+        $row = $partners[$name];
         
-        
-        
-        
-    $event ="javascript:gtag('event', '".$row['desc']."', {'event_category': 'btnBuy' });";
-        
-       $item .= ' <a href="'.$row['link'].'" onclick="'.$event.'" class="dropdown-item" target="_blank">
-                                        <img src="'.$row['img'].'" alt="'.$row['desc'].'" style="max-width:55px" />
-                    </a>';
+        if ($large) {
+            $float = "";
+            $size=' btn-info';
+        }
+
+        $html .= '
+            <a target="_blank" rel="nofollow noopener" href="'.$row['link'].'"
+                onclick="javascript:gtag(\'event\', \'' . _e($name) . '\', {\'event_category\': \'' . _e($name) . '\' });" class="' . $size . ' btn-sm btn">' . _e($name) . '</a>';
     }
-    
-    $float="float:right;";
-    $size = 'btn-sm';
-    
-    if($large){
-        $float="";
-    }
-    
-    $html = '<div class="dropdown" style="margin:0;'.$float.' margin-top: -2px; margin-bottom: -2px;">
-            <button title="Comprar criptomoeda '.$symbol.'" 
-                onclick="javascript:gtag(\'event\', \'btnBuyOpen\', {\'event_category\': \'btnBuy\' });" 
-                style="margin:0" class="'.$size.' btn btn-info  dropdown-toggle" 
-                type="button" 
-                data-toggle="dropdown">
-                BUY  <div class="ripple-container"></div></button>
-            <div class="dropdown-menu ">
-                                   '.$item.'
-                                </div>
-        </div>';
-    return $html;
+
+    return '<div style="'.$float.'" >' . $html . '</div>';
 }
 
- function formatPorc($porc, $price=false, $moeda_char = '', $desc = '',$border='0px') {
+function formatPorc($porc, $price = false, $moeda_char = '', $desc = '', $border = '0px') {
 
-                    $numClass = round(abs($porc) / 20);
-                    if ($numClass > 5) {
-                        $numClass = 6;
-                    }
+    $numClass = round(abs($porc) / 20);
+    if ($numClass > 5) {
+        $numClass = 6;
+    }
 
-                    if ($porc < 0) {
-                        $class_percent = 'red' . $numClass;
-                    } elseif ($porc > 0) {
-                        $class_percent = 'green' . $numClass;
-                    } else {
-                        return '--';
-                        $class_percent = 'badge-default';
-                    }
-                    $tooltip = '';
-                    if ($price) {
-                        $tooltip = 'data-toggle="tooltip" data-html="true" title="' . $desc . '<br>' . $moeda_char . decimal($price, 2, true) . ' "';
-                    }
-                    return '<span style="font-size:13px;width:100%;height:100%;padding:14px;display:block;border-radius: '.$border.';" ' . $tooltip . '  class="badge ' . $class_percent . '">' . decimal($porc, 2) . '%</span>';
+    if ($porc < 0) {
+        $class_percent = 'red' . $numClass;
+    } elseif ($porc > 0) {
+        $class_percent = 'green' . $numClass;
+    } else {
+        return '';
+        $class_percent = 'badge-default';
+    }
+    $tooltip = '';
+    if ($price) {
+        $tooltip = 'data-toggle="tooltip" data-html="true" title="' . $desc . '<br>' . $moeda_char . decimal($price, 2, true) . ' "';
+    }
+    return '<span style="font-size:13px;width:100%;height:100%;padding:14px;display:block;border-radius: ' . $border . ';" ' . $tooltip . '  class="badge ' . $class_percent . '">' . decimal($porc, 2) . '%</span>';
+}
+
+function classPorc($porc, $price = false, $moeda_char = '', $desc = '', $border = '0px') {
+
+    $numClass = round(abs($porc) / 20);
+    if ($numClass > 5) {
+        $numClass = 6;
+    }
+
+    if ($porc < 0) {
+        $class_percent = 'red' . $numClass;
+    } elseif ($porc > 0) {
+        $class_percent = 'green' . $numClass;
+    } else {
+        return '--';
+        $class_percent = 'badge-default';
+    }
+    return $class_percent;
 }

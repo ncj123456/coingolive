@@ -56,26 +56,33 @@
                $coinName = $d['name'].' ('.$d['symbol'].')';
                 ?>
                 <tr >
-                    <td class="text-left padding-table-3px" colspan="2"  style="min-width: 200px;"> 
-                        <a href="javascript:addFavorite('<?= $d['id_externo'] ?>')" style="margin-right:10px;">
+                     <td class="text-center" ><a href="javascript:addFavorite('<?= $d['id_externo'] ?>')">
                             <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['id_externo'] ?>"></i>
                         </a>
-                     <a href="<?= siteUrl('/coins/' . $d['id_externo']) ?>/"><img alt="<?= $coinName ?>"  style="margin-right:10px;    max-height: 20px;" src="/assets/img/coin/<?= $d['id_externo'] ?>-small.png"> <?= $d['name'].' <span class="small"> '.$d['symbol'].'</span>';  ?></a>
-                              <?= btnBuy($d['symbol']) ?>
                     </td>
                     <td class="text-center padding-table-3px"><?= $d['rank']; ?></td>
-
+                       <td class="text-left td-name"> 
+                        <div class="d-flex flex-row align-items-center" style="height:100%">
+                            <div>
+                                <div class="d-flex align-items-center">
+                                    <a href="<?= siteUrl('/coins/' . $d['id_externo'].'/') ?>"><img alt="<?= $coinName ?>" src="/assets/img/coin/<?= $d['id_externo'] ?>-small.png" /></a>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <a class="coin-link" href="<?= siteUrl('/coins/' . $d['id_externo'].'/') ?>"><?= $d['symbol'] ?></a>
+                                    <?= btnAds($d['symbol']) ?></div><div class="desc"><?= $d['name'] ?></div></div>
+                        </div>
+                    </td>
                     <td class="text-right" style="padding-left:3px"><?= $moeda_char ?><?= decimal($d['price_moeda'], 2, true); ?></td>
                     <td class="text-right" style="background-color:  <?= $color_vol24 ?>"> <?= $moeda_char . numFormat($d['volume_24h_moeda'], 2) ?> </td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_1h']); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_24h']); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_7d']); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_14d']); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_30d']); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_200d']); ?></td>
-                    <td class="text-center padding-table-3px" style="padding:0px!important"><?= formatPorc($d['price_change_percentage_1y']); ?></td>
-                    <!--<td class="text-center"><span<?= tooltip('$' . decimal($d['market_cap_moeda'], 0)) ?>>$<?= numFormat($d['market_cap_moeda'], 2); ?></span></td>-->
-                    <!--<td class="text-center padding-table-3px"><?= formatPorc($d['ath_change_percentage'], $d['high_price'], $moeda_char, $d['high_date']); ?></td>-->
+                    <td class="text-center <?= classPorc($d['price_change_percentage_1h'])?>" ><?= decimal($d['price_change_percentage_1h']); ?>%</td>
+                    <td class="text-center <?= classPorc($d['price_change_percentage_24h'])?>" ><?= decimal($d['price_change_percentage_24h']) ?>%</td>
+                    <td class="text-center <?= classPorc($d['price_change_percentage_7d'])?>" ><?= decimal($d['price_change_percentage_7d']) ?>%</td>
+                    <td class="text-center <?= classPorc($d['price_change_percentage_14d'])?>" ><?= decimal($d['price_change_percentage_14d']) ?>%</td>
+                    <td class="text-center <?= classPorc($d['price_change_percentage_30d'])?>" ><?= decimal($d['price_change_percentage_30d']) ?>%</td>
+                    <td class="text-center <?= classPorc($d['price_change_percentage_200d'])?>" ><?= decimal($d['price_change_percentage_200d']) ?>%</td>
+                    <td class="text-center <?= classPorc($d['price_change_percentage_1y'])?>" ><?= decimal($d['price_change_percentage_1y']) ?>%</td>
                     <td class="text-center"data-toggle="tooltip" title="
                         <?= $d['symbol'] ?><br/> 
                         <?= decimal($d['ath_change_percentage'], 2); ?>%<br/>

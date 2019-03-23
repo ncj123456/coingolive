@@ -14,7 +14,7 @@
                 </th>
                 <?php
                 $table_head = [
-                    'rank' => _e('Rank'),
+                    'rank' => _e('#'),
                     'name' => _e('Criptomoeda'),
                     'price_moeda' => _e('Preço Atual'),
                     'price_available_supply' => _e('Preço Máximo'),
@@ -45,7 +45,7 @@
                 <?php } ?>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-coin">
             <?php
             foreach ($data as $d) {
                 $class = " table-success";
@@ -108,13 +108,18 @@
                         </a>
                     </td>
                     <td class="text-center"><?= $d['rank'] ?></td>
-                    <td class="text-left"  style="min-width: 250px;"> 
-                        <a href="<?= siteUrl('/coins/' . $d['codigo']) ?>/">
-                            <img style="margin-right:10px;max-height: 20px;" alt="<?= $nameCoin ?>" title="<?= $nameCoin ?>" src="/assets/img/coin/<?= $d['codigo'] ?>-small.png">
-                            <?= $d['name'] ?>
-                            <small><?= $d['symbol'] ?></small>
-                        </a>
-                        <?= btnBuy($d['symbol']) ?>
+                    <td class="text-left td-name"> 
+                        <div class="d-flex flex-row align-items-center" style="height:100%">
+                            <div>
+                                <div class="d-flex align-items-center">
+                                    <a href="<?= siteUrl('/coins/' . $d['codigo'].'/') ?>"><img alt="<?= $nameCoin ?>" src="/assets/img/coin/<?= $d['codigo'] ?>-small.png" /></a>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                        <a class="coin-link" href="<?= siteUrl('/coins/' . $d['codigo'].'/') ?>"><?= $d['symbol'] ?></a>
+                        <?= btnAds($d['symbol']) ?></div><div class="desc"><?= $d['name'] ?></div></div>
+                        </div>
                     </td>
                     <td class="text-right"><?= $moeda_char . decimal($price_moeda, 2, true) ?></td>
                     <td class="text-right"> <?= $moeda_char . decimal($max_price_moeda, 2, true) ?> </td>

@@ -161,9 +161,7 @@ $disableRank = true;
                         <div class="col-md-4  text-center">
                             <img alt="<?= $nameCoin ?>" style="margin-right:10px;max-width:50px" src="/assets/img/coin/<?= $dados['codigo'] ?>.png">
                             <h1 class="title" style="line-height: 1.1em;margin-top: 3px;font-size: 22px;"><?= $titleH1 ?></h1>
-                            <div class="text-center" style="margin-bottom: 10px">
-<?= btnBuy($dados['symbol'], true); ?>
-                            </div>
+                            <div class="text-center" style="margin-bottom: 10px"><?= btnAds($dados['symbol'], true); ?></div>
                         </div>
                         <div class="col-md-8 " style="max-width:650px;">
                             <div class="card" style="margin-top:10px;margin-bottom:10px">

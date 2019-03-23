@@ -67,8 +67,8 @@ class CoinAth {
     
     private function getTableHead(){
                 $table_head = [
+                    'rank' => _e('#'),
                     'name' => _e('Criptomoeda'),
-                    'rank' => _e('Rank'),
                     'price_moeda' => _e('Preço Atual'),
                     'high_price' => _e('Alta Histórica'),
                     'growth_high' => _e('% Para Alta'),

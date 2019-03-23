@@ -25,6 +25,9 @@ class CronCoin {
 
 
         $db = \Base\DB::connect();
+      $db->query("SET session wait_timeout=28800");
+      $db->query("SET session interactive_timeout=28800");
+
         $db->beginTransaction();
 
         try {
