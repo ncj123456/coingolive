@@ -103,6 +103,13 @@ class CronCoin {
                     $page++;
                 }
             }
+            
+            $countCoins = (new \Model\Moeda())->countCoins();
+            if(empty($countCoins)){
+                echo "Error, no record was saved".PHP_EOL;
+                $db->rollBack();
+                return false;
+            }
             $db->commit();
 
             $file_moedas = ROOT . '/public/assets/moedas.json';

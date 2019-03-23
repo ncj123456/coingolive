@@ -537,5 +537,10 @@ class Moeda extends \Base\DAO {
 
         return $this->query($sql, $par)[0]['rank'];
     }
+    
+    function countCoins(){
+            $sql = "SELECT count(*) as qtde  FROM moeda"; 
+            return $this->query($sql)[0]['qtde'];
+    }
 
 }
