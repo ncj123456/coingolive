@@ -7,7 +7,7 @@ if ($baseMoeda) {
 $market_cap_compare = $compare['market_cap_moeda'];
 
 //calculos
-        $price_moeda = $dados['price_moeda'];
+$price_moeda = $dados['price_moeda'];
 $available_supply = (float) $dados['available_supply'];
 
 $style_title = ' margin-top: 0px;';
@@ -115,7 +115,7 @@ if ($currentLang === 'pt-br') {
     }
 
     $_title = $nameCoin . ' Price' . $descBaseMoeda . ', Price Change History, Market Cap, ATH';
-    $description = 'Price '.$nameCoin . ' today' . $descBaseMoeda . ', cryptocurrency all time high ATH,'
+    $description = 'Price ' . $nameCoin . ' today' . $descBaseMoeda . ', cryptocurrency all time high ATH,'
             . ' see the price change history with percentage gain and loss, compare with the Bitcoin and Gold market cap';
 
     $titleH1 = $nameCoin . '<br/><span class="coin-h1"> Price' . $descBaseMoeda . ' today, Price Change History, Market Cap, All Time High ATH';
@@ -139,24 +139,25 @@ if ($dados['moeda_char'] == 'BTC') {
     $dados['moeda_char'] .= ' ';
 }
 
-if($dados['symbol']=='xrb')
-?>
-<script>
-    var price_coin =<?= $dados['price_moeda'] ?>;
+if ($dados['symbol'] == 'xrb')
+    
+    ?>
+    <script>
+        var price_coin =<?= $dados['price_moeda'] ?>;
     var moeda_char = '<?= $dados['moeda_char'] ?>';
 </script>
 <div class="row" style="margin: 0px;">
     <div class="main main-raised  col-md-12"  style="margin: 0px!important;background-color: #f9f9f9;">
         <div class="container">
             <!--            <div style="position:absolute; top: 1px;right: 8px">
-<?= _e('Ultima atualização') . ' ' . dateDesc($dados['data_alteracao']) ?>
+            <?= _e('Ultima atualização') . ' ' . dateDesc($dados['data_alteracao']) ?>
                         </div>-->
 
             <div class="section section-perfil " style="padding-top: 0;padding-bottom: 2px">
                 <div class="section" style="padding-top: 15px;">
-<?php
-$disableRank = true;
-?>
+                    <?php
+                    $disableRank = true;
+                    ?>
                     <div class="row">
                         <div class="col-md-4  text-center">
                             <img alt="<?= $nameCoin ?>" style="margin-right:10px;max-width:50px" src="/assets/img/coin/<?= $dados['codigo'] ?>.png">
@@ -177,20 +178,20 @@ $disableRank = true;
                                         <div class="input-group-prepend">
                                             <div class="dropdown">
                                                 <button style="width:92px"  class="btn btn-primary  dropdown-toggle moedaAtual" type="button" data-toggle="dropdown">
-<?= $current_moeda ?>
+                                                    <?= $current_moeda ?>
                                                 </button>
                                                 <div class="dropdown-menu ">
-<?php
-$listLangs = \Base\I18n::getListMoeda();
-foreach ($listLangs as $n => $char) {
-    $n2 = strtolower($n);
-    ?>
-                                                        <a href="<?= siteUrl('/coins/' . $dados['codigo'] . '/' . $n2 . '/'); ?>" class="dropdown-item">
-                                                        <?= $n ?>
-                                                        </a>
-                                                            <?php
-                                                        }
+                                                    <?php
+                                                    $listLangs = \Base\I18n::getListMoeda();
+                                                    foreach ($listLangs as $n => $char) {
+                                                        $n2 = strtolower($n);
                                                         ?>
+                                                        <a href="<?= siteUrl('/coins/' . $dados['codigo'] . '/' . $n2 . '/'); ?>" class="dropdown-item">
+                                                            <?= $n ?>
+                                                        </a>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -226,14 +227,14 @@ foreach ($listLangs as $n => $char) {
                                     <div class="col-md-2  col-6" style="margin-bottom:5px;margin-top: 5px">
                                         <span class="description"><?= _e('Fornecimento Máximo') ?></span><br/>
                                         <span> 
-<?php
-if ($dados['max_supply'] > 0) {
-    echo decimal($dados['max_supply'], 0) . ' ';
-    echo $dados['symbol'];
-} else {
-    echo '<span class="table-danger " style="padding:4px 40px;border-radius:10px" data-toggle="tooltip" data-html="true" title="" data-original-title="' . _e("Não existe um limite máximo de fornecimento") . '"> <i class="fa fa-close" style="color:#c5615d"></i></span>';
-}
-?>
+                                            <?php
+                                            if ($dados['max_supply'] > 0) {
+                                                echo decimal($dados['max_supply'], 0) . ' ';
+                                                echo $dados['symbol'];
+                                            } else {
+                                                echo '<span class="table-danger " style="padding:4px 40px;border-radius:10px" data-toggle="tooltip" data-html="true" title="" data-original-title="' . _e("Não existe um limite máximo de fornecimento") . '"> <i class="fa fa-close" style="color:#c5615d"></i></span>';
+                                            }
+                                            ?>
                                         </span>
                                     </div>
                                 </div>
@@ -297,10 +298,10 @@ if ($dados['max_supply'] > 0) {
                                                 <td>1 <?= _e('hora') ?></td>
                                                 <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_1h'], false, '', '', '5px') ?></td>
                                                 <td>
-<?php
-$price1h = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_1h']);
-echo $dados['moeda_char'] . decimal($price1h, 2, true);
-?>
+                                                    <?php
+                                                    $price1h = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_1h']);
+                                                    echo $dados['moeda_char'] . decimal($price1h, 2, true);
+                                                    ?>
                                                 </td>
                                                 <td class="price-total" data-price="<?= $price1h ?>"></td>
 
@@ -309,10 +310,10 @@ echo $dados['moeda_char'] . decimal($price1h, 2, true);
                                                 <td>24 <?= _e('horas') ?></td>
                                                 <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_24h'], false, '', '', '5px') ?></td>
                                                 <td>
-<?php
-$price24h = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_24h']);
-echo $dados['moeda_char'] . decimal($price24h, 2, true);
-?>
+                                                    <?php
+                                                    $price24h = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_24h']);
+                                                    echo $dados['moeda_char'] . decimal($price24h, 2, true);
+                                                    ?>
                                                 </td>
                                                 <td class="price-total" data-price="<?= $price24h ?>"></td>
                                             </tr>
@@ -320,10 +321,10 @@ echo $dados['moeda_char'] . decimal($price24h, 2, true);
                                                 <td>7 <?= _e('dias') ?></td>
                                                 <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_7d'], false, '', '', '5px') ?></td>
                                                 <td>
-<?php
-$price7d = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_7d']);
-echo $dados['moeda_char'] . decimal($price7d, 2, true);
-?>
+                                                    <?php
+                                                    $price7d = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_7d']);
+                                                    echo $dados['moeda_char'] . decimal($price7d, 2, true);
+                                                    ?>
                                                 </td>
                                                 <td class="price-total" data-price="<?= $price7d ?>"></td>
                                             </tr>
@@ -331,10 +332,10 @@ echo $dados['moeda_char'] . decimal($price7d, 2, true);
                                                 <td>14 <?= _e('dias') ?></td>
                                                 <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_14d'], false, '', '', '5px') ?></td>
                                                 <td>
-<?php
-$price14d = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_14d']);
-echo $dados['moeda_char'] . decimal($price14d, 2, true);
-?>
+                                                    <?php
+                                                    $price14d = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_14d']);
+                                                    echo $dados['moeda_char'] . decimal($price14d, 2, true);
+                                                    ?>
                                                 </td>
                                                 <td class="price-total" data-price="<?= $price14d ?>"></td>
                                             </tr>
@@ -342,10 +343,10 @@ echo $dados['moeda_char'] . decimal($price14d, 2, true);
                                                 <td>30 <?= _e('dias') ?></td>
                                                 <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_30d'], false, '', '', '5px') ?></td>              
                                                 <td>
-<?php
-$price30d = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_30d']);
-echo $dados['moeda_char'] . decimal($price30d, 2, true);
-?>
+                                                    <?php
+                                                    $price30d = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_30d']);
+                                                    echo $dados['moeda_char'] . decimal($price30d, 2, true);
+                                                    ?>
                                                 </td>
                                                 <td class="price-total" data-price="<?= $price30d ?>"></td>
                                             </tr>
@@ -353,10 +354,10 @@ echo $dados['moeda_char'] . decimal($price30d, 2, true);
                                                 <td>200 <?= _e('dias') ?></td>
                                                 <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_200d'], false, '', '', '5px') ?></td>
                                                 <td>
-<?php
-$price200d = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_200d']);
-echo $dados['moeda_char'] . decimal($price200d, 2, true);
-?>
+                                                    <?php
+                                                    $price200d = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_200d']);
+                                                    echo $dados['moeda_char'] . decimal($price200d, 2, true);
+                                                    ?>
                                                 </td>
                                                 <td class="price-total" data-price="<?= $price200d ?>"></td>
                                             </tr>
@@ -364,10 +365,10 @@ echo $dados['moeda_char'] . decimal($price200d, 2, true);
                                                 <td>1 <?= _e('ano') ?></td>
                                                 <td style="padding:0px!important"><?= formatPorc($dados['price_change_percentage_1y'], false, '', '', '5px') ?></td>    
                                                 <td>
-<?php
-$price1y = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_1y']);
-echo $dados['moeda_char'] . decimal($price1y, 2, true);
-?>
+                                                    <?php
+                                                    $price1y = $porcInverse($dados['price_moeda'], $dados['price_change_percentage_1y']);
+                                                    echo $dados['moeda_char'] . decimal($price1y, 2, true);
+                                                    ?>
                                                 </td>
                                                 <td class="price-total" data-price="<?= $price1y ?>"></td>
                                             </tr>
@@ -589,6 +590,23 @@ echo $dados['moeda_char'] . decimal($price1y, 2, true);
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6" style="padding:5px">
+                            <div class="card card-body"  style="margin-top: 0px;margin-bottom: 5px;">
+                                <!-- Coinzilla Banner 300x250 -->
+                                <script async src="https://coinzillatag.com/lib/display.js"></script>
+                                <div class="text-center">
+                                    <div class="coinzilla" data-zone="C-387385a8c26c8224bc"></div>
+                                </div>
+                                <script>
+                                window.coinzilla_display = window.coinzilla_display || [];
+                                var c_display_preferences = {};
+                                c_display_preferences.zone = "387385a8c26c8224bc";
+                                c_display_preferences.width = "300";
+                                c_display_preferences.height = "250";
+                                coinzilla_display.push(c_display_preferences);
+                                </script>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -596,9 +614,9 @@ echo $dados['moeda_char'] . decimal($price1y, 2, true);
     </div>
 
     <div class="col-md-12" style="margin-top:30px" >
-<?php require_once __DIR__ . "/../coinmaxprice/msg_alert.inc.php" ?>
+        <?php require_once __DIR__ . "/../coinmaxprice/msg_alert.inc.php" ?>
     </div>
 </div>
 <div class="text-center" style="margin-top: 40px">
-<?= _e('Fonte dos dados:') ?> <a href="https://coingecko.com" target="_blank">CoinGecko</a>
+    <?= _e('Fonte dos dados:') ?> <a href="https://coingecko.com" target="_blank">CoinGecko</a>
 </div>
