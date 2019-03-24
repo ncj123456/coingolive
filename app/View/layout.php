@@ -296,7 +296,7 @@ $version = '2.1';
             <div class="text-center" style="margin-top: 5px;margin-bottom: 5px;">
                 <!-- Coinzilla Banner 728x90 -->
                 <script async src="https://coinzillatag.com/lib/display.js"></script>
-                <div style="min-height: 90px">
+                <div style="min-height: 98px">
                     <div class="coinzilla" data-zone="C-415245a8c26c8245e2"></div>
                 </div>
                 <script>
