@@ -144,10 +144,10 @@
 </div>
 <div class="row" style="padding:20px">
     <?php
-    if (isset($data[0]['data_alteracao'])) {
+    if (isset($data[0]['updated'])) {
         ?>
         <div class="col-md-4  ">
-            <?= _e('Ultima atualização') . ' ' . dateDesc($data[0]['data_alteracao']) ?>
+            <?= _e('Ultima atualização') . ' ' . dateDesc($data[0]['updated']) ?>
         </div>
         <?php
     }

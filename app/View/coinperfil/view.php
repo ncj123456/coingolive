@@ -150,7 +150,7 @@ if ($dados['symbol'] == 'xrb')
     <div class="main main-raised  col-md-12"  style="margin: 0px!important;background-color: #f9f9f9;">
         <div class="container">
             <!--            <div style="position:absolute; top: 1px;right: 8px">
-            <?= _e('Ultima atualização') . ' ' . dateDesc($dados['data_alteracao']) ?>
+            <?= _e('Ultima atualização') . ' ' . dateDesc($dados['updated']) ?>
                         </div>-->
 
             <div class="section section-perfil " style="padding-top: 0;padding-bottom: 2px">

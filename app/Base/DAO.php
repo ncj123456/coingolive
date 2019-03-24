@@ -14,7 +14,7 @@ class DAO {
             //obtem a conexao com o db
             $this->db = \Base\DB::connect();
         }
-        
+
         //adiciona os valores default para identificar os q foram setados
         $this->parDefault();
     }
@@ -82,6 +82,33 @@ class DAO {
             $prepare->bindValue(':' . $key, $val);
         }
         $this->exec($prepare);
+        return $prepare->rowCount();
+    }
+
+    function insertOrUpdate() {
+        $db = $this->db;
+        $dados = $this->dados();
+        $upt_col = [];
+
+        foreach ($dados as $col => $val) {
+            if ($val === '__default__') {
+                unset($dados[$col]);
+            }
+            $upt_col[] = $col . '=:' . $col;
+        }
+        $colunas = array_keys($dados);
+        $sql_colunas = implode(',', $colunas);
+        $sql_param = ':' . implode(',:', $colunas);
+        $upt_sql = implode(',', $upt_col);
+
+        $sql = 'INSERT INTO ' . $this->_table . '(' . $sql_colunas . ') VALUES (' . $sql_param . ') ON DUPLICATE KEY UPDATE ' . $upt_sql;
+        $prepare = $db->prepare($sql);
+        foreach ($dados as $key => $val) {
+            $prepare->bindValue(':' . $key, $val);
+        }
+        $this->exec($prepare);
+        $id = $db->lastInsertId();
+        $this->setLastInsertId($id);
         return $prepare->rowCount();
     }
 
@@ -196,13 +223,13 @@ class DAO {
         return $rs;
     }
 
-    function findAllOrder($where,$column, $order = 'desc') {
+    function findAllOrder($where, $column, $order = 'desc') {
         if (property_exists($this, $column)) {
             if (strtolower($order) == 'desc' || strtolower($order) == 'asc') {
                 return $this->findAll($where, $column . ' ' . $order);
             }
         }
-         return $this->findAll($where); 
+        return $this->findAll($where);
     }
 
     function findId($id) {

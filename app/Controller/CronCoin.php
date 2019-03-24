@@ -24,14 +24,11 @@ class CronCoin {
         file_put_contents(__DIR__.'/pid.txt',$myPid);
 
 
-        $db = \Base\DB::connect();
+       $db = \Base\DB::connect();
       $db->query("SET session wait_timeout=28800");
       $db->query("SET session interactive_timeout=28800");
 
-        $db->beginTransaction();
-
         try {
-            $this->deleteAll($db);
 
             $listMoedas = \Base\I18n::getListMoeda();
             
@@ -92,7 +89,7 @@ class CronCoin {
                         $model->setPriceChangePercentage30d($d['price_change_percentage_30d_in_currency']);
                         $model->setPriceChangePercentage200d($d['price_change_percentage_200d_in_currency']);
                         $model->setPriceChangePercentage1y($d['price_change_percentage_1y_in_currency']);
-                        $model->insert();
+                        $model->insertOrUpdate();
 
                         $this->saveImage($d['image'], $d['id']);
 
@@ -107,16 +104,13 @@ class CronCoin {
             $countCoins = (new \Model\Moeda())->countCoins();
             if(empty($countCoins)){
                 echo "Error, no record was saved".PHP_EOL;
-                $db->rollBack();
                 return false;
             }
-            $db->commit();
 
             $file_moedas = ROOT . '/public/assets/moedas.json';
             $allMoeda = $this->listAll();
             file_put_contents($file_moedas, $allMoeda);
         } catch (\PDOException $ex) {
-            $db->rollBack();
             print_r($ex);
         }
     }
@@ -170,14 +164,12 @@ class CronCoin {
     }
     
     private function saveGlobalData($db,$data){
-        
-        (new \Model\CoinGlobal($db))->deleteAll();
-        
         $json = json_encode($data);
         
         $model = new \Model\CoinGlobal($db);
+        $model->setId(1);
         $model->setDataJson($json);
-        $model->insert();
+        $model->insertOrUpdate();
     }
 
 }

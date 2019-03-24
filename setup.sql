@@ -12,7 +12,6 @@ CREATE TABLE `moeda` (
   `volume_24h_moeda` decimal(20,2) DEFAULT NULL,
   `market_cap_moeda` decimal(20,2) DEFAULT NULL,
   `percent_dominance` decimal(20,6) DEFAULT NULL,
-  `data_alteracao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `price_available_supply` decimal(35,10) DEFAULT NULL,
   `percent_available_supply` decimal(20,2) DEFAULT NULL,
   `percent_change_24h` decimal(20,2) DEFAULT NULL,
@@ -26,6 +25,8 @@ CREATE TABLE `moeda` (
   `price_change_percentage_30d` decimal(20,2) DEFAULT NULL,
   `price_change_percentage_200d` decimal(20,2) DEFAULT NULL,
   `price_change_percentage_1y` decimal(20,2) DEFAULT NULL,
+  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`codigo`,`moeda`),
   KEY `symbol` (`symbol`),
   KEY `name` (`name`),
@@ -126,6 +127,8 @@ CREATE TABLE `video` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `coin_global` (
+  `id` int(1) NOT NULL,
   `data_json` json NOT NULL,
-  `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

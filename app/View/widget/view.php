@@ -105,6 +105,6 @@ if ($data['moeda_char'] == 'BTC') {
     </div>
     <div style="border-top: 1px solid #E4E6EB;text-align:center;clear:both;font-size:10px;font-style:italic;padding:5px 0;">
         <a href="<?= BASE_URL ?>/" target="_blank" style="text-decoration: none; color: #9c27b0;">Powered by CoinGoLive</a>
- <?= _e('Ultima atualização') . ' ' . dateDesc($data['data_alteracao']) ?>
+ <?= _e('Ultima atualização') . ' ' . dateDesc($data['updated']) ?>
     </div>
 </div>

@@ -232,7 +232,7 @@ class Moeda extends \Base\DAO {
                         m.volume_24h_moeda,
                         m.market_cap_moeda,
                         m.percent_dominance,
-                        m.data_alteracao,
+                        m.updated,
                         f.id_coin as favorite
                   FROM moeda m
                   " . $join_favorite . " JOIN user_favorite_coin f 
@@ -317,7 +317,7 @@ class Moeda extends \Base\DAO {
                             DATE_FORMAT(ath_date,'%Y-%m-%d') as high_date,
                             truncate(((ath - price_moeda)*100/price_moeda),2)as growth_high,
                              truncate(((price_moeda - ath)*100/ath),2)as porc_high,
-                        data_alteracao
+                        updated
                   FROM moeda ";
         $sql .= ' WHERE moeda=:moeda
                         AND codigo=:codigo ';
@@ -375,7 +375,7 @@ class Moeda extends \Base\DAO {
                             m.price_moeda,
                              m.moeda_char,
                             m.volume_24h_moeda,
-                            m.data_alteracao,
+                            m.updated,
                             DATE_FORMAT(m.ath_date,'%Y-%m-%d') as high_date,
                             ((m.ath-m.price_moeda)*100/m.price_moeda) as growth_high,
                              ((m.price_moeda - m.ath)*100/m.ath) as porc_high,
@@ -455,7 +455,7 @@ class Moeda extends \Base\DAO {
                             m.market_cap_moeda,
                             m.volume_24h_moeda,
                             m.percent_change_24h as porc24h,
-                            m.data_alteracao,
+                            m.updated,
                             m.ath_change_percentage,
                             m.price_change_percentage_1h,
                             m.price_change_percentage_24h,
@@ -542,5 +542,89 @@ class Moeda extends \Base\DAO {
             $sql = "SELECT count(*) as qtde  FROM moeda"; 
             return $this->query($sql)[0]['qtde'];
     }
+    
+        function findCoinHome($id_user, $favorite, $moeda, $limit = 100, $page = 0, $column = 'rank', $order = 'ASC', $busca = '', $min_rank = false, $max_rank = false, $vol24h) {
+        $column = $this->antiInjection($column);
+        $order = $this->antiInjection($order);
+        $par = [
+            'limit' => $limit,
+            'page' => $page * $limit,
+            'id_user' => $id_user
+        ];
+
+        $join_favorite = "LEFT";
+
+        if ($favorite) {
+            $join_favorite = "INNER";
+        }
+
+
+        $sql = "SELECT * FROM (
+                            SELECT 
+                             m.codigo as id_externo,
+                            m.ath as high_price,
+                            DATE_FORMAT(m.ath_date,'%Y-%m-%d') as high_date,
+                            m.rank,
+                            m.name,
+                              UPPER(m.symbol) as symbol,
+                            m.price_moeda,
+                            m.moeda_char,
+                            m.market_cap_moeda,
+                            m.volume_24h_moeda,
+                            m.percent_change_24h as porc24h,
+                            m.updated,
+                            m.ath_change_percentage,
+                            m.price_change_percentage_1h,
+                            m.price_change_percentage_24h,
+                            m.price_change_percentage_7d,
+                            m.available_supply,
+                             f.id_coin as favorite
+
+                            FROM moeda m
+                              " . $join_favorite . " JOIN user_favorite_coin f 
+                                              ON f.id_coin= m.codigo 
+                                               AND f.id_user=:id_user                            
+                            WHERE m.moeda =:moeda                   
+                        ) c ";
+
+        $where = [];
+
+        $par['moeda'] = $moeda;
+
+        if (!empty($busca)) {
+            $where[] = " (name LIKE(:busca) OR  symbol LIKE(:busca)) ";
+            $par['busca'] = '%' . $busca . '%';
+        }
+
+        if ($min_rank) {
+            $where[] = " rank >= :min_rank ";
+            $par['min_rank'] = $min_rank;
+        }
+
+        if ($max_rank) {
+            $where[] = " rank <= :max_rank ";
+            $par['max_rank'] = $max_rank;
+        }
+        if (empty($busca) && $vol24h) {
+            $where[] = " volume_24h_moeda >= :vol_24h ";
+            $par['vol_24h'] = $vol24h;
+        }
+        if (count($where) > 0) {
+            $sql .= ' WHERE ' . implode(' AND ', $where);
+        }
+
+        if (strtolower($order) === 'desc') {
+            $numOrder = -99999999;
+        } elseif (strtolower($order) === 'asc') {
+            $numOrder = 99999999;
+        } else {
+            return false;
+        }
+
+        $sql .= " ORDER BY COALESCE( " . $column . "," . $numOrder . " )  " . $order . " LIMIT :limit OFFSET :page";
+
+        return $this->query($sql, $par);
+    }
+
 
 }

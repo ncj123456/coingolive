@@ -6,7 +6,7 @@ class Monitor extends \Base\DAO {
 
     function maxprice() {
         $sql = "select 
-                        DATE_SUB(now(), INTERVAL 7 minute) >  min(data_alteracao) as erro
+                        DATE_SUB(now(), INTERVAL 7 minute) >  min(updated) as erro
                         from moeda";
         return $this->query($sql)[0]['erro'];
     }
