@@ -134,7 +134,7 @@ class DAO {
 
     function dados() {
         $dados = get_object_vars($this);
-        unset($dados['_table'], $dados['db'], $dados['id'], $dados['lastInsertId']);
+        unset($dados['_table'], $dados['db'], $dados['lastInsertId']);
 
         if (method_exists($this, 'descTable')) {
 
