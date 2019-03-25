@@ -189,36 +189,56 @@ function btnAds($symbol, $large = false) {
 //    }
 
     $ads = [
-        'btc' => ['Buy', 'Get Loan'],
-        'eth' => ['Buy', 'Get Loan'],
-        'xrp' => ['Get Loan'],
-        'bnb' => ['Get Loan'],
-        'ltc' => ['Buy'],
-        'bch' => ['Buy'],
-        'bsv' => ['Buy'],
-        'dash' => ['Buy'],
-        'nano' => ['Buy'],
-        'doge' => ['Buy'],
-        'smart' => ['Buy'],
-        'zcr' => ['Buy'],
-        'leax' => ['Buy'],
-        'tnj' => ['Buy'],
-        'usdt' => ['Buy', 'Earn Interest'],
-        'tusd' => ['Buy', 'Earn Interest'],
+        'btc' => ['buy', 'get_loan_btc'],
+        'eth' => ['buy', 'get_loan_eth'],
+        'xrp' => ['get_loan_xrp'],
+        'bnb' => ['get_loan_bnb'],
+        'ltc' => ['buy'],
+        'bch' => ['buy'],
+        'bsv' => ['buy'],
+        'dash' => ['buy'],
+        'nano' => ['buy'],
+        'doge' => ['buy'],
+        'smart' => ['buy'],
+        'zcr' => ['buy'],
+        'leax' => ['buy'],
+        'tnj' => ['buy'],
+        'usdt' => ['buy', 'Earn Interest'],
+        'tusd' => ['buy', 'Earn Interest'],
         'usdc' => ['Earn Interest'],
         'pax' => ['Earn Interest'],
-        'dai' => ['Earn Interest']
+        'dai' => ['Earn Interest'],
+        'nexo' => ['get_loan_nexo'],
     ];
 
     $partners = [
-        'Buy' => [
+        'buy' => [
             'link' => 'http://3xb.it/crie-sua-conta?utm_source=coingolive&utm_medium=button_buy',
+            'desc'=>'Buy'
         ],
-        'Get Loan' => [
-            'link' => 'https://nexo.io/?utm_source=coingolive&utm_medium=fixed&utm_term=get_loan&utm_content=web_integration&utm_campaign=nexoeverywhere'
-        ], 
+        'get_loan_btc' => [
+            'link' => 'https://nexo.io/instant-crypto-loans/bitcoin-loan/?utm_source=coingolive&utm_medium=fixed&utm_term=get_loan&utm_content=web_integration&utm_campaign=nexoeverywhere',
+            'desc' => 'Get Loan'
+        ],
+         'get_loan_eth' => [
+            'link' => 'https://nexo.io/instant-crypto-loans/ethereum-loan/?utm_source=coingolive&utm_medium=fixed&utm_term=get_loan&utm_content=web_integration&utm_campaign=nexoeverywhere',
+            'desc' => 'Get Loan'
+        ],
+         'get_loan_xrp' => [
+            'link' => 'https://nexo.io/instant-crypto-loans/xrp-loan/?utm_source=coingolive&utm_medium=fixed&utm_term=get_loan&utm_content=web_integration&utm_campaign=nexoeverywhere',
+            'desc' => 'Get Loan'
+        ],
+           'get_loan_bnb' => [
+            'link' => 'https://nexo.io/instant-crypto-loans/binance-coin-loan/?utm_source=coingolive&utm_medium=fixed&utm_term=get_loan&utm_content=web_integration&utm_campaign=nexoeverywhere',
+            'desc' => 'Get Loan'
+        ],
+        'get_loan_nexo' => [
+            'link' => 'https://nexo.io/instant-crypto-loans/nexo-loan/?utm_source=coingolive&utm_medium=fixed&utm_term=get_loan&utm_content=web_integration&utm_campaign=nexoeverywhere',
+            'desc' => 'Get Loan'
+        ],
         'Earn Interest' => [
-            'link' => 'https://nexo.io/?utm_source=coingolive&utm_medium=fixed&utm_term=earn_interest&utm_content=web_integration&utm_campaign=nexoeverywhere'
+            'link' => 'https://nexo.io/earn-interest/?utm_source=coingolive&utm_medium=fixed&utm_term=earn_interest&utm_content=web_integration&utm_campaign=nexoeverywhere',
+            'desc' => 'Earn Interest'
         ],
     ];
 
@@ -231,18 +251,18 @@ function btnAds($symbol, $large = false) {
     $size = 'btn-ads btn-white';
     foreach ($ads[$symbol] as $name) {
         $row = $partners[$name];
-        
+
         if ($large) {
             $float = "";
-            $size=' btn-info';
+            $size = ' btn-info';
         }
 
         $html .= '
-            <a target="_blank" rel="nofollow noopener" href="'.$row['link'].'"
-                onclick="javascript:gtag(\'event\', \'' . _e($name) . '\', {\'event_category\': \'' . _e($name) . '\' });" class="' . $size . ' btn-sm btn">' . _e($name) . '</a>';
+            <a target="_blank" rel="nofollow noopener" href="' . $row['link'] . '"
+                onclick="javascript:gtag(\'event\', \'' . $name . '\', {\'event_category\': \'' . $name . '\' });" class="' . $size . ' btn-sm btn">' . _e($row['desc']) . '</a>';
     }
 
-    return '<div style="'.$float.'" >' . $html . '</div>';
+    return '<div style="' . $float . '" >' . $html . '</div>';
 }
 
 function formatPorc($porc, $price = false, $moeda_char = '', $desc = '', $border = '0px') {
