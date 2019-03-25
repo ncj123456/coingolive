@@ -132,3 +132,14 @@ CREATE TABLE `coin_global` (
   `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `coin_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(255) DEFAULT NULL,
+  `price` decimal(35,10) DEFAULT NULL,
+  `vol24h` decimal(20,2) DEFAULT NULL,
+  `available_supply` decimal(20,2) DEFAULT NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `codigo` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=2946 DEFAULT CHARSET=latin1;

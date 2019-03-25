@@ -90,6 +90,15 @@ class CronCoin {
                         $model->setPriceChangePercentage200d($d['price_change_percentage_200d_in_currency']);
                         $model->setPriceChangePercentage1y($d['price_change_percentage_1y_in_currency']);
                         $model->insertOrUpdate();
+                        
+                        if($moeda==='USD'){
+                            $coinHistory = new \Model\CoinHistory($db);
+                            $coinHistory->setCodigo($d['id']);
+                            $coinHistory->setPrice((float) $d['current_price']);
+                            $coinHistory->setVol24h($d['total_volume']);
+                            $coinHistory->setAvailableSupply($d['circulating_supply']);
+                            $coinHistory->insert();
+                        }
 
                         $this->saveImage($d['image'], $d['id']);
 
@@ -115,10 +124,6 @@ class CronCoin {
         }
     }
 
-    function deleteAll($db) {
-        $model = new \Model\Moeda($db);
-        $model->deleteAll();
-    }
 
     private function saveImage($url, $code) {
 
