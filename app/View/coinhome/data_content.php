@@ -96,13 +96,12 @@
                     <td class="text-center <?= classPorc($d['price_change_percentage_1h'])?>" ><?= decimal($d['price_change_percentage_1h']); ?>%</td>
                     <td class="text-center <?= classPorc($d['price_change_percentage_24h'])?>" ><?= decimal($d['price_change_percentage_24h']) ?>%</td>
                     <td class="text-center <?= classPorc($d['price_change_percentage_7d'])?>" ><?= decimal($d['price_change_percentage_7d']) ?>%</td>
-                    <td class="text-center" style="padding:0!important;">
-                       <div class='sparkline' data-codigo="<?= $d['id_externo'] ?>"></div>
+                    <td class="text-center" style="padding:0!important;min-width: 166px">
+                       <div class='sparkline' data-codigo="<?= $d['id_externo'] ?>"><i class="fa fa-refresh fa-spin" style="padding:10px"></i></div>
                     </td>
-                    <td class="text-center" style="padding:0!important;">
-                       <div id='chart_vol24h_<?= $d['id_externo'] ?>'></div>
+                    <td class="text-center" style="padding:0!important;min-width: 166px">
+                        <div id='chart_vol24h_<?= $d['id_externo'] ?>'><i class="fa fa-refresh fa-spin" style="padding:10px"></i></div>
                     </td>
-                    
                     
                     <td class="text-right" style="background-color:  <?= $color_vol24 ?>"> <?= $moeda_char . numFormat($d['volume_24h_moeda'], 2) ?> </td>
                      
@@ -148,8 +147,8 @@
                 $urlPage .= '&favorite=' . $inputFavorite;
             }
 
-            $urlPagePrev = siteUrl('/coin/ath-price/') . '?p=' . ($page - 1) . $urlPage;
-            $urlPageNext = siteUrl('/coin/ath-price/') . '?p=' . ($page + 1) . $urlPage;
+            $urlPagePrev = siteUrl('/') . '?p=' . ($page - 1) . $urlPage;
+            $urlPageNext = siteUrl('/') . '?p=' . ($page + 1) . $urlPage;
 
 
             //if disabled

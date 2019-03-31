@@ -10,6 +10,10 @@
             <priority>1</priority>
         </url>
         <url>
+            <loc><?= $urlBase . '/' . $name . '/tools/' ?></loc>
+            <priority>1</priority>
+        </url>
+        <url>
             <loc><?= $urlBase . '/' . $name . '/coin/price/' ?></loc>
             <priority>1</priority>
         </url>

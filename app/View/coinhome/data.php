@@ -1,7 +1,8 @@
 <?php
-$_title = _e("Top 100 Cryptocurrencies by Market Capitalization, Chart Price and Volume 24h");
+$_title2 = _e("Bitcoin e Criptomoedas, Valor de Mercado, Gráfico de Preços e Volume 24h");
 
-$_meta_description = _e('Confira o maior preço atingido (ATH) das criptomoedas, data da alta histórica, a desvalorização desde o maior valor alcançado e a porcentagem de crescimento necessária para voltar à maior cotação da história');
+$h1 = _e("Top 100 Criptomoedas por Valor de Mercado, Gráfico de Preços e Volume 24h");
+$_meta_description = _e('Bitcoin e criptomoedas, gráficos de preço, volume de negociação, valor de mercado');
 
 $compare_coin = isset($_GET['compare']) ? $_GET['compare'] : 'bitcoin';
 $current_moeda = isset($_COOKIE['moeda']) ? $_COOKIE['moeda'] : 'USD';
@@ -38,7 +39,7 @@ $_js[]="/assets/js/plugins/jquery.sparkline.min.js";
 </script>
 <div class="row" style="margin: 0px;">
     <div class="col-md-12">
-        <h1 style="padding: 3px;margin-top:20px;font-size:25px"><?= _e($_title) ?></h1>
+        <h1 style="padding: 3px;margin-top:20px;font-size:25px"><?= $h1 ?></h1>
     </div>
     <div class="col-md-12">
         <div class="card" style="  margin-top: 0px;">
@@ -107,14 +108,6 @@ $_js[]="/assets/js/plugins/jquery.sparkline.min.js";
                     require_once __DIR__ . '/data_content.php';
                     ?>
                 </div>
-            </div>
-        </div>
-        <div class="alert alert-info">
-            <div class="container">
-                <div class="alert-icon">
-                    <i class="material-icons">info_outline</i>
-                </div>
-                <?= _e('ATH é uma abreviação do termo em ingles "all-time high" que traduzindo significa "alta de todos os tempos", é a máxima histórica de uma criptomoeda, o maior preço atingido desde sua existência'); ?>
             </div>
         </div>
     </div> 

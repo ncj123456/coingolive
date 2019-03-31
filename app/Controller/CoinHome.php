@@ -70,14 +70,14 @@ class CoinHome  {
                     'rank' => _e('#'),
                     'name' => _e('Criptomoeda'),
                     'price_moeda' => _e('Preço'),
-                    'Marketcap' => _e('Marketcap'),
-                    'high_price' => _e('1h'),
-                    'growth_high' => _e('24h'),
-                    'high_date' => _e('7d'),
-                    'porc_high' => _e('Gráfico preco 7d'),
-                    'high_price1' => _e('24 vol in 7d'),
-                    'volume_24h_moeda' => _e('Vol 24h'),
-                     'supply' => _e('supply'),
+                    'market_cap_moeda' => _e('MarketCap'),
+                    'price_change_percentage_1h' => _e('1h'),
+                    'price_change_percentage_24h' => _e('24h'),
+                    'price_change_percentage_7d' => _e('7d'),
+                    '#1' => _e('Gráfico preco 7d'),
+                    '#2' => _e('24h Vol. in 7d'),
+                    'volume_24h_moeda' => _e('Vol. 24h'),
+                     'available_supply' => _e('Circ. Supply'),
                 ];
           return $table_head;
     }
@@ -91,8 +91,13 @@ class CoinHome  {
           $rs = (new \Model\CoinHistory())->findLast7Days($_GET['codigo']);
           $json = [];
           foreach($rs as $r){
+              if($r['price'] > 1){
+                  $r['price'] = round($r['price'] ,2);
+              }else{
+                   $r['price'] = round($r['price'] ,8);
+              }
               $json['price'][]=(float) $r['price'];
-              $json['vol24h'][]=(float) $r['vol24h'];
+              $json['vol24h'][]=(float) round($r['vol24h'],0);
           }
           echo json_encode($json);
     }

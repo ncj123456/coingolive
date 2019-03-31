@@ -28,17 +28,20 @@ namespace Model ;
    
    
    function findLast7Days($codigo){
-       $sql = "SELECT
+       $sql = "	SELECT
                ch1.price,
                ch1.vol24h 
            FROM coin_history ch1
-	INNER JOIN (
-		SELECT 
-		min(id) as id,
-		date_format(created,'%Y-%m-%d %H') as dt 
-		FROM coin_history WHERE codigo=:codigo
-		group by dt
-	) ch2 ON ch2.id=ch1.id
+			INNER JOIN (
+				SELECT 
+				min(id) as id,
+				date_format(created,'%Y-%m-%d %H') as dt 
+				FROM coin_history
+                WHERE codigo=:codigo
+				AND created >=  DATE(NOW()) - INTERVAL 7 DAY
+				GROUP BY dt
+			) ch2 ON ch2.id=ch1.id
+        WHERE ch1.created >= DATE(NOW()) - INTERVAL 7 DAY
         ORDER BY ch2.id ASC";
        
        $par = ['codigo'=>$codigo];

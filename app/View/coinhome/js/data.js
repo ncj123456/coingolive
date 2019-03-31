@@ -13,7 +13,7 @@ function loadPage(page) {
     var min_rank = $("#min_rank").val();
     var max_rank = $("#max_rank").val();
     
-    var url = '/coin/ath-price/?p=' + page;
+    var url = '/?p=' + page;
     
             if(order_filter_vol24h!='1M'){
                 url+='&vol24h=' + order_filter_vol24h;
@@ -114,7 +114,8 @@ $("#formBusca").on('submit', function () {
                          height: '50px',
                          type: 'line',
                          fillColor: '#74d9f1',
-                         lineColor: '#04748e'
+                         lineColor: '#04748e',
+                         highlightLineColor: '#7f00ff',
                      });
                         });
     });
