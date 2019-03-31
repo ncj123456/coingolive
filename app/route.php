@@ -4,6 +4,9 @@ $app = new Base\Route();
 
 //static pages
 $app->get('', 'Home:view');
+$app->get('/new-home', 'CoinHome:data');
+$app->get('/coin-home', 'CoinHome:last7days');
+
 $app->get('/contact', 'Home:contact');
 $app->get('/feedback', 'Home:feedback');
 $app->get('/partners', 'Home:partners');

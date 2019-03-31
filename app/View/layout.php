@@ -352,8 +352,14 @@ $version = '2.1';
     <script src="/assets/js/material-kit.js?v=<?= $version ?>"></script>
     <script src="/assets/js/plugins/jquery.mask.min.js?v=<?= $version ?>"></script>
     <script src="/assets/js/global.js?v=<?= $version ?>12"></script>    
-    <script type="text/javascript" src="/assets/js/plugins/pace.js"></script>    
-    <script src="https://hosted-sip.civic.com/js/civic.sip.min.js"></script>
+    <script async type="text/javascript" src="/assets/js/plugins/pace.js"></script>    
+    <script async src="https://hosted-sip.civic.com/js/civic.sip.min.js"></script>
+      <?php
+        foreach ($_js as $j) {
+            echo '<script type="text/javascript" src="' . $j . '?v=' . $version . '"></script>';
+            echo "\n";
+        }
+        ?>
     <script>
 <?= $this->js ?>
     </script>
@@ -381,14 +387,14 @@ $version = '2.1';
         </script>
     <?php } ?>
     <script>
-
-// Step 2: Instantiate instance of civic.sip
-        var civicSip = new civic.sip({appId: 'rJ6jQnzWm'});
-
-// Step 3: Start scope request.
-        function civicLogin() {
+var civicSip = {};
+function civicLogin() {
             civicSip.signup({style: 'popup', scopeRequest: civicSip.ScopeRequests.BASIC_SIGNUP});
         }
+
+window.onload = function(){    
+// Step 2: Instantiate instance of civic.sip
+        var civicSip = new civic.sip({appId: 'rJ6jQnzWm'});
 
 // Listen for data
         civicSip.on('auth-code-received', function (event) {
@@ -439,6 +445,7 @@ if (isset($_GET['uuid'])) {
             link.media = 'all';
             head.appendChild(link);
         }
+};
     </script>
 </body>
 </html>
