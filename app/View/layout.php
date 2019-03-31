@@ -69,14 +69,14 @@ $version = '2.1';
                 gtag('config', 'UA-114358769-1');
             </script>
             <!--ads-->
-            <script src="https://coinzillatag.com/lib/sticky.js"></script>
+<!--            <script src="https://coinzillatag.com/lib/sticky.js"></script>
             <script>window.coinzilla_sticky = window.coinzilla_sticky || [];
                 function czilla() {
                     coinzilla_sticky.push(arguments);
                 }
                 czilla('98865aa193af59e91');</script>
 
-            <script src="https://coinzillatag.com/lib/wpnative.js"></script><script>var c_widget = czilla_widget_popup || [];var c_widget_preferences = {}; c_widget_preferences.zone = "183275ad4c9f709767"; c_widget_preferences.yMobile = "top";c_widget_preferences.x = "right"; c_widget_preferences.y = "top"; c_widget.push(c_widget_preferences);</script>
+            <script src="https://coinzillatag.com/lib/wpnative.js"></script><script>var c_widget = czilla_widget_popup || [];var c_widget_preferences = {}; c_widget_preferences.zone = "183275ad4c9f709767"; c_widget_preferences.yMobile = "top";c_widget_preferences.x = "right"; c_widget_preferences.y = "top"; c_widget.push(c_widget_preferences);</script>-->
 
             <?php
         }
