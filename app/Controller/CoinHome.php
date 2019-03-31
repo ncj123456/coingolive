@@ -74,7 +74,7 @@ class CoinHome  {
                     'price_change_percentage_1h' => _e('1h'),
                     'price_change_percentage_24h' => _e('24h'),
                     'price_change_percentage_7d' => _e('7d'),
-                    '#1' => _e('Gráfico preco 7d'),
+                    '#1' => _e('Gráfico Preço 7d'),
                     '#2' => _e('24h Vol. in 7d'),
                     'volume_24h_moeda' => _e('Vol. 24h'),
                      'available_supply' => _e('Circ. Supply'),

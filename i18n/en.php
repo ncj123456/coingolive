@@ -174,5 +174,6 @@ return [
     'Filtro volume 24h'=>'24h volume filter',
     'Top 100 Criptomoedas por Valor de Mercado, Gráfico de Preços e Volume 24h'=>'Top 100 Cryptocurrencies by Market Cap, Price Chart and Volume Chart 24h',
     'Bitcoin e Criptomoedas, Valor de Mercado, Gráfico de Preços e Volume 24h'=>'Bitcoin and Cryptocurrencies, Market Cap, Price Chart and Volume 24h',
-    'Bitcoin e criptomoedas, gráficos de preço, volume de negociação, valor de mercado'=>'Bitcoin and cryptocurrencies, price charts, volume 24 hours, market cap'
+    'Bitcoin e criptomoedas, gráficos de preço, volume de negociação, valor de mercado'=>'Bitcoin and cryptocurrencies, price charts, volume 24 hours, market cap',
+    'Gráfico Preço 7d'=>'Price Chart 7d'
     ];
