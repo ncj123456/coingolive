@@ -394,7 +394,7 @@ function civicLogin() {
 
 window.onload = function(){    
 // Step 2: Instantiate instance of civic.sip
-        var civicSip = new civic.sip({appId: 'rJ6jQnzWm'});
+        civicSip = new civic.sip({appId: 'rJ6jQnzWm'});
 
 // Listen for data
         civicSip.on('auth-code-received', function (event) {
