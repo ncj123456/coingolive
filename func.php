@@ -193,7 +193,7 @@ function btnAds($symbol, $large = false) {
         'eth' => ['buy', 'get_loan_eth'],
         'xrp' => ['get_loan_xrp'],
         'bnb' => ['get_loan_bnb'],
-        'ltc' => ['buy'],
+        'ltc' => ['buy', 'get_loan_ltc'],
         'bch' => ['buy'],
         'bsv' => ['buy'],
         'dash' => ['buy'],
@@ -226,6 +226,10 @@ function btnAds($symbol, $large = false) {
         ],
          'get_loan_xrp' => [
             'link' => 'https://nexo.io/instant-crypto-loans/xrp-loan/?utm_source=coingolive&utm_medium=fixed&utm_term=get_loan&utm_content=web_integration&utm_campaign=nexoeverywhere',
+            'desc' => 'Get Loan'
+        ],
+          'get_loan_ltc' => [
+            'link' => 'https://nexo.io/instant-crypto-loans/litecoin-loan/?utm_source=coingolive&utm_medium=fixed&utm_term=get_loan&utm_content=web_integration&utm_campaign=nexoeverywhere',
             'desc' => 'Get Loan'
         ],
            'get_loan_bnb' => [
