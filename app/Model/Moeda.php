@@ -31,6 +31,7 @@ class Moeda extends \Base\DAO {
     protected $price_change_percentage_30d;
     protected $price_change_percentage_200d;
     protected $price_change_percentage_1y;
+    protected $data_7d;
 
     function descTable() {
         $attr = [
@@ -208,6 +209,10 @@ class Moeda extends \Base\DAO {
 
     function setPriceChangePercentage1y($price_change_percentage_1y) {
         $this->price_change_percentage_1y = $price_change_percentage_1y;
+    }
+
+    function setData7d($data_7d) {
+        $this->data_7d = $data_7d;
     }
 
     function findList($id_user, $favorite = false, $moeda, $search = null, $column = 'rank', $order = 'asc', $limit = null, $offset = 0, $min_rank = false, $max_rank = false) {
@@ -537,13 +542,13 @@ class Moeda extends \Base\DAO {
 
         return $this->query($sql, $par)[0]['rank'];
     }
-    
-    function countCoins(){
-            $sql = "SELECT count(*) as qtde  FROM moeda"; 
-            return $this->query($sql)[0]['qtde'];
+
+    function countCoins() {
+        $sql = "SELECT count(*) as qtde  FROM moeda";
+        return $this->query($sql)[0]['qtde'];
     }
-    
-        function findCoinHome($id_user, $favorite, $moeda, $limit = 100, $page = 0, $column = 'rank', $order = 'ASC', $busca = '', $min_rank = false, $max_rank = false, $vol24h) {
+
+    function findCoinHome($id_user, $favorite, $moeda, $limit = 100, $page = 0, $column = 'rank', $order = 'ASC', $busca = '', $min_rank = false, $max_rank = false, $vol24h) {
         $column = $this->antiInjection($column);
         $order = $this->antiInjection($order);
         $par = [
@@ -578,7 +583,8 @@ class Moeda extends \Base\DAO {
                             m.price_change_percentage_24h,
                             m.price_change_percentage_7d,
                             m.available_supply,
-                             f.id_coin as favorite
+                            m.data_7d,
+                            f.id_coin as favorite
 
                             FROM moeda m
                               " . $join_favorite . " JOIN user_favorite_coin f 
@@ -625,6 +631,5 @@ class Moeda extends \Base\DAO {
 
         return $this->query($sql, $par);
     }
-
 
 }

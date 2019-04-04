@@ -70,7 +70,7 @@
 
                 $coinName = $d['name'] . ' (' . $d['symbol'] . ')';
                 ?>
-                <tr >
+                <tr>
                     <td class="text-center" ><a href="javascript:addFavorite('<?= $d['codigo'] ?>')">
                             <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['codigo'] ?>"></i>
                         </a>
@@ -97,10 +97,10 @@
                     <td class="text-center <?= classPorc($d['price_change_percentage_24h'])?>" ><?= decimal($d['price_change_percentage_24h']) ?>%</td>
                     <td class="text-center <?= classPorc($d['price_change_percentage_7d'])?>" ><?= decimal($d['price_change_percentage_7d']) ?>%</td>
                     <td class="text-center" style="padding:0!important;min-width: 166px">
-                       <div class='sparkline' data-codigo="<?= $d['id_externo'] ?>"><i class="fa fa-refresh fa-spin" style="padding:10px"></i></div>
+                       <div class='sparkline' data-codigo="<?= $d['id_externo'] ?>" data-json7d='<?= $d['data_7d'] ?>'></div>
                     </td>
                     <td class="text-center" style="padding:0!important;min-width: 166px">
-                        <div id='chart_vol24h_<?= $d['id_externo'] ?>'><i class="fa fa-refresh fa-spin" style="padding:10px"></i></div>
+                        <div id='chart_vol24h_<?= $d['id_externo'] ?>'></div>
                     </td>
                     
                     <td class="text-right" style="background-color:  <?= $color_vol24 ?>"> <?= $moeda_char . numFormat($d['volume_24h_moeda'], 2) ?> </td>

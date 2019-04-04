@@ -41,7 +41,6 @@ function loadPage(page) {
                   url+='&favorite=' + user_favorite;
             }
         window.location.href =encodeURI(siteUrl(url));
-//    $('#tableContent').load(encodeURI(siteUrl(url)));
 }
 
 
@@ -74,48 +73,42 @@ $("#formBusca").on('submit', function () {
         $("#order_filter_vol24h").val(type);
         loadPage();
     }
-//    
-//    allData7d2 = [];
-//    for(var i in allData7d){
-//        allData7d2.push(parseFloat(allData7d[i].toFixed(2)));
-//    }
     
     $(".sparkline").each(function(){
-        var obj =  $(this);
-        var codigo =obj.data('codigo');
-       var url = siteUrl('/coin-home/?codigo='+codigo);
-        $.getJSON(url,function(data){
-                        var opt = {
-                            lineColor: '#ff0000',
-                            fillColor: '#ffaaaa',
-                            spotColor: '#005fbf'
-                        };
-                        var dataPrice = data.price;
-                        if(dataPrice[0]<dataPrice[dataPrice.length-1]){
-                            opt = {
-                                lineColor: '#007f00',
-                                fillColor: '#a6db72',
-                                spotColor: '#005fbf'
-                            };
-                        }
-                        obj.sparkline(data.price, {
-                            type: 'line',
-                            width: '166px',
-                            height: '50px',
-                            highlightLineColor: '#7f00ff',
-                           minSpotColor: '#7f00ff',
-                            maxSpotColor: '#7f00ff',
-                            lineColor: opt.lineColor,
-                            fillColor: opt.fillColor,
-                            spotColor: opt.spotColor});
-                    
-                    $("#chart_vol24h_"+codigo).sparkline(data.vol24h, {
-                        width: '166px',
-                         height: '50px',
-                         type: 'line',
-                         fillColor: '#74d9f1',
-                         lineColor: '#04748e',
-                         highlightLineColor: '#7f00ff',
-                     });
-                        });
+       var obj =  $(this);
+       var codigo =obj.data('codigo');
+       var data= obj.data('json7d');
+       
+        var opt = {
+            lineColor: '#ff0000',
+            fillColor: '#ffaaaa',
+            spotColor: '#005fbf'
+        };
+        var dataPrice = data.price;
+        if(dataPrice[0]<dataPrice[dataPrice.length-1]){
+            opt = {
+                lineColor: '#007f00',
+                fillColor: '#a6db72',
+                spotColor: '#005fbf'
+            };
+        }
+        obj.sparkline(data.price, {
+            type: 'line',
+            width: '166px',
+            height: '50px',
+            highlightLineColor: '#7f00ff',
+           minSpotColor: '#7f00ff',
+            maxSpotColor: '#7f00ff',
+            lineColor: opt.lineColor,
+            fillColor: opt.fillColor,
+            spotColor: opt.spotColor});
+
+    $("#chart_vol24h_"+codigo).sparkline(data.vol24h, {
+        width: '166px',
+         height: '50px',
+         type: 'line',
+         fillColor: '#74d9f1',
+         lineColor: '#04748e',
+         highlightLineColor: '#7f00ff',
+     });
     });

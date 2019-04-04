@@ -63,6 +63,17 @@ class CronCoin {
                         if($d['symbol']=='xrp'){
                             $d['name'] = 'Ripple';
                         }
+                        
+                        if($moeda==='USD'){
+                            $coinHistory = new \Model\CoinHistory($db);
+                            $coinHistory->setCodigo($d['id']);
+                            $coinHistory->setPrice((float) $d['current_price']);
+                            $coinHistory->setVol24h($d['total_volume']);
+                            $coinHistory->setAvailableSupply($d['circulating_supply']);
+                            $coinHistory->insert();
+                        }
+                        $data7d= $this->getLast7days($d['id']);
+                        $data7dJson = json_encode($data7d);
 
                         $model = new \Model\Moeda($db);
                         $model->setCodigo($d['id']);
@@ -89,17 +100,9 @@ class CronCoin {
                         $model->setPriceChangePercentage30d($d['price_change_percentage_30d_in_currency']);
                         $model->setPriceChangePercentage200d($d['price_change_percentage_200d_in_currency']);
                         $model->setPriceChangePercentage1y($d['price_change_percentage_1y_in_currency']);
+                        $model->setData7d($data7dJson);
                         $model->insertOrUpdate();
                         
-                        if($moeda==='USD'){
-                            $coinHistory = new \Model\CoinHistory($db);
-                            $coinHistory->setCodigo($d['id']);
-                            $coinHistory->setPrice((float) $d['current_price']);
-                            $coinHistory->setVol24h($d['total_volume']);
-                            $coinHistory->setAvailableSupply($d['circulating_supply']);
-                            $coinHistory->insert();
-                        }
-
                         $this->saveImage($d['image'], $d['id']);
 
                         echo "page " . $page . " inserted: " . $d['symbol'] . '-' . $moeda . "\n";
@@ -175,6 +178,21 @@ class CronCoin {
         $model->setId(1);
         $model->setDataJson($json);
         $model->insertOrUpdate();
+    }
+    
+    private function getLast7days($codigo){
+          $rs = (new \Model\CoinHistory())->findLast7Days($codigo);
+          $json = [];
+          foreach($rs as $r){
+              if($r['price'] > 1){
+                  $r['price'] = round($r['price'] ,2);
+              }else{
+                   $r['price'] = round($r['price'] ,8);
+              }
+              $json['price'][]=(float) $r['price'];
+              $json['vol24h'][]=(float) round($r['vol24h'],0);
+          }
+          return $json;
     }
 
 }
