@@ -76,7 +76,7 @@ class CronCoin {
                         
                         //verifica se ja buscou os dados de 7 dias
                         if(!isset($data7dJson[$d['id']])){
-                                $data7d= $this->getLast7days($d['id']);
+                                $data7d= $this->getLast7days($db,$d['id']);
                                 $data7dJson[$d['id']] = json_encode($data7d);
                         }
 
@@ -187,8 +187,8 @@ class CronCoin {
         $model->insertOrUpdate();
     }
     
-    private function getLast7days($codigo){
-          $rs = (new \Model\CoinHistory())->findLast7Days($codigo);
+    private function getLast7days($db,$codigo){
+          $rs = (new \Model\CoinHistory($db))->findLast7Days($codigo);
           $json = [];
           foreach($rs as $r){
               if($r['price'] > 1){
