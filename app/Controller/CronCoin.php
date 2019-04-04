@@ -31,6 +31,7 @@ class CronCoin {
         try {
 
             $listMoedas = \Base\I18n::getListMoeda();
+            $data7dJson= [];
             
             $globalData = $this->getGlobalData();
             $this->saveGlobalData($db, $globalData);
@@ -72,8 +73,12 @@ class CronCoin {
                             $coinHistory->setAvailableSupply($d['circulating_supply']);
                             $coinHistory->insert();
                         }
-                        $data7d= $this->getLast7days($d['id']);
-                        $data7dJson = json_encode($data7d);
+                        
+                        //verifica se ja buscou os dados de 7 dias
+                        if(!isset($data7dJson[$d['id']])){
+                                $data7d= $this->getLast7days($d['id']);
+                                $data7dJson[$d['id']] = json_encode($data7d);
+                        }
 
                         $model = new \Model\Moeda($db);
                         $model->setCodigo($d['id']);
@@ -100,7 +105,7 @@ class CronCoin {
                         $model->setPriceChangePercentage30d($d['price_change_percentage_30d_in_currency']);
                         $model->setPriceChangePercentage200d($d['price_change_percentage_200d_in_currency']);
                         $model->setPriceChangePercentage1y($d['price_change_percentage_1y_in_currency']);
-                        $model->setData7d($data7dJson);
+                        $model->setData7d($data7dJson[$d['id']]);
                         $model->insertOrUpdate();
                         
                         $this->saveImage($d['image'], $d['id']);
@@ -112,6 +117,8 @@ class CronCoin {
                     $page++;
                 }
             }
+            
+            (new \Model\CoinHistory($db))->delete8Days();
             
             $countCoins = (new \Model\Moeda())->countCoins();
             if(empty($countCoins)){
