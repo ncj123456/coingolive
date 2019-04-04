@@ -26,8 +26,10 @@ class CoinHistory extends \Base\DAO {
         $this->available_supply = $available_supply;
     }
 
-    function findLast7Days($codigo) {
-        $sql = "	SELECT
+    function findLast7Days($codigos) {
+        $whereIn = "'".implode("','", $codigos)."'";
+         $sql = "SELECT
+               ch1.codigo,
                ch1.price,
                ch1.vol24h 
            FROM coin_history ch1
@@ -36,19 +38,18 @@ class CoinHistory extends \Base\DAO {
 				min(id) as id,
 				date_format(created,'%Y-%m-%d %H') as dt 
 				FROM coin_history
-                WHERE codigo=:codigo
+                WHERE codigo IN (".$whereIn.")
 				AND created >=  DATE(NOW()) - INTERVAL 7 DAY
-				GROUP BY dt
+				GROUP BY codigo,dt
 			) ch2 ON ch2.id=ch1.id
         WHERE ch1.created >= DATE(NOW()) - INTERVAL 7 DAY
-        ORDER BY ch2.id ASC";
+        ORDER BY  ch1.codigo, ch2.id ASC";
 
-        $par = ['codigo' => $codigo];
-        return $this->query($sql, $par);
+        return $this->query($sql);
     }
 
     function delete8Days() {
-        $db = $this->db;
+        $db = $this->getDb();
         $sql = 'DELETE FROM ' . $this->_table . ' WHERE created <  DATE(NOW()) - INTERVAL 8 DAY ';
         $prepare = $db->prepare($sql);
         $this->exec($prepare);
