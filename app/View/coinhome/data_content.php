@@ -71,8 +71,8 @@
                 $coinName = $d['name'] . ' (' . $d['symbol'] . ')';
                 ?>
                 <tr>
-                    <td class="text-center" ><a href="javascript:addFavorite('<?= $d['codigo'] ?>')">
-                            <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['codigo'] ?>"></i>
+                    <td class="text-center" ><a href="javascript:addFavorite('<?= $d['id_externo'] ?>')">
+                            <i class="fa fa-star<?= $favorite ?>" id="user_favorite_<?= $d['id_externo'] ?>"></i>
                         </a>
                     </td>
                     <td class="text-center padding-table-3px"><?= $d['rank']; ?></td>
