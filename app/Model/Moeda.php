@@ -582,6 +582,7 @@ class Moeda extends \Base\DAO {
                             m.price_change_percentage_1h,
                             m.price_change_percentage_24h,
                             m.price_change_percentage_7d,
+                            m.percent_dominance,
                             m.available_supply,
                             m.data_7d,
                             f.id_coin as favorite
