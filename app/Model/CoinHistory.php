@@ -43,7 +43,7 @@ class CoinHistory extends \Base\DAO {
 				GROUP BY codigo,dt
 			) ch2 ON ch2.id=ch1.id
         WHERE ch1.created >= DATE(NOW()) - INTERVAL 7 DAY
-        ORDER BY  ch1.codigo, ch2.id ASC";
+        ORDER BY  ch1.codigo, ch1.id ASC";
 
         return $this->query($sql);
     }

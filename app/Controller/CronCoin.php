@@ -4,7 +4,7 @@ namespace Controller;
 
 class CronCoin {
 
-    private function getGlobalData($moeda) {
+    private function getGlobalData() {
         $url = "https://api.coingecko.com/api/v3/global";
         $json = file_get_contents($url);
         $data = json_decode($json, 1);

@@ -143,6 +143,9 @@ CREATE TABLE `coin_history` (
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `codigo` (`codigo`),
-  KEY `created` (`created`)
-) ENGINE=InnoDB AUTO_INCREMENT=6892292 DEFAULT CHARSET=latin1;
+  KEY `created` (`created`),
+  KEY `codigo_created` (`codigo`,`created`),
+  KEY `codigo_id` (`codigo`,`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12940350 DEFAULT CHARSET=latin1;
+
 
