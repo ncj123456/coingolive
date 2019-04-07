@@ -80,7 +80,7 @@ $("#formBusca").on('submit', function () {
        var data= obj.data('json7d');
        
        if(!data){
-           return false;
+           return true;
        }
        
         var opt = {
