@@ -26,13 +26,15 @@ CREATE TABLE `moeda` (
   `price_change_percentage_200d` decimal(20,2) DEFAULT NULL,
   `price_change_percentage_1y` decimal(20,2) DEFAULT NULL,
   `data_7d` text COLLATE utf8_unicode_ci,
-  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`codigo`,`moeda`),
   KEY `symbol` (`symbol`),
   KEY `name` (`name`),
   KEY `codigo` (`codigo`),
-  KEY `moeda_char` (`moeda_char`)
+  KEY `moeda_char` (`moeda_char`),
+  KEY `rank` (`rank`),
+  KEY `volume` (`volume_24h_moeda`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 

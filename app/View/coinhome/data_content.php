@@ -128,6 +128,11 @@
             if (!empty($inputBusca)) {
                 $urlPage .= '&s=' . $inputBusca;
             }
+            
+            if($inputOrderFilterVol24h!='1M'){
+                   $urlPage .= '&vol24h='.$inputOrderFilterVol24h;
+            }
+            
             if ($inputOrderName == 'rank' && $inputOrderType == 'asc') {
                 
             } else {

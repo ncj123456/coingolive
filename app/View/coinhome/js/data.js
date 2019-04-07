@@ -79,6 +79,10 @@ $("#formBusca").on('submit', function () {
        var codigo =obj.data('codigo');
        var data= obj.data('json7d');
        
+       if(typeof data.price === 'undefined'){
+           return false;
+       }
+       
         var opt = {
             lineColor: '#ff0000',
             fillColor: '#ffaaaa',

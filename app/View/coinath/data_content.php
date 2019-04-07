@@ -78,12 +78,12 @@
                         <div class="d-flex flex-row align-items-center" style="height:100%">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <a href="<?= siteUrl('/coins/' . $d['id_externo'].'/') ?>"><img alt="<?= $coinName ?>" src="/assets/img/coin/<?= $d['id_externo'] ?>-small.png" /></a>
+                                    <a href="<?= siteUrl('/coins/' . $d['id_externo'] . '/') ?>"><img alt="<?= $coinName ?>" src="/assets/img/coin/<?= $d['id_externo'] ?>-small.png" /></a>
                                 </div>
                             </div>
                             <div>
                                 <div>
-                                    <a class="coin-link" href="<?= siteUrl('/coins/' . $d['id_externo'].'/') ?>"><?= $d['symbol'] ?></a>
+                                    <a class="coin-link" href="<?= siteUrl('/coins/' . $d['id_externo'] . '/') ?>"><?= $d['symbol'] ?></a>
                                     <?= btnAds($d['symbol']) ?></div><div class="desc"><?= $d['name'] ?></div></div>
                         </div>
                     </td>
@@ -130,6 +130,10 @@
             if (!empty($inputBusca)) {
                 $urlPage .= '&s=' . $inputBusca;
             }
+            if ($inputOrderFilterVol24h != '1M') {
+                $urlPage .= '&vol24h=' . $inputOrderFilterVol24h;
+            }
+
             if ($inputOrderName == 'rank' && $inputOrderType == 'asc') {
                 
             } else {
