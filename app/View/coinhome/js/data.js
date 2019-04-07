@@ -79,7 +79,7 @@ $("#formBusca").on('submit', function () {
        var codigo =obj.data('codigo');
        var data= obj.data('json7d');
        
-       if(typeof data.price === 'undefined'){
+       if(!data){
            return false;
        }
        
