@@ -35,7 +35,7 @@ class CoinHistory extends \Base\DAO {
            FROM coin_history ch1
 			INNER JOIN (
 				SELECT 
-				min(id) as id,
+				max(id) as id,
 				date_format(created,'%Y-%m-%d %H') as dt 
 				FROM coin_history
                 WHERE codigo IN (".$whereIn.")
