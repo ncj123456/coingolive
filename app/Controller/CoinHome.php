@@ -87,19 +87,19 @@ class CoinHome  {
        header("Location: ". siteUrl('/coin/ath-price/'));
     }
     
-    function last7days(){
-          $rs = (new \Model\CoinHistory())->findLast7Days($_GET['codigo']);
-          $json = [];
-          foreach($rs as $r){
-              if($r['price'] > 1){
-                  $r['price'] = round($r['price'] ,2);
-              }else{
-                   $r['price'] = round($r['price'] ,8);
-              }
-              $json['price'][]=(float) $r['price'];
-              $json['vol24h'][]=(float) round($r['vol24h'],0);
-          }
-          echo json_encode($json);
-    }
+//    function last7days(){
+//          $rs = (new \Model\CoinHistory())->findLast7Days($_GET['codigo']);
+//          $json = [];
+//          foreach($rs as $r){
+//              if($r['price'] > 1){
+//                  $r['price'] = round($r['price'] ,2);
+//              }else{
+//                   $r['price'] = round($r['price'] ,8);
+//              }
+//              $json['price'][]=(float) $r['price'];
+//              $json['vol24h'][]=(float) round($r['vol24h'],0);
+//          }
+//          echo json_encode($json);
+//    }
 
 }
