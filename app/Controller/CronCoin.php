@@ -51,16 +51,35 @@ class CronCoin {
                     $url = "https://api.coingecko.com/api/v3/coins/markets?order=gecko_desc&vs_currency=" . $moedaLower . "&price_change_percentage=1h,24h,7d,14d,30d,200d,1y&per_page=250&page=" . $page;
                     $json = file_get_contents($url);
                     $data = json_decode($json, 1);
-                    
-                    
+
+
                     $idsCoin = [];
-                    foreach($data as $c){
-                        $idsCoin[]=$c['id'];
+                    foreach ($data as $c) {
+                        $idsCoin[] = $c['id'];
                     }
 
+                    //insere o historico
+                    foreach ($data as $d) {
+                        if ($moeda === 'USD') {
+                            $coinHistory = new \Model\CoinHistory($db);
+                            $coinHistory->setCodigo($d['id']);
+                            $coinHistory->setPrice((float) $d['current_price']);
+                            $coinHistory->setVol24h($d['total_volume']);
+                            $coinHistory->setAvailableSupply($d['circulating_supply']);
+                            $coinHistory->insert();
+                        }
+                    }
+
+                    //executa apenas no usd
+                    if ($moeda === 'USD') {
+                        $data7d2 = $this->getLast7days($db, $idsCoin);
+                        $data7d = array_merge($data7d, $data7d2);
+                    }
 
                     foreach ($data as $d) {
-                        
+
+                        $data7dJson = json_encode($data7d[$d['id']]);
+
                         //calcula o percentual de dominancia
                         $moeda_market_cap_dinamico = (float) $d['market_cap'];
                         $dominance = $moeda_market_cap_dinamico * 100 / $marketGlobalDinamic;
@@ -71,20 +90,6 @@ class CronCoin {
                         if ($d['symbol'] == 'xrp') {
                             $d['name'] = 'Ripple';
                         }
-
-                        if ($moeda === 'USD') {
-                            $coinHistory = new \Model\CoinHistory($db);
-                            $coinHistory->setCodigo($d['id']);
-                            $coinHistory->setPrice((float) $d['current_price']);
-                            $coinHistory->setVol24h($d['total_volume']);
-                            $coinHistory->setAvailableSupply($d['circulating_supply']);
-                            $coinHistory->insert();
-                            
-                            $data7d2 = $this->getLast7days($db, $idsCoin);
-                            $data7d = array_merge($data7d,$data7d2);
-                        }
-                        
-                        $data7dJson= json_encode($data7d[$d['id']]);
 
                         $model = new \Model\Moeda($db);
                         $model->setCodigo($d['id']);
