@@ -214,8 +214,15 @@ class CronCoin {
         try{
             
         $db = \Base\DB::connect();
+        
+         echo "Deleting...".PHP_EOL;
+         
         (new \Model\CoinHistory($db))->delete8Days();
+        
+        echo "Optimizing...".PHP_EOL;
         $db->query(" OPTIMIZE TABLE  coin_history");
+        
+        echo "OK".PHP_EOL;
         
         }catch(\Exception $e){
             echo $e->getMessage()."\n";
