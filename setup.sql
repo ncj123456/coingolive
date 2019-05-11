@@ -25,7 +25,7 @@ CREATE TABLE `moeda` (
   `price_change_percentage_30d` decimal(20,2) DEFAULT NULL,
   `price_change_percentage_200d` decimal(20,2) DEFAULT NULL,
   `price_change_percentage_1y` decimal(20,2) DEFAULT NULL,
-  `data_7d` text COLLATE utf8_unicode_ci,
+  `data_7d`  varchar(4000) COLLATE utf8_unicode_ci NOT NULL,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`codigo`,`moeda`),
