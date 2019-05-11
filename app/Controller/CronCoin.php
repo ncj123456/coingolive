@@ -129,8 +129,6 @@ class CronCoin {
                 }
             }
 
-            (new \Model\CoinHistory($db))->delete8Days();
-
             $countCoins = (new \Model\Moeda())->countCoins();
             if (empty($countCoins)) {
                 echo "Error, no record was saved" . PHP_EOL;
@@ -210,6 +208,18 @@ class CronCoin {
             $json[$r['codigo']]['vol24h'][] = (float) round($r['vol24h'], 0);
         }
         return $json;
+    }
+
+    function optimize() {
+        try{
+            
+        $db = \Base\DB::connect();
+        (new \Model\CoinHistory($db))->delete8Days();
+        $db->query(" OPTIMIZE TABLE  coin_history");
+        
+        }catch(\Exception $e){
+            echo $e->getMessage()."\n";
+        }
     }
 
 }
