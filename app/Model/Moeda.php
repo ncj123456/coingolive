@@ -303,7 +303,10 @@ class Moeda extends \Base\DAO {
                         UPPER(symbol) as symbol,
                         moeda,
                         moeda_char,
-                        price_moeda,                        
+                        price_moeda,   
+                        (SELECT concat('[', group_concat(json_object('moeda',moeda,'price',price_moeda)),']') 
+                        FROM moeda WHERE codigo=:codigo 
+                        GROUP BY codigo) all_prices,                     
                         available_supply,
                         max_supply,
                         volume_24h_moeda,

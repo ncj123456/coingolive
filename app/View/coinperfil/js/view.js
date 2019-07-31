@@ -4,6 +4,8 @@ function loadPage(page, marketcap) {
 
 $('#topMoedaAtual').hide();
 
+$('#topMoedaAtual').click();
+
 $(".market-cap-rank").each(function () {
     var loading = '<i class="fa fa-refresh fa-spin"></i>';
     var obj = $(this);
@@ -13,45 +15,108 @@ $(".market-cap-rank").each(function () {
     $.get(url, function (data) {
         data = JSON.parse(data);
         obj.text(data.rank);
+        
     });
 });
 
-$("#amount_from").on('keyup click change', function () {
+function resizeScreen(){
+    var width = $(window).width();
+    
+    if(width < 992){
+        $("#rowItems").removeClass("flex-md-row");
+        $("#rowItems").addClass("flex-md-column");
+    }else{
+        $("#rowItems").removeClass("flex-md-column");
+        $("#rowItems").addClass("flex-md-row");
+    }
+}
+
+$(document).ready(function(){
+
+    var to = $("#amount_from").val()
+    to = 1;
+
+    var pricemoeda = $("#amount_from").attr("pricemoeda"); 
+
+    convertValues(to,pricemoeda);
+    
+    resizeScreen();
+});
+
+$(window).resize(function(){
+    resizeScreen();
+});
+/*$(".amount-converter").on('keyup click change', function () {
+
     var from = parseFloat($("#amount_from").val());
-    
+
     var result = price_coin*from;
-    
-      if(result > 1){
+
+    console.log(result);
+    if(result > 1){
         result = result.toFixed(2);
     }else{
-         result =result.toFixed(8);
+        result = result.toFixed(8);
+
+    }
+    //$("#amount_from").val(from);
+    $(".amount-converter").each(function(){
+        if ($(this).data("symbol") == "BTC"){
+            $(this).val(result);
+        }else if($(this).data("symbol") == "USD"){
+            
+        }
+    });
+    
+
+    setTotal(result);
+});*/
+
+arr = all_prices_decoded;
+
+function changeValue(){
+   
+    all_prices_decoded.forEach = function(f,s){
+        console.log('adad');
     }
     
-    $("#amount_to").val(result);
-      setTotal(from);
-});
-$("#amount_to").on('keyup click change', function () {
-    var to = parseFloat($("#amount_to").val());
-    
-    var result = to/price_coin;
-    
-    if(result > 1){
-        result =result.toFixed(2);
-    }else{
-        result =result.toFixed(8);
-    }
-    
-    $("#amount_from").val(result);
-    
-     setTotal(result);
-});
-$("#amount_to,#amount_from").on('focus',function(){
-    $(this).select();
+}
+$(window).on(function(){
+
 });
 
-$("#amount_from").val('1');
-$("#amount_from").trigger('keyup');
+//Função Para Converter
+function convertValues(to,result){
+    //var classe = $(".amount-converter").hasClass("amount-this");
+    
+    $(".amount-converter").each(function(){
+        if ($(this).hasClass("amount-this")){
 
+           $(this).removeClass("amount-this");
+
+        }else{
+
+            var thisprice = $(this).attr("pricemoeda");             
+            var res = thisprice/result*to;   
+            res >= 1 ? res = res.toFixed(2) : res = res.toFixed(8);
+            $(this).val(res); 
+            var valueCoin = $("#amount_from").val();
+            setTotal(valueCoin);
+
+        }
+    });
+}
+
+///Alteração Do Input 
+$(".amount-converter").on("input",function () {
+
+    var symbol = $(this).data("symbol");
+    var to = parseFloat($(this).val()); 
+    var pricemoeda = $(this).attr("pricemoeda"); 
+    $(this).addClass("amount-this");
+    convertValues(to,pricemoeda,symbol);
+
+});
 
 function setTotal(amount){
     $(".price-total").each(function(){

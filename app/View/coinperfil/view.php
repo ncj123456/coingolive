@@ -139,14 +139,33 @@ if ($dados['moeda_char'] == 'BTC') {
     $dados['moeda_char'] .= ' ';
 }
 
+$dadosDecoded = json_decode($dados['all_prices'],false);
+
+//alterar posição array
+
+function changePos(&$array, $a, $b) {
+    $out = array_splice($array, $a, 1);    
+	array_splice($array, $b, 0, $out);
+}
+//posição original BRL BTC EUR USD
+
+//mudando ultimo para o primeiro 
+changePos($dadosDecoded,3,0);
+
+//mudando terceiro para o ultimo
+changePos($dadosDecoded,3,2);
+
 if ($dados['symbol'] == 'xrb')
-    
     ?>
     <script>
         var price_coin =<?= $dados['price_moeda'] ?>;
-    var moeda_char = '<?= $dados['moeda_char'] ?>';
+        var moeda_char = '<?= $dados['moeda_char'] ?>';
+        var all_prices = <?= $dados['all_prices'] ?>;
+        var all_prices_decoded = <?= json_decode($dados['all_prices']) ?>;
+        
 </script>
 <div class="row" style="margin: 0px;">
+
     <div class="main main-raised  col-md-12"  style="margin: 0px!important;background-color: #f9f9f9;">
         <div class="container">
             <!--            <div style="position:absolute; top: 1px;right: 8px">
@@ -154,54 +173,51 @@ if ($dados['symbol'] == 'xrb')
                         </div>-->
 
             <div class="section section-perfil " style="padding-top: 0;padding-bottom: 2px">
-                <div class="section" style="padding-top: 15px;">
+            <div class="section" style="padding-top: 15px;">
                     <?php
                     $disableRank = true;
                     ?>
                     <div class="row">
-                        <div class="col-md-4  text-center">
+                        <div style="margin-left: auto;margin-right: auto;" class="col-md-4 text-center  ">
                             <img alt="<?= $nameCoin ?>" style="margin-right:10px;max-width:50px" src="/assets/img/coin/<?= $dados['codigo'] ?>.png">
                             <h1 class="title" style="line-height: 1.1em;margin-top: 3px;font-size: 22px;"><?= $titleH1 ?></h1>
                             <div class="text-center" style="margin-bottom: 10px"><?= btnAds($dados['symbol'], true); ?></div>
-                        </div>
-                        <div class="col-md-8 " style="max-width:650px;">
-                            <div class="card" style="margin-top:10px;margin-bottom:10px">
-                                <div style="padding:30px" class="d-flex flex-column flex-md-row align-items-center justify-content-center">
-                                    <div class="input-group ">
+                        </div>                        
+                        <div class="col-md-12 text-center" style="max-width:1850px;margin-top:-45px">
+                                    <div class="card d-flex justify-content-center" style="padding:10px;top:20px;max-width:410px;margin-bottom:0px;margin-left:auto;margin-right:auto">
+                                             
+                                    <div class="input-group">
+
                                         <div class="input-group-prepend">
                                             <button style="width:92px"  class="btn btn-primary"><?= $dados['symbol'] ?></button>
                                         </div>
-                                        <input type="number"  step="any" id="amount_from"   style="padding: 5px 0px 5px 10px;height: 47px;font-size: 20px"  value="" class="form-control amount-converter">
+                                        <input type="number" data-symbol="<?=$dados['symbol'];?>" pricemoeda="<?=1?>" step="any" id="amount_from"   style="padding: 10px 0px 5px 10px;height: 47px;font-size: 20px"  value="" class="form-control amount-converter ">
+                                        
+                                     
                                     </div>
-                                    <i  class="fa fa-exchange text-xl text-lg-2xl m-3 currency-swap"></i>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="dropdown">
-                                                <button style="width:92px"  class="btn btn-primary  dropdown-toggle moedaAtual" type="button" data-toggle="dropdown">
-                                                    <?= $current_moeda ?>
-                                                </button>
-                                                <div class="dropdown-menu ">
-                                                    <?php
-                                                    $listLangs = \Base\I18n::getListMoeda();
-                                                    foreach ($listLangs as $n => $char) {
-                                                        $n2 = strtolower($n);
-                                                        ?>
-                                                        <a href="<?= siteUrl('/coins/' . $dados['codigo'] . '/' . $n2 . '/'); ?>" class="dropdown-item">
-                                                            <?= $n ?>
-                                                        </a>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </div>
+                                    </div>
+                                    <div id="rowItems" class="card d-flex flex-md-row " style="max-width:2500px;padding:10px;margin-bottom:20px">
+                                    <?php foreach($dadosDecoded as $value){?>                               
+                                        <div class="input-group ">
+                                            <div class="input-group-prepend ">
+                                                <button style="width:92px"  class="btn btn-primary moedaAtual" type="button" data-toggle="dropdown">
+                                                    <?= $value->moeda?>
+                                                </button>           
                                             </div>
+                                            
+                                            
+                                            <input data-symbol="<?= $value->moeda;?>" type="number" 
+                                            pricecurrentmoeda="<?= $value->price_moeda ?>" pricemoeda="<?= $value->price ?>" step="any" style="margin:20;padding: 5px 1px 5px 10px;height: 47px;font-size: 20px" value="" class="form-control amount-converter " >
                                         </div>
-                                        <input type="number" step="any"  id="amount_to" style="padding: 5px 0px 5px 10px;height: 47px;font-size: 20px" value="" class="form-control amount-converter" >
-                                    </div>
+
+                                    <?php } ?>
+                                    
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-12 text-center" >
+                                    
+                        
+                        
+                        <div class="col-md-12 text-center"style="margin-left: auto;margin-right: auto;" class="col-md-4 text-center  " >
                             <div class="card card-body"  style="margin-top: 0px;margin-bottom: 8px;">
                                 <div class="row">
                                     <div class="col-md-2 col-6" style="margin-bottom:5px;margin-top: 5px;">
@@ -240,6 +256,8 @@ if ($dados['symbol'] == 'xrb')
                                 </div>
                             </div>
                         </div>
+                        </div>
+                        <div class="row">
                         <div class="col-md-6 text-center" style="padding:5px;">
                             <div class="card card-body"  style="margin-top: 0px;height: 99%">
                                 <h2   style=" margin-top: 2px;"><?= _e('Alta Histórica') ?></h2>
@@ -279,6 +297,7 @@ if ($dados['symbol'] == 'xrb')
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col-md-6 text-center" style="padding:5px">
 
                             <div class="card card-body"  style="margin-top: 0px;margin-bottom: 5px;">
@@ -377,12 +396,12 @@ if ($dados['symbol'] == 'xrb')
                                 </div>
                             </div>
                         </div>
-
+                                          
                         <div class="col-md-6 text-center" style="padding:5px">
                             <div class="card card-body"  style="margin-top: 0px;margin-bottom: 5px;">
                                 <h2><img style="max-width:60px" src="/assets/img/btc_today.png" alt="<?= _e('BTC hoje') ?>" /> <?= _e('Market Cap Atual BTC') ?></h2>
                                 <p><?= _e('Cálculo de preço com o valor de mercado atual do Bitcoin'); ?></p>
-                                <table class="table " style="font-size:15px;border-radius: 20px;background-color: whitesmoke;">
+                                <table class="table" style="border-style: hidden;font-size:15px;border-radius: 20px;background-color: whitesmoke;">
                                     <tbody>
                                         <tr>
                                             <td><?= _e('Atual Market Cap BTC'); ?></td>
@@ -457,7 +476,8 @@ if ($dados['symbol'] == 'xrb')
                             <div class="card card-body"  style="margin-top: 0px;margin-bottom: 5px;">
                                 <h2><img style="max-width:60px" src="/assets/img/btc_ath.png"  alt="BTC ATH"/> <?= _e('Market Cap BTC na ATH') ?></h2>
                                 <p><?= _e('Cálculo de preço com o maior valor de mercado do Bitcoin') ?></p>
-                                <table class="table " style="font-size:15px;border-radius: 20px;background-color: whitesmoke;">
+                                <table class="table " style="font-size:15px;
+                                border-style: hidden;border-radius: 20px;background-color: whitesmoke;">
                                     <tbody>
                                         <tr>
                                             <td><?= _e('Maior MarketCap BTC') ?></td>
@@ -521,12 +541,12 @@ if ($dados['symbol'] == 'xrb')
                                 </div>
                             </div>
                         </div>
-
+                          
                         <div class="col-md-6 text-center" style="padding:5px">
                             <div class="card card-body"  style="margin-top: 0px;margin-bottom: 5px;">
                                 <h2><img style="max-width:40px" src="/assets/img/gold.png" alt="Ouro" /> <?= _e('Market Cap Ouro') ?> </h2>
                                 <p><?= _e('Cálculo de preço com o valor de mercado aproximado do Ouro') ?></p>
-                                <table class="table " style="font-size:15px;border-radius: 20px;background-color: whitesmoke;">
+                                <table class="table " style="font-size:15px;border-style: hidden;border-radius: 20px;background-color: whitesmoke;">
                                     <tbody>
                                         <tr>
                                             <td><?= _e('Market Cap Ouro') ?></td>
@@ -595,7 +615,7 @@ if ($dados['symbol'] == 'xrb')
                                 <!-- Coinzilla Banner 300x250 -->
                                 <script async src="https://coinzillatag.com/lib/display.js"></script>
                                 <div class="text-center">
-                                    <div class="coinzilla" data-zone="C-387385a8c26c8224bc"></div>
+                                    <div id="ads" class="coinzilla" data-zone="C-387385a8c26c8224bc"></div>
                                 </div>
                                 <script>
                                 window.coinzilla_display = window.coinzilla_display || [];
@@ -607,8 +627,10 @@ if ($dados['symbol'] == 'xrb')
                                 </script>
                             </div>
                         </div>
+                        </div> 
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
