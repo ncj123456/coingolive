@@ -181,10 +181,10 @@ if ($dados['symbol'] == 'xrb')
                         <div style="margin-left: auto;margin-right: auto;" class="col-md-4 text-center  ">
                             <img alt="<?= $nameCoin ?>" style="margin-right:10px;max-width:50px" src="/assets/img/coin/<?= $dados['codigo'] ?>.png">
                             <h1 class="title" style="line-height: 1.1em;margin-top: 3px;font-size: 22px;"><?= $titleH1 ?></h1>
-                            <div class="text-center" style="margin-bottom: 10px"><?= btnAds($dados['symbol'], true); ?></div>
+                            <div class="text-center"><?= btnAds($dados['symbol'], true); ?></div>
                         </div>                        
-                        <div class="col-md-12 text-center" style="max-width:1850px;margin-top:-45px">
-                                    <div class="card d-flex justify-content-center" style="padding:10px;top:20px;max-width:410px;margin-bottom:0px;margin-left:auto;margin-right:auto">
+                        <div class="col-md-12 text-center" style="max-width:1850px;">
+                                    <div class="card d-flex justify-content-center" style="padding:10px;top:0px;max-width:410px;margin-bottom:0px;margin-left:auto;margin-right:auto">
                                              
                                     <div class="input-group">
 
